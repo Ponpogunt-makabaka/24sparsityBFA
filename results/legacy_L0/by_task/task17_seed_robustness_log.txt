@@ -1,0 +1,41 @@
+====================================================================================================
+Task 17: Seed Robustness
+====================================================================================================
+Script: run_task17_seed_robustness.py
+Timestamp: 2026-02-12 15:55:44
+Seeds: [123, 456, 789]
+Device: cpu
+CIFAR dataset path: /home/lab-2010/24sparsityBFA/data
+CIFAR model checkpoint path: /home/lab-2010/24sparsityBFA/models/sparse_model.pth
+Imagenette root (offline): /home/lab-2010/24sparsityBFA/data/imagenette/imagenette2
+ResNet18 checkpoint path: /home/lab-2010/24sparsityBFA/weights/resnet18-f37072fd.pth
+
+Config:
+- seeds: 123,456,789
+- max_flips: 50
+- calib_samples: 256
+- eval_samples: 2000
+- max_groups_per_layer: 2000
+- allow_nonpositive: False
+- batch_size: 256
+- data_dir: ./data
+- cifar_ckpt: models/sparse_model.pth
+- run_task6: False
+- imagenet_root: /home/lab-2010/24sparsityBFA/data/imagenet
+- imagenette_root: /home/lab-2010/24sparsityBFA/data/imagenette/imagenette2
+- resnet18_weights: /home/lab-2010/24sparsityBFA/weights/resnet18-f37072fd.pth
+- imagenet_batch_size: 32
+- imagenet_calib_samples: 128
+- imagenet_eval_samples: 256
+- imagenet_max_groups_per_layer: 2000
+- bn_calib_steps: 120
+- bn_lr: 0.001
+- use_cuda: False
+
+Per-task summary:
+- Task5_ResNet20_CIFAR10: mean_final=12.24% std_final=1.82% n=3
+
+Outputs:
+- results/task17_seed_robustness_table.csv
+- results/task17_seed_robustness_log.txt
+- results/task17_seed_robustness_boxplot.png

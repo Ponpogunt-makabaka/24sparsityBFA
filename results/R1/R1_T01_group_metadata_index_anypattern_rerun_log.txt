@@ -1,0 +1,106 @@
+================================================================================
+R1_T01: Group-based 2:4 Metadata Attack (Position Encoding, Any Pattern)
+================================================================================
+Script: run_R1_T01_group_metadata_index_anypattern.py
+Timestamp: 2026-02-20 16:14:53
+Device: cpu
+Dataset: cifar10
+Model: resnet20
+Encoding: position
+Checkpoint: /home/lab-2010/24sparsityBFA/results/legacy_L0/by_task/task28_sparse_mask_fixed_finetune_int8_ckpt.pth
+
+Config:
+  seed: 0
+  max_flips: 50
+  calib_samples: 256
+  eval_samples: 2000
+  topk_verify: 64
+
+Results:
+  baseline_acc: 92.33%
+  final_acc: 16.75%
+  accuracy_drop: 75.59%
+  baseline_loss: 0.251385
+  final_loss: 15.950482
+  loss_increase: 15.699097
+  total_flips: 50
+  n_acc_increase_steps: 1
+  n_loss_decrease_steps: 0
+  acc_increase_steps: [44]
+  loss_decrease_steps: []
+
+Counters:
+  total_groups: 3378200
+  valid_groups: 3372010
+  candidates_considered: 16859615
+  candidates_valid: 16859615
+  candidates_invalid_collision: 0
+  candidates_skipped_excluded: 790
+  candidates_skipped_forbidden: 435
+
+Timing:
+  wall_sec: 1121.93
+
+Metadata hashes:
+  initial: 1c24a7ed5f32e3c5
+  final: f7e692563a813541
+
+Step-by-step details:
+--------------------------------------------------------------------------------
+Step 1: layer1.2.conv1 g=448 (2, 3) -> (0, 1) | proxy=0.0234 exact=0.0393 | acc=91.75% (-0.59%) loss=0.2694 (+0.017984) hash=9b63fa3200376298
+Step 2: layer1.2.conv1 g=453 (0, 1) -> (1, 2) | proxy=0.0525 exact=0.0402 | acc=90.77% (-0.98%) loss=0.2987 (+0.029320) hash=74db6371ee105c18
+Step 3: layer2.0.downsample.0 g=72 (1, 2) -> (0, 3) | proxy=0.0737 exact=0.0403 | acc=89.31% (-1.46%) loss=0.3381 (+0.039411) hash=dfdfc761df55d369
+Step 4: layer2.0.downsample.0 g=115 (1, 3) -> (0, 2) | proxy=0.0814 exact=0.0468 | acc=88.43% (-0.88%) loss=0.3881 (+0.050017) hash=58b541a1d74659fa
+Step 5: layer1.0.conv1 g=559 (1, 2) -> (0, 3) | proxy=0.0463 exact=0.0672 | acc=87.79% (-0.63%) loss=0.4480 (+0.059878) hash=9a8b4b603bb93e59
+Step 6: layer1.1.conv1 g=125 (0, 3) -> (1, 3) | proxy=0.0578 exact=0.0957 | acc=85.89% (-1.90%) loss=0.5556 (+0.107603) hash=4c06de6dcb4183bc
+Step 7: layer1.0.conv1 g=448 (0, 3) -> (1, 2) | proxy=0.0662 exact=0.2018 | acc=82.67% (-3.22%) loss=0.7221 (+0.166462) hash=715f0f69d8a7e759
+Step 8: layer1.0.conv1 g=439 (1, 2) -> (0, 3) | proxy=0.1812 exact=0.1882 | acc=79.69% (-2.98%) loss=0.8879 (+0.165846) hash=35c52198228110e9
+Step 9: layer1.2.conv1 g=340 (0, 3) -> (0, 1) | proxy=0.3361 exact=0.2068 | acc=76.61% (-3.08%) loss=1.0703 (+0.182348) hash=4e2bc6674c9fe6d6
+Step 10: layer1.2.conv1 g=353 (0, 1) -> (1, 2) | proxy=0.2473 exact=0.2400 | acc=73.34% (-3.27%) loss=1.2959 (+0.225633) hash=648ace83f2810ec7
+Step 11: layer1.0.conv1 g=563 (0, 1) -> (2, 3) | proxy=0.3143 exact=0.2791 | acc=69.58% (-3.76%) loss=1.5662 (+0.270350) hash=7aeb8e2f51bb697a
+Step 12: layer1.2.conv1 g=445 (0, 1) -> (1, 2) | proxy=0.4793 exact=0.2809 | acc=66.41% (-3.17%) loss=1.8498 (+0.283529) hash=1a3ced6399dcfb3b
+Step 13: layer1.0.conv2 g=163 (0, 3) -> (1, 2) | proxy=0.2031 exact=0.3040 | acc=62.45% (-3.96%) loss=2.1766 (+0.326838) hash=10e9ce22cc7ee3ad
+Step 14: layer2.0.downsample.0 g=51 (2, 3) -> (0, 2) | proxy=0.3625 exact=0.3142 | acc=58.89% (-3.56%) loss=2.5535 (+0.376928) hash=bfed6fb8bdfdc422
+Step 15: layer1.0.conv2 g=354 (0, 1) -> (2, 3) | proxy=0.3807 exact=0.3206 | acc=56.45% (-2.44%) loss=2.9071 (+0.353601) hash=084c0500607c00cb
+Step 16: layer1.0.conv1 g=544 (1, 3) -> (0, 2) | proxy=0.2865 exact=0.3384 | acc=53.71% (-2.73%) loss=3.2388 (+0.331682) hash=50015bea5737478f
+Step 17: layer1.2.conv1 g=327 (1, 3) -> (0, 2) | proxy=0.5563 exact=0.3543 | acc=50.63% (-3.08%) loss=3.6150 (+0.376192) hash=5a4e5256cb5091b2
+Step 18: layer1.0.conv2 g=299 (2, 3) -> (0, 3) | proxy=0.5558 exact=0.3580 | acc=47.41% (-3.22%) loss=4.1125 (+0.497482) hash=b17fa01ff6409102
+Step 19: layer1.0.conv2 g=122 (0, 1) -> (2, 3) | proxy=0.5110 exact=0.4034 | acc=44.14% (-3.27%) loss=4.6041 (+0.491628) hash=8d312757ff4faa4f
+Step 20: layer1.0.conv2 g=130 (0, 3) -> (1, 3) | proxy=0.9428 exact=0.4163 | acc=40.43% (-3.71%) loss=5.0409 (+0.436734) hash=23ee65a5f62d5e7b
+Step 21: layer2.0.conv1 g=763 (1, 3) -> (0, 1) | proxy=0.6898 exact=0.4071 | acc=38.72% (-1.71%) loss=5.4404 (+0.399562) hash=a2e0d0055e241efc
+Step 22: layer1.0.conv2 g=318 (0, 1) -> (2, 3) | proxy=0.5110 exact=0.3992 | acc=36.62% (-2.10%) loss=5.8771 (+0.436712) hash=8f2605bb1e7c6b9d
+Step 23: layer1.2.conv1 g=465 (0, 1) -> (1, 2) | proxy=0.6581 exact=0.3767 | acc=34.96% (-1.66%) loss=6.2318 (+0.354678) hash=1f8250e9167a3d69
+Step 24: layer1.0.conv1 g=568 (0, 3) -> (1, 2) | proxy=0.3547 exact=0.3775 | acc=32.91% (-2.05%) loss=6.6045 (+0.372739) hash=d0bafcea312d69f6
+Step 25: layer1.0.conv2 g=231 (2, 3) -> (0, 1) | proxy=0.4252 exact=0.3850 | acc=30.96% (-1.95%) loss=6.9809 (+0.376312) hash=b5ff1fd360eab43b
+Step 26: layer2.0.conv1 g=431 (0, 3) -> (1, 2) | proxy=0.5131 exact=0.3245 | acc=29.54% (-1.42%) loss=7.2991 (+0.318200) hash=5b0a74d3edcdd68b
+Step 27: layer1.1.conv2 g=124 (0, 1) -> (2, 3) | proxy=0.5669 exact=0.3471 | acc=28.52% (-1.03%) loss=7.6230 (+0.323970) hash=9111909804a1e4c7
+Step 28: layer1.2.conv1 g=65 (0, 2) -> (1, 2) | proxy=0.4600 exact=0.6194 | acc=26.46% (-2.05%) loss=8.2314 (+0.608358) hash=d86725b2d8a22d68
+Step 29: layer2.0.downsample.0 g=76 (0, 2) -> (1, 2) | proxy=0.4296 exact=0.4231 | acc=24.95% (-1.51%) loss=8.5686 (+0.337218) hash=c0a0c9b071f0bd1d
+Step 30: layer1.0.conv2 g=387 (2, 3) -> (0, 1) | proxy=0.3909 exact=0.3400 | acc=24.51% (-0.44%) loss=8.9082 (+0.339557) hash=8afc524871472fc4
+Step 31: layer1.0.conv2 g=110 (0, 1) -> (2, 3) | proxy=0.3625 exact=0.3292 | acc=24.02% (-0.49%) loss=9.2435 (+0.335304) hash=073df5dccee2e5e8
+Step 32: layer2.0.downsample.0 g=2 (2, 3) -> (0, 2) | proxy=0.9823 exact=0.3309 | acc=23.39% (-0.63%) loss=9.5266 (+0.283105) hash=2b051ccc5f4dfd88
+Step 33: layer1.0.conv2 g=389 (2, 3) -> (0, 1) | proxy=0.4597 exact=0.3552 | acc=22.02% (-1.37%) loss=9.9430 (+0.416385) hash=e625b72637e9577c
+Step 34: layer1.2.conv1 g=269 (0, 1) -> (2, 3) | proxy=0.3756 exact=0.3736 | acc=21.29% (-0.73%) loss=10.3105 (+0.367593) hash=030891175980750c
+Step 35: layer3.1.conv1 g=1002 (1, 3) -> (0, 2) | proxy=0.4681 exact=0.3500 | acc=21.14% (-0.15%) loss=10.7029 (+0.392330) hash=e2ab0889d4bcabb2
+Step 36: layer2.0.downsample.0 g=62 (1, 3) -> (0, 2) | proxy=0.8096 exact=0.3434 | acc=20.31% (-0.83%) loss=11.1033 (+0.400474) hash=76e374468110c351
+Step 37: layer2.0.conv2 g=1543 (1, 3) -> (0, 3) | proxy=0.3864 exact=0.3502 | acc=20.17% (-0.15%) loss=11.4331 (+0.329745) hash=6685bbaa4089c96a
+Step 38: layer2.0.downsample.0 g=79 (0, 3) -> (1, 2) | proxy=0.4732 exact=0.3326 | acc=20.17% (+0.00%) loss=11.7749 (+0.341850) hash=8f791399c58b0b55
+Step 39: layer2.0.downsample.0 g=28 (0, 1) -> (1, 2) | proxy=0.6315 exact=0.3714 | acc=20.02% (-0.15%) loss=12.1979 (+0.422914) hash=7a0c3d88828d4a0e
+Step 40: layer2.0.conv1 g=767 (1, 3) -> (0, 1) | proxy=0.9514 exact=0.3263 | acc=19.24% (-0.78%) loss=12.5349 (+0.337039) hash=d2ea6643aebc6c71
+Step 41: layer3.1.conv1 g=2042 (1, 2) -> (0, 2) | proxy=0.4296 exact=0.3202 | acc=19.19% (-0.05%) loss=12.9118 (+0.376876) hash=d9745f6706f89c95
+Step 42: layer1.2.conv1 g=331 (1, 2) -> (0, 2) | proxy=0.3617 exact=0.3213 | acc=18.51% (-0.68%) loss=13.2188 (+0.306993) hash=b0e79945ffb86949
+Step 43: layer1.0.conv2 g=295 (2, 3) -> (0, 1) | proxy=0.4253 exact=0.3138 | acc=18.16% (-0.34%) loss=13.5653 (+0.346578) hash=7bd270781993948b
+Step 44: layer3.1.conv1 g=810 (1, 2) -> (0, 2) | proxy=0.4446 exact=0.3276 | acc=18.21% (+0.05%) loss=13.9483 (+0.382969) hash=6ebe135980eb0cf4
+Step 45: layer2.0.conv2 g=37 (0, 3) -> (1, 2) | proxy=0.4458 exact=0.3392 | acc=17.92% (-0.29%) loss=14.2749 (+0.326590) hash=b8b3622a1e70e297
+Step 46: layer1.0.conv2 g=121 (0, 2) -> (1, 3) | proxy=0.4252 exact=0.3167 | acc=17.72% (-0.20%) loss=14.6235 (+0.348642) hash=7f62845d760b0226
+Step 47: layer1.0.conv2 g=275 (1, 3) -> (0, 2) | proxy=0.5573 exact=0.3324 | acc=17.33% (-0.39%) loss=14.9980 (+0.374429) hash=006ac35f46038ab7
+Step 48: layer2.0.conv1 g=791 (1, 3) -> (0, 3) | proxy=0.3512 exact=0.3147 | acc=17.09% (-0.24%) loss=15.2910 (+0.293031) hash=1e371814c8442d96
+Step 49: layer2.0.conv1 g=20 (1, 2) -> (0, 1) | proxy=0.5303 exact=0.2966 | acc=16.89% (-0.20%) loss=15.6345 (+0.343479) hash=ef333a7a0442ca6b
+Step 50: layer2.1.conv1 g=1113 (2, 3) -> (0, 1) | proxy=0.4759 exact=0.3024 | acc=16.75% (-0.15%) loss=15.9505 (+0.315997) hash=f7e692563a813541
+
+================================================================================
+Reproduction command:
+  python run_R1_T01_group_metadata_index_anypattern.py \
+    --device cpu --seed 0 --max-flips 50 \
+    --calib-samples 256 --eval-samples 2000 \
+    --topk-verify 64 --ckpt results/legacy_L0/by_task/task28_sparse_mask_fixed_finetune_int8_ckpt.pth

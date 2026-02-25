@@ -1,0 +1,36 @@
+====================================================================================================
+Task 18: Bitmask Metadata Validity Under 1 Physical Bit Flip
+====================================================================================================
+Script: run_task18_bitmask_validity.py
+Timestamp: 2026-02-14 16:07:37
+Seed: 123
+Device: cpu
+Dataset path: /home/lab-2010/24sparsityBFA/data
+Model checkpoint path: /home/lab-2010/24sparsityBFA/models/sparse_model.pth
+
+Baseline (subset eval for sanity):
+- eval_samples: 2000
+- acc:  86.57%
+- loss: 0.5051
+
+Definition:
+- Bitmask metadata per 2:4 group: 4 bits with popcount==2.
+- 1 physical bit flip = toggle ONE of the 4 bits.
+- A flip is VALID iff popcount(after)==2.
+
+Results (counting only baseline-valid groups with popcount==2):
+- total_groups(pop2): 67456
+- total_single_bit_flips: 269824
+- valid_flips:   0 (0.0000%)
+- invalid_flips: 269824 (100.0000%)
+
+Post-flip popcount breakdown:
+- popcount=1: 134912
+- popcount=3: 134912
+
+Artifacts:
+- results/task18_bitmask_validity_summary.csv
+- results/task18_bitmask_validity_breakdown.png
+
+How to run:
+  python run_task18_bitmask_validity.py --device cpu --seed 123 --eval-samples 2000

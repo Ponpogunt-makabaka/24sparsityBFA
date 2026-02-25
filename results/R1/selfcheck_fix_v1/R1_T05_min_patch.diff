@@ -1,0 +1,29 @@
+--- a/run_R1_T05_joint_best_step_attack.py
++++ b/run_R1_T05_joint_best_step_attack.py
+@@
+-        # Clear gradient
+-        if module.weight.grad is not None:
+-            module.weight.grad = None
+-
+     return candidates, counters
+@@
+-        # Clear gradient
+-        if module.weight.grad is not None:
+-            module.weight.grad = None
+-
+     return candidates, counters
+@@
+-        # Clear gradient
+-        if module.weight.grad is not None:
+-            module.weight.grad = None
+-
+     return candidates, counters
+@@
+-        counters_total["weight_bit"] = weight_counters["candidates_valid"]
++        counters_total["weight_bit"] = len(weight_candidates)
+@@
+-        counters_total["index_1bit"] = index_counters["candidates_valid"]
++        counters_total["index_1bit"] = len(index_candidates)
+@@
+-        counters_total["bitmask_swap"] = bitmask_counters["candidates_valid"]
++        counters_total["bitmask_swap"] = len(bitmask_candidates)

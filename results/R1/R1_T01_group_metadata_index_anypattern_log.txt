@@ -1,0 +1,99 @@
+================================================================================
+Task 1.xx: Group-based 2:4 Metadata Attack (Position Encoding)
+================================================================================
+Script: run_task1xx_group_metadata_attack.py
+Timestamp: 2026-02-16 14:42:22
+Device: cpu
+Dataset: cifar10
+Model: resnet20
+Encoding: position
+Checkpoint: /home/lab-2010/24sparsityBFA/results/task28_sparse_mask_fixed_finetune_int8_ckpt.pth
+
+Config:
+  seed: 0
+  max_flips: 50
+  calib_samples: 256
+  eval_samples: 2000
+  topk_verify: 0
+
+Results:
+  baseline_acc: 92.33%
+  final_acc: 38.67%
+  total_flips: 50
+  accuracy_drop: 53.66%
+
+Counters:
+  total_groups: 3378200
+  valid_groups: 3372010
+  candidates_considered: 16859739
+  candidates_valid: 16859739
+  candidates_invalid_collision: 0
+  candidates_skipped_excluded: 790
+  candidates_skipped_forbidden: 311
+
+Timing:
+  wall_sec: 945.49
+
+Metadata hashes:
+  initial: 1c24a7ed5f32e3c5
+  final: bdca343cda25b02d
+
+Step-by-step details:
+--------------------------------------------------------------------------------
+Step 1: layer2.0.downsample.0 g=81 (2, 3) -> (0, 1) | proxy=0.0415 | acc=92.58% loss=0.2535 hash=7a97d049ed4f923f
+Step 2: layer2.0.downsample.0 g=115 (1, 3) -> (0, 2) | proxy=0.0306 | acc=92.29% loss=0.2579 hash=d8e835a5f4786531
+Step 3: layer2.0.downsample.0 g=72 (1, 2) -> (0, 3) | proxy=0.0412 | acc=91.94% loss=0.2767 hash=3511f0115aa4bd87
+Step 4: layer1.2.conv1 g=448 (2, 3) -> (0, 1) | proxy=0.0617 | acc=90.33% loss=0.3255 hash=4be2b1eabc76e139
+Step 5: layer2.0.downsample.0 g=32 (1, 2) -> (0, 3) | proxy=0.1007 | acc=88.96% loss=0.3682 hash=e55cfeb8f30ee509
+Step 6: layer1.2.conv1 g=453 (0, 1) -> (1, 2) | proxy=0.1195 | acc=87.55% loss=0.4434 hash=cbe730908e7f507e
+Step 7: layer2.0.conv1 g=1064 (2, 3) -> (0, 1) | proxy=0.1036 | acc=86.57% loss=0.4967 hash=0cb85f111cfbe025
+Step 8: layer1.2.conv1 g=445 (0, 1) -> (1, 2) | proxy=0.1186 | acc=85.11% loss=0.5728 hash=53dfc8a6b66208e2
+Step 9: layer2.0.conv1 g=1056 (0, 2) -> (0, 1) | proxy=0.1465 | acc=84.13% loss=0.6241 hash=ae3e26602f44db85
+Step 10: layer2.0.conv1 g=1060 (2, 3) -> (0, 1) | proxy=0.1832 | acc=82.57% loss=0.7155 hash=6770bdac73a83fc7
+Step 11: layer1.0.conv2 g=130 (0, 3) -> (1, 2) | proxy=0.2034 | acc=81.35% loss=0.8117 hash=ac20b1633d3e6499
+Step 12: layer1.0.conv1 g=300 (1, 3) -> (0, 1) | proxy=0.2367 | acc=80.52% loss=0.8621 hash=42a6860be2bb3edb
+Step 13: layer2.0.conv1 g=1072 (1, 2) -> (0, 1) | proxy=0.2524 | acc=79.54% loss=0.9027 hash=24537469443cd576
+Step 14: layer2.0.conv1 g=1068 (0, 2) -> (0, 1) | proxy=0.2605 | acc=78.47% loss=0.9723 hash=cedc469201892bf6
+Step 15: layer1.1.conv1 g=160 (1, 3) -> (0, 1) | proxy=0.2874 | acc=78.32% loss=0.9683 hash=b5471563b2f2994c
+Step 16: layer2.0.conv1 g=1076 (1, 2) -> (0, 1) | proxy=0.2836 | acc=77.78% loss=1.0108 hash=b71341f60fe59389
+Step 17: layer1.2.conv1 g=521 (0, 1) -> (1, 2) | proxy=0.2888 | acc=76.51% loss=1.0674 hash=62ca20853a21ccb6
+Step 18: layer1.2.conv1 g=465 (0, 1) -> (1, 2) | proxy=0.2873 | acc=75.59% loss=1.1255 hash=4deb7a121bd3c448
+Step 19: layer2.0.downsample.0 g=74 (0, 2) -> (1, 3) | proxy=0.2838 | acc=77.34% loss=0.9969 hash=08275319328e0caa
+Step 20: layer1.1.conv1 g=16 (1, 3) -> (0, 2) | proxy=0.2372 | acc=76.37% loss=1.0480 hash=578da92164e92a20
+Step 21: layer2.2.conv1 g=896 (1, 3) -> (0, 2) | proxy=0.2670 | acc=75.24% loss=1.1143 hash=ba251090c2eccdd8
+Step 22: layer1.0.conv1 g=559 (1, 2) -> (0, 3) | proxy=0.2722 | acc=72.46% loss=1.3199 hash=1b8777c00d7ed854
+Step 23: layer1.0.conv2 g=299 (2, 3) -> (0, 3) | proxy=0.3097 | acc=72.02% loss=1.3277 hash=e5d810614521ecbd
+Step 24: layer1.2.conv1 g=64 (2, 3) -> (0, 1) | proxy=0.3018 | acc=71.39% loss=1.3678 hash=0b1aeb6ccc2e5765
+Step 25: layer1.0.conv2 g=303 (2, 3) -> (0, 2) | proxy=0.3179 | acc=70.56% loss=1.4584 hash=d9ace149479d9490
+Step 26: layer1.0.conv2 g=122 (0, 1) -> (2, 3) | proxy=0.3267 | acc=68.85% loss=1.5919 hash=232e1444f083e5aa
+Step 27: layer2.0.downsample.0 g=114 (1, 2) -> (0, 1) | proxy=0.3467 | acc=70.51% loss=1.4548 hash=5a8e8bf52c15f146
+Step 28: layer2.0.conv1 g=1072 (0, 1) -> (0, 2) | proxy=0.3264 | acc=71.09% loss=1.4179 hash=369f11de3adc2747
+Step 29: layer2.0.conv1 g=1072 (0, 2) -> (0, 3) | proxy=0.3655 | acc=67.48% loss=1.6476 hash=a8109564fd1dff3a
+Step 30: layer1.0.conv1 g=563 (0, 1) -> (2, 3) | proxy=0.3521 | acc=64.45% loss=1.9197 hash=80c0b315e42b2908
+Step 31: layer1.0.conv1 g=448 (0, 3) -> (1, 2) | proxy=0.4066 | acc=59.33% loss=2.5103 hash=3670c870c9285a6c
+Step 32: layer1.0.conv2 g=121 (0, 2) -> (1, 3) | proxy=0.3942 | acc=57.86% loss=2.6410 hash=954a3679a26fdc52
+Step 33: layer2.0.downsample.0 g=62 (1, 3) -> (0, 2) | proxy=0.4006 | acc=58.45% loss=2.5535 hash=e37aa411ae5b5e01
+Step 34: layer1.2.conv1 g=519 (1, 2) -> (0, 1) | proxy=0.3956 | acc=57.71% loss=2.6349 hash=c039f23098b60ede
+Step 35: layer1.0.conv2 g=130 (1, 2) -> (0, 2) | proxy=0.3951 | acc=58.84% loss=2.5215 hash=4a077b694d64896c
+Step 36: layer1.0.conv2 g=130 (0, 2) -> (2, 3) | proxy=0.7137 | acc=56.10% loss=2.8040 hash=df4af6f14f9bf154
+Step 37: layer2.0.conv1 g=767 (1, 3) -> (0, 1) | proxy=0.4127 | acc=54.20% loss=2.9799 hash=503b30fae89c9dd3
+Step 38: layer2.0.conv1 g=1060 (0, 1) -> (1, 2) | proxy=0.4445 | acc=55.62% loss=2.8119 hash=6a45151d2791988d
+Step 39: layer2.0.conv1 g=1060 (1, 2) -> (0, 3) | proxy=0.8286 | acc=52.64% loss=3.1581 hash=1f6c908124221e5f
+Step 40: layer2.0.conv1 g=1060 (0, 3) -> (1, 3) | proxy=0.4497 | acc=54.25% loss=2.9914 hash=f0c1c51d543e52f2
+Step 41: layer2.0.conv1 g=1060 (1, 3) -> (0, 2) | proxy=0.6709 | acc=54.39% loss=2.9651 hash=514ebe969847077d
+Step 42: layer2.0.conv1 g=1060 (0, 2) -> (1, 2) | proxy=0.4386 | acc=55.62% loss=2.8119 hash=6a45151d2791988d
+Step 43: layer2.0.conv1 g=1060 (1, 2) -> (2, 3) | proxy=0.5741 | acc=54.59% loss=2.9571 hash=7d7b02756b18a8c7
+Step 44: layer2.0.conv1 g=1060 (2, 3) -> (0, 3) | proxy=0.6508 | acc=52.64% loss=3.1581 hash=1f6c908124221e5f
+Step 45: layer1.1.conv2 g=124 (0, 1) -> (2, 3) | proxy=0.4322 | acc=51.42% loss=3.4175 hash=a30e43f40f4a94f3
+Step 46: layer2.0.conv1 g=1056 (0, 1) -> (0, 3) | proxy=0.8371 | acc=46.58% loss=4.0916 hash=6375e0d686ce479e
+Step 47: layer1.0.conv2 g=389 (2, 3) -> (0, 1) | proxy=0.5073 | acc=43.99% loss=4.3725 hash=df0c2633162ef7d6
+Step 48: layer2.0.downsample.0 g=27 (0, 3) -> (1, 2) | proxy=0.5719 | acc=42.09% loss=4.5787 hash=d9ab5cdacbe13d9c
+Step 49: layer1.2.conv1 g=41 (0, 3) -> (1, 3) | proxy=0.6605 | acc=40.72% loss=4.7183 hash=14c7519c76d83f9a
+Step 50: layer2.0.conv1 g=431 (0, 3) -> (1, 2) | proxy=0.6325 | acc=38.67% loss=5.0477 hash=bdca343cda25b02d
+
+================================================================================
+Reproduction command:
+  python run_task1xx_group_metadata_attack.py \
+    --device cpu --seed 0 --max-flips 50 \
+    --calib-samples 256 --eval-samples 2000 \
+    --topk-verify 0 --ckpt /home/lab-2010/24sparsityBFA/results/task28_sparse_mask_fixed_finetune_int8_ckpt.pth

@@ -1,0 +1,43 @@
+{
+  "dataset": "imagenette2_full",
+  "source_url": "https://s3.amazonaws.com/fast-ai-imageclas/imagenette2.tgz",
+  "output_root": "/home/fuq/testarea/24sparsityBFA/data/imagenette_full",
+  "train": {
+    "num_classes": 10,
+    "counts": {
+      "n01440764": 963,
+      "n02102040": 955,
+      "n02979186": 993,
+      "n03000684": 858,
+      "n03028079": 941,
+      "n03394916": 956,
+      "n03417042": 961,
+      "n03425413": 931,
+      "n03445777": 951,
+      "n03888257": 960
+    },
+    "total_images": 9469,
+    "min_class_count": 858,
+    "max_class_count": 993,
+    "max_to_min_ratio": 1.1573426573426573
+  },
+  "val": {
+    "num_classes": 10,
+    "counts": {
+      "n01440764": 387,
+      "n02102040": 395,
+      "n02979186": 357,
+      "n03000684": 386,
+      "n03028079": 409,
+      "n03394916": 394,
+      "n03417042": 389,
+      "n03425413": 419,
+      "n03445777": 399,
+      "n03888257": 390
+    },
+    "total_images": 3925,
+    "min_class_count": 357,
+    "max_class_count": 419,
+    "max_to_min_ratio": 1.173669467787115
+  }
+}

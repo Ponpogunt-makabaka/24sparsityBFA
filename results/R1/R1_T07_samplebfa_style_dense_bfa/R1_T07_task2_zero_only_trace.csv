@@ -1,0 +1,1 @@
+step,mode,layer_name,weight_idx,old_int8,new_int8,grad_val,attack_loss_before,attack_loss_after,delta_attack_loss,eval_loss,eval_acc,n_layer_candidates,n_global_candidates,elapsed_sec

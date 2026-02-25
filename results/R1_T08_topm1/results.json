@@ -1,0 +1,810 @@
+[
+  {
+    "seed": 0,
+    "initial_acc": 92.1,
+    "final_acc": 53.21,
+    "num_flips": 50,
+    "attack_history": [
+      {
+        "flip": 1,
+        "layer": "layer2.0.downsample.0",
+        "group": 47,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "acc_before": 92.1,
+        "acc_after": 91.95,
+        "acc_drop": 0.14999999999999147
+      },
+      {
+        "flip": 2,
+        "layer": "layer2.0.downsample.0",
+        "group": 62,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 91.95,
+        "acc_after": 90.88,
+        "acc_drop": 1.0700000000000074
+      },
+      {
+        "flip": 3,
+        "layer": "conv1",
+        "group": 90,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "acc_before": 90.88,
+        "acc_after": 89.4,
+        "acc_drop": 1.4799999999999898
+      },
+      {
+        "flip": 4,
+        "layer": "layer2.0.downsample.0",
+        "group": 119,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 89.4,
+        "acc_after": 87.95,
+        "acc_drop": 1.4500000000000028
+      },
+      {
+        "flip": 5,
+        "layer": "conv1",
+        "group": 37,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "acc_before": 87.95,
+        "acc_after": 87.61,
+        "acc_drop": 0.3400000000000034
+      },
+      {
+        "flip": 6,
+        "layer": "conv1",
+        "group": 30,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "acc_before": 87.61,
+        "acc_after": 87.08,
+        "acc_drop": 0.5300000000000011
+      },
+      {
+        "flip": 7,
+        "layer": "conv1",
+        "group": 97,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "acc_before": 87.08,
+        "acc_after": 86.39,
+        "acc_drop": 0.6899999999999977
+      },
+      {
+        "flip": 8,
+        "layer": "layer2.0.downsample.0",
+        "group": 50,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 86.39,
+        "acc_after": 85.13,
+        "acc_drop": 1.2600000000000051
+      },
+      {
+        "flip": 9,
+        "layer": "conv1",
+        "group": 96,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 85.13,
+        "acc_after": 84.59,
+        "acc_drop": 0.539999999999992
+      },
+      {
+        "flip": 10,
+        "layer": "layer2.0.downsample.0",
+        "group": 51,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "acc_before": 84.59,
+        "acc_after": 83.06,
+        "acc_drop": 1.5300000000000011
+      },
+      {
+        "flip": 11,
+        "layer": "layer2.0.downsample.0",
+        "group": 45,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 83.06,
+        "acc_after": 82.4,
+        "acc_drop": 0.6599999999999966
+      },
+      {
+        "flip": 12,
+        "layer": "conv1",
+        "group": 87,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 82.4,
+        "acc_after": 81.83,
+        "acc_drop": 0.5700000000000074
+      },
+      {
+        "flip": 13,
+        "layer": "layer2.0.conv2",
+        "group": 993,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "acc_before": 81.83,
+        "acc_after": 81.23,
+        "acc_drop": 0.5999999999999943
+      },
+      {
+        "flip": 14,
+        "layer": "layer2.0.downsample.0",
+        "group": 48,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "acc_before": 81.23,
+        "acc_after": 80.46,
+        "acc_drop": 0.7700000000000102
+      },
+      {
+        "flip": 15,
+        "layer": "conv1",
+        "group": 78,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "acc_before": 80.46,
+        "acc_after": 79.59,
+        "acc_drop": 0.8699999999999903
+      },
+      {
+        "flip": 16,
+        "layer": "layer2.0.downsample.0",
+        "group": 55,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "acc_before": 79.59,
+        "acc_after": 78.99,
+        "acc_drop": 0.6000000000000085
+      },
+      {
+        "flip": 17,
+        "layer": "conv1",
+        "group": 64,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "acc_before": 78.99,
+        "acc_after": 78.35,
+        "acc_drop": 0.6400000000000006
+      },
+      {
+        "flip": 18,
+        "layer": "layer1.1.conv1",
+        "group": 142,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "acc_before": 78.35,
+        "acc_after": 77.77,
+        "acc_drop": 0.5799999999999983
+      },
+      {
+        "flip": 19,
+        "layer": "layer1.0.conv1",
+        "group": 108,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 77.77,
+        "acc_after": 77.17,
+        "acc_drop": 0.5999999999999943
+      },
+      {
+        "flip": 20,
+        "layer": "layer1.0.conv2",
+        "group": 380,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "acc_before": 77.17,
+        "acc_after": 76.48,
+        "acc_drop": 0.6899999999999977
+      },
+      {
+        "flip": 21,
+        "layer": "layer2.0.downsample.0",
+        "group": 118,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "acc_before": 76.48,
+        "acc_after": 74.77,
+        "acc_drop": 1.710000000000008
+      },
+      {
+        "flip": 22,
+        "layer": "layer1.0.conv1",
+        "group": 143,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 74.77,
+        "acc_after": 73.84,
+        "acc_drop": 0.9299999999999926
+      },
+      {
+        "flip": 23,
+        "layer": "layer2.0.downsample.0",
+        "group": 63,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "acc_before": 73.84,
+        "acc_after": 71.68,
+        "acc_drop": 2.1599999999999966
+      },
+      {
+        "flip": 24,
+        "layer": "layer3.0.downsample.0",
+        "group": 352,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "acc_before": 71.68,
+        "acc_after": 70.52,
+        "acc_drop": 1.1600000000000108
+      },
+      {
+        "flip": 25,
+        "layer": "layer1.2.conv1",
+        "group": 250,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "acc_before": 70.52,
+        "acc_after": 69.88,
+        "acc_drop": 0.6400000000000006
+      },
+      {
+        "flip": 26,
+        "layer": "layer2.0.downsample.0",
+        "group": 18,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "acc_before": 69.88,
+        "acc_after": 68.39,
+        "acc_drop": 1.4899999999999949
+      },
+      {
+        "flip": 27,
+        "layer": "layer1.0.conv1",
+        "group": 547,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "acc_before": 68.39,
+        "acc_after": 67.89,
+        "acc_drop": 0.5
+      },
+      {
+        "flip": 28,
+        "layer": "layer1.0.conv1",
+        "group": 574,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "acc_before": 67.89,
+        "acc_after": 67.1,
+        "acc_drop": 0.7900000000000063
+      },
+      {
+        "flip": 29,
+        "layer": "layer1.0.conv2",
+        "group": 57,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "acc_before": 67.1,
+        "acc_after": 66.79,
+        "acc_drop": 0.30999999999998806
+      },
+      {
+        "flip": 30,
+        "layer": "layer1.1.conv1",
+        "group": 382,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 66.79,
+        "acc_after": 66.31,
+        "acc_drop": 0.480000000000004
+      },
+      {
+        "flip": 31,
+        "layer": "layer1.1.conv2",
+        "group": 11,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 66.31,
+        "acc_after": 65.63,
+        "acc_drop": 0.6800000000000068
+      },
+      {
+        "flip": 32,
+        "layer": "layer2.0.conv2",
+        "group": 604,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "acc_before": 65.63,
+        "acc_after": 64.44,
+        "acc_drop": 1.1899999999999977
+      },
+      {
+        "flip": 33,
+        "layer": "layer1.2.conv2",
+        "group": 348,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "acc_before": 64.44,
+        "acc_after": 64.0,
+        "acc_drop": 0.4399999999999977
+      },
+      {
+        "flip": 34,
+        "layer": "layer3.0.downsample.0",
+        "group": 353,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 64.0,
+        "acc_after": 62.94,
+        "acc_drop": 1.0600000000000023
+      },
+      {
+        "flip": 35,
+        "layer": "layer1.0.conv1",
+        "group": 139,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 62.94,
+        "acc_after": 61.99,
+        "acc_drop": 0.9499999999999957
+      },
+      {
+        "flip": 36,
+        "layer": "layer2.0.downsample.0",
+        "group": 98,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 61.99,
+        "acc_after": 61.33,
+        "acc_drop": 0.6600000000000037
+      },
+      {
+        "flip": 37,
+        "layer": "layer2.0.downsample.0",
+        "group": 83,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 61.33,
+        "acc_after": 60.63,
+        "acc_drop": 0.6999999999999957
+      },
+      {
+        "flip": 38,
+        "layer": "layer2.0.conv1",
+        "group": 1073,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "acc_before": 60.63,
+        "acc_after": 59.87,
+        "acc_drop": 0.7600000000000051
+      },
+      {
+        "flip": 39,
+        "layer": "layer2.2.conv1",
+        "group": 932,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "acc_before": 59.87,
+        "acc_after": 59.31,
+        "acc_drop": 0.5599999999999952
+      },
+      {
+        "flip": 40,
+        "layer": "layer2.0.downsample.0",
+        "group": 71,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "acc_before": 59.31,
+        "acc_after": 58.85,
+        "acc_drop": 0.46000000000000085
+      },
+      {
+        "flip": 41,
+        "layer": "layer2.0.downsample.0",
+        "group": 100,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 58.85,
+        "acc_after": 57.78,
+        "acc_drop": 1.0700000000000003
+      },
+      {
+        "flip": 42,
+        "layer": "layer3.0.downsample.0",
+        "group": 431,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "acc_before": 57.78,
+        "acc_after": 57.47,
+        "acc_drop": 0.3100000000000023
+      },
+      {
+        "flip": 43,
+        "layer": "layer3.0.conv1",
+        "group": 3458,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 57.47,
+        "acc_after": 56.9,
+        "acc_drop": 0.5700000000000003
+      },
+      {
+        "flip": 44,
+        "layer": "layer1.1.conv1",
+        "group": 143,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "acc_before": 56.9,
+        "acc_after": 56.03,
+        "acc_drop": 0.8699999999999974
+      },
+      {
+        "flip": 45,
+        "layer": "layer2.2.conv1",
+        "group": 937,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "acc_before": 56.03,
+        "acc_after": 55.72,
+        "acc_drop": 0.3100000000000023
+      },
+      {
+        "flip": 46,
+        "layer": "conv1",
+        "group": 76,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 55.72,
+        "acc_after": 55.07,
+        "acc_drop": 0.6499999999999986
+      },
+      {
+        "flip": 47,
+        "layer": "layer2.0.downsample.0",
+        "group": 68,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "acc_before": 55.07,
+        "acc_after": 54.63,
+        "acc_drop": 0.4399999999999977
+      },
+      {
+        "flip": 48,
+        "layer": "layer1.2.conv1",
+        "group": 72,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "acc_before": 54.63,
+        "acc_after": 54.07,
+        "acc_drop": 0.5600000000000023
+      },
+      {
+        "flip": 49,
+        "layer": "layer2.0.downsample.0",
+        "group": 114,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 54.07,
+        "acc_after": 53.65,
+        "acc_drop": 0.4200000000000017
+      },
+      {
+        "flip": 50,
+        "layer": "layer2.0.downsample.0",
+        "group": 54,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "acc_before": 53.65,
+        "acc_after": 53.21,
+        "acc_drop": 0.4399999999999977
+      }
+    ]
+  }
+]

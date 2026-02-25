@@ -1,0 +1,118 @@
+================================================================================
+R1_T02.1: Group-based 2:4 Metadata Attack (Index/Position Encoding, 1-bit Reachable, Exact Verification)
+================================================================================
+Script: run_R1_T02_1_group_metadata_index_1bit_exact.py
+Timestamp: 2026-02-24 03:03:45
+Device: cpu
+Dataset: cifar10
+Model: resnet20
+Checkpoint: /home/fuq/testarea/24sparsityBFA/sample_bfa/1_sparse_finetune.pth
+
+Constraint:
+  1-bit reachable transitions in 4-bit code space
+  Index/Position encoding: two 2-bit indices per code
+  NCA validity: reject candidates with collision (i==j)
+
+Method:
+  Top-K Exact Verification: K=64
+  Stage 1: Proxy Screening (first-order Taylor expansion)
+  Stage 2: Exact Verification (real forward pass on calib subset)
+  Revert: Model state restored after each verification
+
+Config:
+  seed: 0
+  max_flips: 50
+  calib_samples: 256
+  eval_samples: 2000
+  topk: 64
+
+Results:
+  baseline_acc: 92.33%
+  final_acc: 11.96%
+  accuracy_drop: 80.37%
+  baseline_loss: 0.251385
+  final_loss: 21.730485
+  loss_increase: 21.479099
+  total_flips: 50
+  n_acc_increase_steps: 1
+  n_loss_decrease_steps: 0
+  acc_increase_steps: [2]
+  loss_decrease_steps: []
+
+Counters:
+  total_groups: 3378200
+  valid_groups: 3372010
+  candidates_considered: 13487695
+  candidates_valid: 8992057
+  candidates_rejected_collision: 4495638
+  candidates_rejected_no_change: 0
+  candidates_skipped_excluded: 790
+  candidates_skipped_forbidden: 345
+
+Timing:
+  wall_sec: 251.31
+
+Metadata hashes:
+  initial: 1c24a7ed5f32e3c5
+  final: 1650f875298686ee
+
+Step-by-step details:
+--------------------------------------------------------------------------------
+Step 1: layer2.0.downsample.0 g=22 8(0b1000) -> 9(0b1001) (bit0) | (0, 2) -> (1, 2) | proxy=0.0111 exact_L=0.2021 (Δ+0.0265) | acc=91.85% (-0.49%) loss=0.2644 (+0.012990) | topk=64 verify_t=1.86s
+Step 2: layer1.2.conv1 g=203 8(0b1000) -> 12(0b1100) (bit2) | (0, 2) -> (0, 3) | proxy=0.0180 exact_L=0.2239 (Δ+0.0218) | acc=92.14% (+0.29%) loss=0.2686 (+0.004192) | topk=64 verify_t=1.87s
+Step 3: layer1.2.conv1 g=453 4(0b0100) -> 6(0b0110) (bit1) | (0, 1) -> (1, 2) | proxy=0.0274 exact_L=0.2532 (Δ+0.0293) | acc=91.46% (-0.68%) loss=0.2807 (+0.012101) | topk=64 verify_t=1.99s
+Step 4: layer1.2.conv1 g=448 14(0b1110) -> 6(0b0110) (bit3) | (2, 3) -> (1, 2) | proxy=0.0617 exact_L=0.2930 (Δ+0.0398) | acc=90.97% (-0.49%) loss=0.3032 (+0.022580) | topk=64 verify_t=1.86s
+Step 5: layer2.0.downsample.0 g=32 9(0b1001) -> 13(0b1101) (bit2) | (1, 2) -> (1, 3) | proxy=0.0681 exact_L=0.3366 (Δ+0.0436) | acc=90.48% (-0.49%) loss=0.3248 (+0.021569) | topk=64 verify_t=1.83s
+Step 6: layer1.0.conv1 g=300 13(0b1101) -> 9(0b1001) (bit2) | (1, 3) -> (1, 2) | proxy=0.0347 exact_L=0.3845 (Δ+0.0479) | acc=89.31% (-1.17%) loss=0.3667 (+0.041837) | topk=64 verify_t=1.83s
+Step 7: layer1.0.conv1 g=559 9(0b1001) -> 8(0b1000) (bit0) | (1, 2) -> (0, 2) | proxy=0.0434 exact_L=0.4549 (Δ+0.0703) | acc=88.57% (-0.73%) loss=0.4242 (+0.057515) | topk=64 verify_t=1.94s
+Step 8: layer1.0.conv1 g=448 12(0b1100) -> 8(0b1000) (bit2) | (0, 3) -> (0, 2) | proxy=0.0376 exact_L=0.5541 (Δ+0.0992) | acc=86.04% (-2.54%) loss=0.5113 (+0.087161) | topk=64 verify_t=2.08s
+Step 9: layer2.0.downsample.0 g=72 9(0b1001) -> 13(0b1101) (bit2) | (1, 2) -> (1, 3) | proxy=0.1648 exact_L=0.7022 (Δ+0.1481) | acc=83.35% (-2.69%) loss=0.6735 (+0.162135) | topk=64 verify_t=2.06s
+Step 10: layer2.0.downsample.0 g=115 13(0b1101) -> 9(0b1001) (bit2) | (1, 3) -> (1, 2) | proxy=0.1326 exact_L=0.8828 (Δ+0.1806) | acc=80.03% (-3.32%) loss=0.8538 (+0.180302) | topk=64 verify_t=1.89s
+Step 11: layer1.1.conv1 g=125 12(0b1100) -> 13(0b1101) (bit0) | (0, 3) -> (1, 3) | proxy=0.2618 exact_L=1.1315 (Δ+0.2488) | acc=75.93% (-4.10%) loss=1.0694 (+0.215680) | topk=64 verify_t=2.08s
+Step 12: layer1.0.conv1 g=439 9(0b1001) -> 8(0b1000) (bit0) | (1, 2) -> (0, 2) | proxy=0.2293 exact_L=1.3991 (Δ+0.2676) | acc=72.31% (-3.61%) loss=1.2999 (+0.230415) | topk=64 verify_t=1.94s
+Step 13: layer1.2.conv1 g=353 4(0b0100) -> 6(0b0110) (bit1) | (0, 1) -> (1, 2) | proxy=0.2966 exact_L=1.7136 (Δ+0.3145) | acc=68.36% (-3.96%) loss=1.5864 (+0.286491) | topk=64 verify_t=1.88s
+Step 14: layer1.0.conv1 g=563 4(0b0100) -> 12(0b1100) (bit3) | (0, 1) -> (0, 3) | proxy=0.3324 exact_L=2.0743 (Δ+0.3607) | acc=63.72% (-4.64%) loss=1.9044 (+0.318052) | topk=64 verify_t=2.04s
+Step 15: layer2.0.downsample.0 g=51 14(0b1110) -> 6(0b0110) (bit3) | (2, 3) -> (1, 2) | proxy=0.3740 exact_L=2.4811 (Δ+0.4068) | acc=59.13% (-4.59%) loss=2.3368 (+0.432419) | topk=64 verify_t=1.84s
+Step 16: layer1.2.conv1 g=445 4(0b0100) -> 6(0b0110) (bit1) | (0, 1) -> (1, 2) | proxy=0.6341 exact_L=2.9003 (Δ+0.4192) | acc=55.66% (-3.47%) loss=2.7157 (+0.378909) | topk=64 verify_t=2.13s
+Step 17: layer2.0.conv1 g=1056 8(0b1000) -> 12(0b1100) (bit2) | (0, 2) -> (0, 3) | proxy=0.4543 exact_L=3.2889 (Δ+0.3886) | acc=52.64% (-3.03%) loss=3.0914 (+0.375658) | topk=64 verify_t=1.99s
+Step 18: layer2.0.conv1 g=1064 14(0b1110) -> 12(0b1100) (bit1) | (2, 3) -> (0, 3) | proxy=0.6731 exact_L=3.7038 (Δ+0.4149) | acc=49.90% (-2.73%) loss=3.4432 (+0.351837) | topk=64 verify_t=1.85s
+Step 19: layer2.0.conv1 g=763 13(0b1101) -> 9(0b1001) (bit2) | (1, 3) -> (1, 2) | proxy=0.5480 exact_L=4.1154 (Δ+0.4116) | acc=47.36% (-2.54%) loss=3.8387 (+0.395468) | topk=64 verify_t=2.15s
+Step 20: layer1.0.conv1 g=305 12(0b1100) -> 13(0b1101) (bit0) | (0, 3) -> (1, 3) | proxy=0.4007 exact_L=4.5526 (Δ+0.4372) | acc=44.38% (-2.98%) loss=4.2944 (+0.455699) | topk=64 verify_t=2.11s
+Step 21: layer1.0.conv2 g=299 14(0b1110) -> 12(0b1100) (bit1) | (2, 3) -> (0, 3) | proxy=0.6185 exact_L=4.9810 (Δ+0.4284) | acc=41.11% (-3.27%) loss=4.7726 (+0.478172) | topk=64 verify_t=2.10s
+Step 22: layer1.2.conv1 g=340 12(0b1100) -> 8(0b1000) (bit2) | (0, 3) -> (0, 2) | proxy=0.4638 exact_L=5.4145 (Δ+0.4335) | acc=39.31% (-1.81%) loss=5.2100 (+0.437401) | topk=64 verify_t=1.90s
+Step 23: layer1.2.conv1 g=465 4(0b0100) -> 6(0b0110) (bit1) | (0, 1) -> (1, 2) | proxy=0.8074 exact_L=5.8185 (Δ+0.4040) | acc=37.79% (-1.51%) loss=5.6052 (+0.395255) | topk=64 verify_t=2.02s
+Step 24: layer2.0.conv1 g=1072 9(0b1001) -> 13(0b1101) (bit2) | (1, 2) -> (1, 3) | proxy=0.5154 exact_L=6.2046 (Δ+0.3861) | acc=35.30% (-2.49%) loss=6.0193 (+0.414041) | topk=64 verify_t=1.83s
+Step 25: layer2.0.conv1 g=767 13(0b1101) -> 9(0b1001) (bit2) | (1, 3) -> (1, 2) | proxy=0.6351 exact_L=6.5936 (Δ+0.3890) | acc=33.25% (-2.05%) loss=6.4045 (+0.385274) | topk=64 verify_t=1.84s
+Step 26: layer2.0.conv1 g=1076 9(0b1001) -> 13(0b1101) (bit2) | (1, 2) -> (1, 3) | proxy=0.5319 exact_L=6.9961 (Δ+0.4025) | acc=31.74% (-1.51%) loss=6.8420 (+0.437449) | topk=64 verify_t=1.90s
+Step 27: layer2.0.conv1 g=1060 14(0b1110) -> 12(0b1100) (bit1) | (2, 3) -> (0, 3) | proxy=0.6924 exact_L=7.3901 (Δ+0.3940) | acc=30.42% (-1.32%) loss=7.2388 (+0.396804) | topk=64 verify_t=1.93s
+Step 28: layer2.0.conv1 g=1068 8(0b1000) -> 12(0b1100) (bit2) | (0, 2) -> (0, 3) | proxy=0.5300 exact_L=7.7768 (Δ+0.3866) | acc=28.96% (-1.46%) loss=7.6524 (+0.413618) | topk=64 verify_t=1.81s
+Step 29: layer2.0.downsample.0 g=27 12(0b1100) -> 8(0b1000) (bit2) | (0, 3) -> (0, 2) | proxy=0.5733 exact_L=8.4639 (Δ+0.6871) | acc=26.81% (-2.15%) loss=8.3117 (+0.659287) | topk=64 verify_t=2.02s
+Step 30: layer1.1.conv2 g=124 4(0b0100) -> 6(0b0110) (bit1) | (0, 1) -> (1, 2) | proxy=0.4201 exact_L=8.9837 (Δ+0.5198) | acc=25.20% (-1.61%) loss=8.8132 (+0.501519) | topk=64 verify_t=1.96s
+Step 31: layer2.0.conv1 g=103 12(0b1100) -> 8(0b1000) (bit2) | (0, 3) -> (0, 2) | proxy=0.5935 exact_L=9.5085 (Δ+0.5248) | acc=24.61% (-0.59%) loss=9.3600 (+0.546818) | topk=64 verify_t=2.10s
+Step 32: layer2.0.conv1 g=8 9(0b1001) -> 13(0b1101) (bit2) | (1, 2) -> (1, 3) | proxy=0.5790 exact_L=9.9827 (Δ+0.4742) | acc=23.29% (-1.32%) loss=9.8062 (+0.446186) | topk=64 verify_t=1.92s
+Step 33: layer2.0.conv1 g=107 13(0b1101) -> 9(0b1001) (bit2) | (1, 3) -> (1, 2) | proxy=0.6402 exact_L=10.4331 (Δ+0.4504) | acc=22.51% (-0.78%) loss=10.2809 (+0.474666) | topk=64 verify_t=1.87s
+Step 34: layer1.0.conv1 g=160 14(0b1110) -> 6(0b0110) (bit3) | (2, 3) -> (1, 2) | proxy=0.4188 exact_L=11.6549 (Δ+1.2218) | acc=19.73% (-2.78%) loss=11.5560 (+1.275149) | topk=64 verify_t=1.93s
+Step 35: layer2.0.downsample.0 g=59 13(0b1101) -> 9(0b1001) (bit2) | (1, 3) -> (1, 2) | proxy=0.4451 exact_L=12.5113 (Δ+0.8564) | acc=18.60% (-1.12%) loss=12.3830 (+0.826949) | topk=64 verify_t=1.97s
+Step 36: layer1.1.conv1 g=198 4(0b0100) -> 12(0b1100) (bit3) | (0, 1) -> (0, 3) | proxy=0.4665 exact_L=13.1163 (Δ+0.6050) | acc=17.68% (-0.93%) loss=12.9941 (+0.611068) | topk=64 verify_t=2.04s
+Step 37: layer2.0.downsample.0 g=79 12(0b1100) -> 8(0b1000) (bit2) | (0, 3) -> (0, 2) | proxy=0.7306 exact_L=13.7315 (Δ+0.6152) | acc=17.14% (-0.54%) loss=13.5649 (+0.570882) | topk=64 verify_t=2.12s
+Step 38: layer3.1.conv1 g=7322 4(0b0100) -> 12(0b1100) (bit3) | (0, 1) -> (0, 3) | proxy=0.7164 exact_L=14.3277 (Δ+0.5962) | acc=16.55% (-0.59%) loss=14.1721 (+0.607196) | topk=64 verify_t=1.83s
+Step 39: layer1.1.conv1 g=195 8(0b1000) -> 12(0b1100) (bit2) | (0, 2) -> (0, 3) | proxy=0.4712 exact_L=14.9314 (Δ+0.6037) | acc=15.67% (-0.88%) loss=14.7920 (+0.619919) | topk=64 verify_t=2.09s
+Step 40: layer1.1.conv1 g=209 12(0b1100) -> 13(0b1101) (bit0) | (0, 3) -> (1, 3) | proxy=0.4752 exact_L=15.4836 (Δ+0.5522) | acc=14.84% (-0.83%) loss=15.3631 (+0.571096) | topk=64 verify_t=1.91s
+Step 41: layer3.0.downsample.0 g=156 8(0b1000) -> 12(0b1100) (bit2) | (0, 2) -> (0, 3) | proxy=0.6353 exact_L=16.0274 (Δ+0.5438) | acc=14.40% (-0.44%) loss=15.9442 (+0.581030) | topk=64 verify_t=2.04s
+Step 42: layer3.1.conv1 g=1002 13(0b1101) -> 12(0b1100) (bit0) | (1, 3) -> (0, 3) | proxy=0.6615 exact_L=16.5521 (Δ+0.5248) | acc=14.31% (-0.10%) loss=16.5224 (+0.578247) | topk=64 verify_t=1.81s
+Step 43: layer2.0.downsample.0 g=2 14(0b1110) -> 6(0b0110) (bit3) | (2, 3) -> (1, 2) | proxy=1.5508 exact_L=17.1147 (Δ+0.5625) | acc=13.96% (-0.34%) loss=17.0626 (+0.540164) | topk=64 verify_t=1.88s
+Step 44: layer1.0.conv1 g=9 12(0b1100) -> 13(0b1101) (bit0) | (0, 3) -> (1, 3) | proxy=0.4583 exact_L=17.7063 (Δ+0.5917) | acc=13.67% (-0.29%) loss=17.6513 (+0.588683) | topk=64 verify_t=1.92s
+Step 45: layer1.0.conv2 g=524 13(0b1101) -> 12(0b1100) (bit0) | (1, 3) -> (0, 3) | proxy=0.4480 exact_L=18.2530 (Δ+0.5466) | acc=13.18% (-0.49%) loss=18.2143 (+0.563029) | topk=64 verify_t=1.95s
+Step 46: layer1.2.conv1 g=33 12(0b1100) -> 13(0b1101) (bit0) | (0, 3) -> (1, 3) | proxy=0.4366 exact_L=19.0097 (Δ+0.7567) | acc=12.89% (-0.29%) loss=18.9929 (+0.778639) | topk=64 verify_t=1.80s
+Step 47: layer1.2.conv1 g=17 4(0b0100) -> 6(0b0110) (bit1) | (0, 1) -> (1, 2) | proxy=0.4755 exact_L=19.7071 (Δ+0.6974) | acc=12.65% (-0.24%) loss=19.6750 (+0.682066) | topk=64 verify_t=2.05s
+Step 48: layer2.0.conv2 g=37 12(0b1100) -> 13(0b1101) (bit0) | (0, 3) -> (1, 3) | proxy=0.9431 exact_L=20.4988 (Δ+0.7917) | acc=12.45% (-0.20%) loss=20.4534 (+0.778428) | topk=64 verify_t=1.97s
+Step 49: layer3.1.conv1 g=6842 9(0b1001) -> 8(0b1000) (bit0) | (1, 2) -> (0, 2) | proxy=0.5994 exact_L=21.1496 (Δ+0.6508) | acc=12.16% (-0.29%) loss=21.1005 (+0.647080) | topk=64 verify_t=1.86s
+Step 50: layer2.0.downsample.0 g=3 12(0b1100) -> 8(0b1000) (bit2) | (0, 3) -> (0, 2) | proxy=0.8081 exact_L=21.7919 (Δ+0.6424) | acc=11.96% (-0.20%) loss=21.7305 (+0.629976) | topk=64 verify_t=1.83s
+
+================================================================================
+Reproduction command:
+  python run_R1_T02_1_group_metadata_index_1bit_exact.py \
+    --device cpu --seed 0 --max-flips 50 \
+    --calib-samples 256 --eval-samples 2000 \
+    --topk 64 \
+    --ckpt sample_bfa/1_sparse_finetune.pth

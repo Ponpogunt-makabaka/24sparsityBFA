@@ -1,0 +1,3 @@
+task,baseline_acc,final_acc,acc_drop,logical_swaps,physical_flips,runtime_sec
+R1_T04,92.33,50.73,41.60,50,100,761.15
+R1_T03,92.33,65.14,27.20,25,50,382.56

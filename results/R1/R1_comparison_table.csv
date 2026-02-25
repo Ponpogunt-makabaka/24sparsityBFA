@@ -1,0 +1,5 @@
+task,encoding,constraint,ops_count,baseline_acc,final_acc,acc_drop,color
+R1_T01,Index/Position,Any Pattern,50,92.33,38.67,53.66,Blue
+R1_T02,Index/Position,1-bit Reachable,50,92.33,30.37,61.96,Orange
+R1_T03,Bitmask,Cost-2 Swap,25 swaps / 50 flips,92.33,65.14,27.19,Green
+R1_T04,Bitmask,Cost-2 Swap,50 swaps / 100 flips,92.33,50.73,41.60,Red

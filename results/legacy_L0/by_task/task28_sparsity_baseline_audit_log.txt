@@ -1,0 +1,65 @@
+==========================================================================================
+Task 28: Sparsity Baseline Audit (ResNet-20 / CIFAR-10, 2:4)
+==========================================================================================
+timestamp: 2026-02-14 19:17:21
+seed: 123
+device: cpu
+data_dir: /home/lab-2010/24sparsityBFA/data
+dense_ckpt: /home/lab-2010/24sparsityBFA/models/dense_model.pth
+sparse_ckpt: /home/lab-2010/24sparsityBFA/models/sparse_model.pth
+eval_samples: 10000
+num_workers: 0
+cifar10 mean/std: mean=(0.4914, 0.4822, 0.4465) std=(0.2471, 0.2435, 0.2616)
+test_transform_has_random_ops: False
+
+[Stage] dense_fp32 top1=92.45% sha1=2176f824c65c
+[Stage] dense_int8_ptq top1=92.46% sha1=e2aab472e6e9
+[Stage] sparse_fp32_existing top1=86.50% sha1=15d579ff6881
+[Stage] sparse_int8_existing top1=86.54% sha1=6b41ce157cae
+[Stage] dense->sparse init load missing=0 unexpected=0
+[Stage] sparse_fp32_from_dense_maskfixed_init top1=58.28%
+
+==========================================================================================
+Finetune Probe: mask-fixed sparse from dense
+==========================================================================================
+finetune_epochs=10 finetune_lr=0.01 finetune_wd=0.0005
+[Finetune] dense->sparse load missing=0 unexpected=0
+[Finetune][ep=001/10] lr=0.00976 train_loss=0.1673 train_acc=94.10% val_acc=89.45% time=75.6s
+[Finetune][ep=002/10] lr=0.00905 train_loss=0.1440 train_acc=94.84% val_acc=89.19% time=75.3s
+[Finetune][ep=003/10] lr=0.00794 train_loss=0.1287 train_acc=95.59% val_acc=89.59% time=75.4s
+[Finetune][ep=004/10] lr=0.00655 train_loss=0.1145 train_acc=96.15% val_acc=90.29% time=75.9s
+[Finetune][ep=005/10] lr=0.00500 train_loss=0.0906 train_acc=97.07% val_acc=90.29% time=75.7s
+[Finetune][ep=006/10] lr=0.00345 train_loss=0.0804 train_acc=97.39% val_acc=91.29% time=75.6s
+[Finetune][ep=007/10] lr=0.00206 train_loss=0.0639 train_acc=98.07% val_acc=91.65% time=76.2s
+[Finetune][ep=008/10] lr=0.00095 train_loss=0.0551 train_acc=98.37% val_acc=91.81% time=75.4s
+[Finetune][ep=009/10] lr=0.00024 train_loss=0.0469 train_acc=98.70% val_acc=92.11% time=76.0s
+[Finetune][ep=010/10] lr=0.00000 train_loss=0.0426 train_acc=98.89% val_acc=92.17% time=74.7s
+[Finetune] baked frozen masks into weights (layers=21)
+[Finetune] saved fp32 sparse ckpt: results/task28_sparse_mask_fixed_finetune_ckpt.pth
+[Finetune] finetuned sparse_fp32 (in-memory) top1=92.17%
+[Finetune] finetuned sparse_fp32 (reloaded) top1=92.17% sha1=d4a36da6a7ea
+[Finetune] finetuned sparse_int8 top1=92.21% sha1=87d5b414f0da
+
+==========================================================================================
+High-Probability Fault Checklist (A–I)
+==========================================================================================
+(A) CIFAR-10 normalization present (mean/std logged above): PASS
+(B) test transform deterministic (no RandomCrop/Flip): PASS
+(C) checkpoint load: see [Stage] lines; strict load in factory (missing/unexpected should be 0).
+(D) BN running stats sane (no NaN/zero var) on sparse model: PASS (mean_abs_mean=0.1515 var_mean=0.0815)
+(D) model.eval() enforced during eval_top1(): PASS
+(E) 2:4 group validity fraction on sparse_fp32_existing: 1.000000 => PASS
+(F/H) metadata grouping sanity on sparse_int8_existing (mask has 2 ones per 4): 1.000000 => PASS
+(F/H) NOTE: baseline drop is observed before CSR/position encoding is used for attack.
+(G) INT8 PTQ calibration sets quantized=True in Int8 modules: PASS
+(I) eval uses full CIFAR-10 test set (10000) when eval_samples=10000: PASS
+
+==========================================================================================
+Root-Cause Classification
+==========================================================================================
+Dense baseline is high (92.45%), but sparse baseline is low (86.50%).
+Conclusion: accuracy drop is dominated by the sparsification/training regime, not PTQ.
+
+How to run:
+  python run_task28_sparsity_baseline_audit.py --device cpu --eval-samples 10000 --seed 123
+  python run_task28_sparsity_baseline_audit.py --device cpu --eval-samples 10000 --seed 123 --finetune-epochs 20 --finetune-lr 0.01

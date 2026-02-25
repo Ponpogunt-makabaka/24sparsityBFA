@@ -1,0 +1,4 @@
+defense,executed_flips,attempted_candidates,collisions_skipped,avg_search_ms,avg_apply_ms,avg_defense_ms,avg_total_ms,throughput_attempts_per_sec,throughput_impact_pct_vs_none,wall_sec
+none,50,5442144,1816131,1600.521592,0.223765,0.000887,1600.746243,0.624709,0.000000,80.037526
+parity,50,5442144,1816317,1575.833179,0.218983,0.136250,1576.188412,0.634442,-1.534149,78.809647
+crc,50,5442144,1816317,1565.182734,0.221923,2.005130,1567.409787,0.637995,-2.082557,78.370711

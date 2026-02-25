@@ -1,0 +1,40 @@
+legacy_task_id,artifact_type,file_path,short_description,related_R1_tasks,reuse_priority,caveat,evidence_source
+task1,log,results/legacy_L0/by_task/task1_dense_int8_log.txt,Dense INT8 BFA attack with 50 flips (92.46%→10.00%),R1_T06;R1_T07,High,Dense model semantics differ from sparse-gated R1,Log file shows traditional BFA pattern
+task1,pkl,results/legacy_L0/by_date/task1_dense_int8_result.pkl,Raw result data for Task1 dense attack,R1_T07,Medium,May need parsing script update,File in by_date directory
+task2,log,results/legacy_L0/by_task/task2_sparse_dense_zero_log.txt,Zero-only attack (92.10%→12.43%),R1_T06;R1_T07,High,Possible semantic discrepancy - legacy more effective than R1,Log shows significant accuracy drop
+task2,pkl,results/legacy_L0/by_date/task2_sparse_dense_zero_result.pkl,Raw zero-only attack data,R1_T06,Medium,Different forward semantics possible,File in by_date directory
+task3,log,results/legacy_L0/by_task/task3_sparse_dense_nonzero_log.txt,Non-zero-only attack (92.10%→10.00%),R1_T06;R1_T07,High,Matches R1 expectation for nonzero mode,Log shows effectiveness
+task3,pkl,results/legacy_L0/by_date/task3_sparse_dense_nonzero_result.pkl,Raw nonzero-only attack data,R1_T06,Medium,Legacy semantics may differ,File in by_date directory
+task4,log,results/legacy_L0/by_task/task4_sparse_csr_index_log.txt,CSR collision-allowed attack (86.54%→53.94%),R1_T01;R1_T02,Medium,CSR encoding differs from 2:4 position,Log shows accuracy increases
+task4,pkl,results/legacy_L0/by_date/task4_sparse_csr_index_result.pkl,Raw CSR attack data,R1_T01,Low,Different encoding scheme,File in by_date directory
+task5,log,results/legacy_L0/by_task/task5_csr_non_collision_log.txt,CSR NCSA attack (92.10%→11.10%),R1_T01;R1_T02,High,NCSA effectiveness reference,Log shows strong results
+task5,pkl,results/legacy_L0/by_date/task5_csr_non_collision_result.pkl,Raw NCSA attack data,R1_T02,Medium,Different group encoding,File in by_date directory
+task10,log,results/legacy_L0/by_task/task10_flip_outcome_log.txt,Flip outcome taxonomy (rewire/delete/merge),All R1 metadata,Medium,CSR-specific taxonomy,Log defines outcome categories
+task10,pkl,results/legacy_L0/by_task/task10_flip_outcome_summary.pkl,Flip outcome summary data,R1_T01,Low,Needs adaptation for 2:4,File in by_task directory
+task11,log,results/legacy_L0/by_task/task11_defense_log.txt,Metadata defense (parity/CRC),All R1,Low,Defense context not attack,Log shows defense mechanisms
+task11,pkl,results/legacy_L0/by_task/task11_defense_result.pkl,Defense result data,Low,Not directly relevant,File in by_task directory
+task18,log,results/legacy_L0/by_task/task18_bitmask_validity_log.txt,Bitmask 1-bit flip validity (0% valid),R1_T03;R1_T04,High,Justifies cost-2 approach,Log proves single-bit invalid
+task18,csv,results/legacy_L0/by_task/task18_bitmask_validity_summary.csv,Bitmask validity summary table,R1_T03,Medium,Summary format only,File in by_task directory
+task20,log,results/legacy_L0/by_task/task20_bitmask_swap_log.txt,Cost-2 swap attack (86.57%→35.50%),R1_T03,High,Direct predecessor,Log shows swap semantics
+task20,pkl,results/legacy_L0/by_date/task20_bitmask_swap_result.pkl,Swap attack raw data,R1_T03,Medium,Different baseline accuracy,File in by_date directory
+task21,log,results/legacy_L0/by_task/task21_position_compare_log.txt,Position vs weight MSB compare,R1_T01;R1_T02,Medium,Shows similar effectiveness,Log comparison table
+task21,pkl,results/legacy_L0/by_task/task21_position_ncsa_result.pkl,NCSA position attack data,R1_T01,Low,Different encoding,File in by_task directory
+task22,log,results/legacy_L0/by_task/task22_dense_weight_msb_log.txt,Dense weight MSB attack,R1_T07,Medium,Dense model baseline,Log shows MSB pattern
+task28,log,results/legacy_L0/by_task/task28_closed_loop_sanity_log.txt,Checkpoint compatibility sanity check,All R1,High,Critical for R1 checkpoint source,Log verifies baseline
+task28,log,results/legacy_L0/by_task/task28_sparsity_baseline_audit_log.txt,Sparsity structure audit,All R1,High,Verifies 2:4 structure,Log shows density 50.08%
+task28,ckpt,results/legacy_L0/by_task/task28_sparse_mask_fixed_finetune_int8_ckpt.pth,R1 checkpoint source,All R1,High,Directly used by R1,File name indicates usage
+task28,csv,results/legacy_L0/by_task/task28_closed_loop_sanity_table.csv,Sanity check summary table,All R1,Medium,Summary format,File in by_task directory
+task28,png,results/legacy_L0/by_date/task28_closed_loop_sanity_curves.png,Sanity check curves,All R1,Medium,Visual comparison,File in by_date directory
+debug_task1xx,md,results/legacy_L0/debug_task1xx/final_root_cause_report.md,Critical bug: quantized=False fix,All R1,High,MUST call calibrate_all_layers(),Report documents fix
+debug_task1xx,md,results/legacy_L0/debug_task1xx/code_path_audit.md,Sparse_mask code path audit,All R1,High,Verifies metadata usage,Audit report
+debug_task1xx,txt,results/legacy_L0/debug_task1xx/sanity_one_step_log.txt,One-step sanity test result,All R1,High,Shows fix effectiveness,Log shows loss delta
+debug_task1xx,json,results/legacy_L0/debug_task1xx/sanity_one_step_result.json,One-step test JSON result,All R1,Medium,Machine-readable result,File in debug directory
+task13,log,results/legacy_L0/by_task/task13_calib_sweep_log.txt,Calibration sample sweep,All R1,Medium,Shows calib sensitivity,Log varies calib_samples
+task13,csv,results/legacy_L0/by_task/task13_calib_sweep_table.csv,Calib sweep summary table,All R1,Low,Summary format,File in by_task directory
+task14,log,results/legacy_L0/by_task/task14_layer_trace_log.txt,Layer-wise impact analysis,All R1,Medium,Shows layer vulnerability,Log traces per layer
+task14,pkl,results/legacy_L0/by_task/task14_layer_trace.pkl,Layer trace raw data,R1_T01,Low,Needs parsing,File in by_task directory
+task17,log,results/legacy_L0/by_task/task17_seed_robustness_log.txt,Seed robustness analysis,All R1,Medium,Shows variance across seeds,Log uses multiple seeds
+task17,csv,results/legacy_L0/by_task/task17_seed_robustness_table.csv,Seed robustness table,All R1,Low,Summary format,File in by_task directory
+by_date,png,results/legacy_L0/by_date/task1_3_sparse_dense_comparison.png,Task1-3 comparison plot,R1_T06;R1_T07,Medium,Visual baseline comparison,File in by_date directory
+by_date,png,results/legacy_L0/by_date/task10_acc_vs_effective_rewire.png,Effective rewire analysis,R1_T01,Low,CSR-specific analysis,File in by_date directory
+by_date,png,results/legacy_L0/by_date/task20_bitmask_swap_curve.png,Swap attack curve,R1_T03,Medium,Visual swap progression,File in by_date directory

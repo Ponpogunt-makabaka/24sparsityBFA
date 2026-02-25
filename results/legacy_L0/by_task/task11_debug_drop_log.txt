@@ -1,0 +1,50 @@
+====================================================================================================
+Task 11: Metadata Integrity Defense + Overhead/Effectiveness
+====================================================================================================
+Script: run_task11_metadata_defense.py
+Timestamp: 2026-02-11 14:10:53
+Seed: 123
+Device: cpu
+Dataset path: /home/lab-2010/24sparsityBFA/data
+Model checkpoint path: /home/lab-2010/24sparsityBFA/models/sparse_model.pth
+
+Config:
+- max_flips: 50
+- calib_samples: 256
+- eval_samples: 2000
+- max_groups_per_layer: 2000
+- allow_nonpositive: False
+- defense: all
+- mitigation: drop
+- line_bytes: 64
+- bypass_parity: False
+- bypass_crc: False
+- debug_trace: False
+
+Coverage assumptions:
+- Parity is computed over the 4-bit metadata nibble (two 2-bit indices), not the 4-bit mask.
+- CRC-8 is computed per 64B of metadata (default), packed as 4-bit nibbles.
+- Stored parity/CRC live in software state (`IntegrityState.good_*`) and are trusted by default.
+
+Overhead:
+- none: +0.000000 bits/group (storage +0.000000%, metadata-only +0.000000%)
+- parity: +1.000000 bits/group (storage +5.000000%, metadata-only +25.000000%)
+- crc8: +0.062500 bits/group (storage +0.312500%, metadata-only +1.562500%)
+
+Results:
+- none: init=86.57% final=13.38% steps=50 detected=0 mitigated=0
+  timing: hash_b!=a=0 hash_c==d=0 revert(a==c)=0 assert_fail=0
+- parity: init=86.57% final=61.47% steps=50 detected=50 mitigated=50
+  timing: hash_b!=a=0 hash_c==d=0 revert(a==c)=0 assert_fail=0
+- crc: init=86.57% final=9.91% steps=50 detected=50 mitigated=50
+  timing: hash_b!=a=0 hash_c==d=0 revert(a==c)=0 assert_fail=0
+
+Outputs:
+- results/task11_debug_drop_attack_curves.png
+- results/task11_debug_drop_overhead_table.csv
+- results/task11_debug_drop_result.pkl
+- results/task11_debug_drop_log.txt
+
+How to run:
+  python run_task11_metadata_defense.py --mitigation revert
+  python run_task11_metadata_defense.py --mitigation drop

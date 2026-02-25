@@ -1,0 +1,1546 @@
+{
+  "cifar100": {
+    "target": "CIFAR-100",
+    "loader_found": true,
+    "import_success": true,
+    "instantiation_success": false,
+    "batch_test_success": false,
+    "train_batch_shape": null,
+    "test_batch_shape": null,
+    "train_label_range": null,
+    "test_label_range": null,
+    "status": "NOT_READY",
+    "errors": [
+      "Failed to create dataloaders: Dataset not found or corrupted. You can use download=True to download it"
+    ]
+  },
+  "mobilenet_v2": {
+    "model_type": "MobileNet-V2",
+    "path": "data/T09_ImageNet_Scale/weights/mobilenet_v2_2_4_sparse_imagenette.pth",
+    "exists": true,
+    "loadable": true,
+    "layers_audited": [
+      {
+        "name": "classifier.1.weight",
+        "type": "Linear",
+        "shape": [
+          1000,
+          1280
+        ],
+        "total_groups": 320000,
+        "valid_groups": 320000,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 320000
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.1.conv.1.weight",
+        "type": "Conv2d",
+        "shape": [
+          16,
+          32,
+          1,
+          1
+        ],
+        "total_groups": 128,
+        "valid_groups": 128,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 128
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.10.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          384,
+          64,
+          1,
+          1
+        ],
+        "total_groups": 6144,
+        "valid_groups": 6144,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 6144
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.10.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          64,
+          384,
+          1,
+          1
+        ],
+        "total_groups": 6144,
+        "valid_groups": 6144,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 6144
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.11.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          384,
+          64,
+          1,
+          1
+        ],
+        "total_groups": 6144,
+        "valid_groups": 6144,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 6144
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.11.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          96,
+          384,
+          1,
+          1
+        ],
+        "total_groups": 9216,
+        "valid_groups": 9216,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 9216
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.12.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          576,
+          96,
+          1,
+          1
+        ],
+        "total_groups": 13824,
+        "valid_groups": 13824,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 13824
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.12.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          96,
+          576,
+          1,
+          1
+        ],
+        "total_groups": 13824,
+        "valid_groups": 13824,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 13824
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.13.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          576,
+          96,
+          1,
+          1
+        ],
+        "total_groups": 13824,
+        "valid_groups": 13824,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 13824
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.13.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          96,
+          576,
+          1,
+          1
+        ],
+        "total_groups": 13824,
+        "valid_groups": 13824,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 13824
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.14.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          576,
+          96,
+          1,
+          1
+        ],
+        "total_groups": 13824,
+        "valid_groups": 13824,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 13824
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.14.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          160,
+          576,
+          1,
+          1
+        ],
+        "total_groups": 23040,
+        "valid_groups": 23040,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 23040
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.15.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          960,
+          160,
+          1,
+          1
+        ],
+        "total_groups": 38400,
+        "valid_groups": 38400,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 38400
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.15.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          160,
+          960,
+          1,
+          1
+        ],
+        "total_groups": 38400,
+        "valid_groups": 38400,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 38400
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.16.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          960,
+          160,
+          1,
+          1
+        ],
+        "total_groups": 38400,
+        "valid_groups": 38400,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 38400
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.16.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          160,
+          960,
+          1,
+          1
+        ],
+        "total_groups": 38400,
+        "valid_groups": 38400,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 38400
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.17.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          960,
+          160,
+          1,
+          1
+        ],
+        "total_groups": 38400,
+        "valid_groups": 38400,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 38400
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.17.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          320,
+          960,
+          1,
+          1
+        ],
+        "total_groups": 76800,
+        "valid_groups": 76800,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 76800
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.18.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          1280,
+          320,
+          1,
+          1
+        ],
+        "total_groups": 102400,
+        "valid_groups": 102400,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 102400
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.2.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          96,
+          16,
+          1,
+          1
+        ],
+        "total_groups": 384,
+        "valid_groups": 384,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 384
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.2.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          24,
+          96,
+          1,
+          1
+        ],
+        "total_groups": 576,
+        "valid_groups": 576,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 576
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.3.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          144,
+          24,
+          1,
+          1
+        ],
+        "total_groups": 864,
+        "valid_groups": 864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.3.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          24,
+          144,
+          1,
+          1
+        ],
+        "total_groups": 864,
+        "valid_groups": 864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.4.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          144,
+          24,
+          1,
+          1
+        ],
+        "total_groups": 864,
+        "valid_groups": 864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.4.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          32,
+          144,
+          1,
+          1
+        ],
+        "total_groups": 1152,
+        "valid_groups": 1152,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 1152
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.5.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          192,
+          32,
+          1,
+          1
+        ],
+        "total_groups": 1536,
+        "valid_groups": 1536,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 1536
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.5.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          32,
+          192,
+          1,
+          1
+        ],
+        "total_groups": 1536,
+        "valid_groups": 1536,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 1536
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.6.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          192,
+          32,
+          1,
+          1
+        ],
+        "total_groups": 1536,
+        "valid_groups": 1536,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 1536
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.6.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          32,
+          192,
+          1,
+          1
+        ],
+        "total_groups": 1536,
+        "valid_groups": 1536,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 1536
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.7.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          192,
+          32,
+          1,
+          1
+        ],
+        "total_groups": 1536,
+        "valid_groups": 1536,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 1536
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.7.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          64,
+          192,
+          1,
+          1
+        ],
+        "total_groups": 3072,
+        "valid_groups": 3072,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 3072
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.8.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          384,
+          64,
+          1,
+          1
+        ],
+        "total_groups": 6144,
+        "valid_groups": 6144,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 6144
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.8.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          64,
+          384,
+          1,
+          1
+        ],
+        "total_groups": 6144,
+        "valid_groups": 6144,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 6144
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.9.conv.0.0.weight",
+        "type": "Conv2d",
+        "shape": [
+          384,
+          64,
+          1,
+          1
+        ],
+        "total_groups": 6144,
+        "valid_groups": 6144,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 6144
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "features.9.conv.2.weight",
+        "type": "Conv2d",
+        "shape": [
+          64,
+          384,
+          1,
+          1
+        ],
+        "total_groups": 6144,
+        "valid_groups": 6144,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 6144
+        },
+        "skipped": false,
+        "skip_reason": null
+      }
+    ],
+    "total_groups": 851168,
+    "valid_groups": 851168,
+    "invalid_groups": 0,
+    "violations": 0,
+    "skipped_layers": 18,
+    "compliance_rate": 100.0,
+    "status": "PASS",
+    "errors": []
+  },
+  "deit_tiny": {
+    "model_type": "DeiT-Tiny",
+    "path": "data/T09_ImageNet_Scale/weights/deit_tiny_2_4_sparse_imagenette.pth",
+    "exists": true,
+    "loadable": true,
+    "layers_audited": [
+      {
+        "name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "type": "Linear",
+        "shape": [
+          768,
+          192
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_0.mlp.3.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          768
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_0.self_attention.in_proj_weight",
+        "type": "Linear",
+        "shape": [
+          576,
+          192
+        ],
+        "total_groups": 27648,
+        "valid_groups": 27648,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 27648
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          192
+        ],
+        "total_groups": 9216,
+        "valid_groups": 9216,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 9216
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_1.mlp.0.weight",
+        "type": "Linear",
+        "shape": [
+          768,
+          192
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_1.mlp.3.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          768
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_1.self_attention.in_proj_weight",
+        "type": "Linear",
+        "shape": [
+          576,
+          192
+        ],
+        "total_groups": 27648,
+        "valid_groups": 27648,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 27648
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_1.self_attention.out_proj.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          192
+        ],
+        "total_groups": 9216,
+        "valid_groups": 9216,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 9216
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_10.mlp.0.weight",
+        "type": "Linear",
+        "shape": [
+          768,
+          192
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_10.mlp.3.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          768
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_10.self_attention.in_proj_weight",
+        "type": "Linear",
+        "shape": [
+          576,
+          192
+        ],
+        "total_groups": 27648,
+        "valid_groups": 27648,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 27648
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_10.self_attention.out_proj.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          192
+        ],
+        "total_groups": 9216,
+        "valid_groups": 9216,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 9216
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_11.mlp.0.weight",
+        "type": "Linear",
+        "shape": [
+          768,
+          192
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_11.mlp.3.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          768
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_11.self_attention.in_proj_weight",
+        "type": "Linear",
+        "shape": [
+          576,
+          192
+        ],
+        "total_groups": 27648,
+        "valid_groups": 27648,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 27648
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_11.self_attention.out_proj.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          192
+        ],
+        "total_groups": 9216,
+        "valid_groups": 9216,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 9216
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_2.mlp.0.weight",
+        "type": "Linear",
+        "shape": [
+          768,
+          192
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_2.mlp.3.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          768
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "type": "Linear",
+        "shape": [
+          576,
+          192
+        ],
+        "total_groups": 27648,
+        "valid_groups": 27648,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 27648
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_2.self_attention.out_proj.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          192
+        ],
+        "total_groups": 9216,
+        "valid_groups": 9216,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 9216
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_3.mlp.0.weight",
+        "type": "Linear",
+        "shape": [
+          768,
+          192
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_3.mlp.3.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          768
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_3.self_attention.in_proj_weight",
+        "type": "Linear",
+        "shape": [
+          576,
+          192
+        ],
+        "total_groups": 27648,
+        "valid_groups": 27648,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 27648
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_3.self_attention.out_proj.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          192
+        ],
+        "total_groups": 9216,
+        "valid_groups": 9216,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 9216
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_4.mlp.0.weight",
+        "type": "Linear",
+        "shape": [
+          768,
+          192
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_4.mlp.3.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          768
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_4.self_attention.in_proj_weight",
+        "type": "Linear",
+        "shape": [
+          576,
+          192
+        ],
+        "total_groups": 27648,
+        "valid_groups": 27648,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 27648
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_4.self_attention.out_proj.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          192
+        ],
+        "total_groups": 9216,
+        "valid_groups": 9216,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 9216
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_5.mlp.0.weight",
+        "type": "Linear",
+        "shape": [
+          768,
+          192
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_5.mlp.3.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          768
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_5.self_attention.in_proj_weight",
+        "type": "Linear",
+        "shape": [
+          576,
+          192
+        ],
+        "total_groups": 27648,
+        "valid_groups": 27648,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 27648
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_5.self_attention.out_proj.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          192
+        ],
+        "total_groups": 9216,
+        "valid_groups": 9216,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 9216
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_6.mlp.0.weight",
+        "type": "Linear",
+        "shape": [
+          768,
+          192
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_6.mlp.3.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          768
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_6.self_attention.in_proj_weight",
+        "type": "Linear",
+        "shape": [
+          576,
+          192
+        ],
+        "total_groups": 27648,
+        "valid_groups": 27648,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 27648
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_6.self_attention.out_proj.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          192
+        ],
+        "total_groups": 9216,
+        "valid_groups": 9216,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 9216
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "type": "Linear",
+        "shape": [
+          768,
+          192
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_7.mlp.3.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          768
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_7.self_attention.in_proj_weight",
+        "type": "Linear",
+        "shape": [
+          576,
+          192
+        ],
+        "total_groups": 27648,
+        "valid_groups": 27648,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 27648
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_7.self_attention.out_proj.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          192
+        ],
+        "total_groups": 9216,
+        "valid_groups": 9216,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 9216
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "type": "Linear",
+        "shape": [
+          768,
+          192
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_8.mlp.3.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          768
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_8.self_attention.in_proj_weight",
+        "type": "Linear",
+        "shape": [
+          576,
+          192
+        ],
+        "total_groups": 27648,
+        "valid_groups": 27648,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 27648
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_8.self_attention.out_proj.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          192
+        ],
+        "total_groups": 9216,
+        "valid_groups": 9216,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 9216
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_9.mlp.0.weight",
+        "type": "Linear",
+        "shape": [
+          768,
+          192
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_9.mlp.3.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          768
+        ],
+        "total_groups": 36864,
+        "valid_groups": 36864,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 36864
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_9.self_attention.in_proj_weight",
+        "type": "Linear",
+        "shape": [
+          576,
+          192
+        ],
+        "total_groups": 27648,
+        "valid_groups": 27648,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 27648
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "encoder.layers.encoder_layer_9.self_attention.out_proj.weight",
+        "type": "Linear",
+        "shape": [
+          192,
+          192
+        ],
+        "total_groups": 9216,
+        "valid_groups": 9216,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 9216
+        },
+        "skipped": false,
+        "skip_reason": null
+      },
+      {
+        "name": "heads.head.weight",
+        "type": "Linear",
+        "shape": [
+          1000,
+          192
+        ],
+        "total_groups": 48000,
+        "valid_groups": 48000,
+        "invalid_groups": 0,
+        "violations": 0,
+        "zero_distribution": {
+          "2": 48000
+        },
+        "skipped": false,
+        "skip_reason": null
+      }
+    ],
+    "total_groups": 1375104,
+    "valid_groups": 1375104,
+    "invalid_groups": 0,
+    "violations": 0,
+    "skipped_layers": 1,
+    "compliance_rate": 100.0,
+    "status": "PASS",
+    "errors": []
+  },
+  "overall_status": "PARTIAL"
+}

@@ -1,0 +1,2 @@
+baseline_acc,final_acc,acc_drop,baseline_loss,final_loss,loss_increase,max_flips,topk,eval_samples,calib_samples,seed,runtime_sec,num_groups_total,num_groups_valid,candidates_considered,candidates_valid,candidates_rejected_collision,candidates_rejected_no_change,n_acc_increase_steps,n_loss_decrease_steps,acc_increase_steps,loss_decrease_steps
+92.33%,11.96%,80.37%,0.251385,21.730485,21.479099,50,64,2000,256,0,251.31,3378200,3372010,13487695,8992057,4495638,0,1,0,[2],[]

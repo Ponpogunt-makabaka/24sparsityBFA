@@ -1,0 +1,3 @@
+method,seed,baseline_acc,final_acc,successful_flips,ckpt
+dense_weight_msb_int8,123,92.529296875,11.181640625,10,/home/lab-2010/24sparsityBFA/models/dense_model.pth
+sparse_metadata_ncsa_noncollision_int8,123,92.333984375,71.435546875,10,/home/lab-2010/24sparsityBFA/results/task28_sparse_mask_fixed_finetune_ckpt.pth

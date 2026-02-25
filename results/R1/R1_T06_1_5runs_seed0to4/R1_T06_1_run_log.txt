@@ -1,0 +1,113 @@
+================================================================================
+R1_T06.1 REWRITE: Sparse-Gated BFA with Dense-View Candidate Search + Top-K Exact
+================================================================================
+
+Timestamp: 2026-02-23 15:18:05
+Device: cpu
+Checkpoint: /home/lab-2010/24sparsityBFA/results/legacy_L0/by_task/task28_sparse_mask_fixed_finetune_int8_ckpt.pth
+Seeds: [0, 1, 2, 3, 4]
+Physical budget: 50
+Calib samples: 256
+Eval samples: 2000
+Top-K: 64
+Modes: global,zero_only,nonzero_only
+
+Semantics:
+- sparse_mask is preserved (sparse-gated forward)
+- candidate generation uses dense-view global search
+- exact verification naturally rejects ineffective masked candidates
+
+Results:
+
+sparse-gated : global weight-bit flip (dense-view search) (K=64)
+  Baseline: 92.40% acc, 0.269775 loss
+  Final: 10.20% acc, 17.575377 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : zero-only (dense-view search) (K=64)
+  Baseline: 92.40% acc, 0.269775 loss
+  Final: 89.90% acc, 0.361839 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : non-zero only (dense-view search) (K=64)
+  Baseline: 92.40% acc, 0.269775 loss
+  Final: 10.15% acc, 14.784735 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : global weight-bit flip (dense-view search) (K=64)
+  Baseline: 92.25% acc, 0.268054 loss
+  Final: 10.65% acc, 18.122452 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : zero-only (dense-view search) (K=64)
+  Baseline: 92.25% acc, 0.268054 loss
+  Final: 86.10% acc, 0.512892 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : non-zero only (dense-view search) (K=64)
+  Baseline: 92.25% acc, 0.268054 loss
+  Final: 11.45% acc, 16.442428 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : global weight-bit flip (dense-view search) (K=64)
+  Baseline: 92.80% acc, 0.254427 loss
+  Final: 9.15% acc, 16.305872 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : zero-only (dense-view search) (K=64)
+  Baseline: 92.80% acc, 0.254427 loss
+  Final: 91.80% acc, 0.278447 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : non-zero only (dense-view search) (K=64)
+  Baseline: 92.80% acc, 0.254427 loss
+  Final: 9.15% acc, 16.305872 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : global weight-bit flip (dense-view search) (K=64)
+  Baseline: 92.10% acc, 0.282221 loss
+  Final: 11.95% acc, 18.330305 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : zero-only (dense-view search) (K=64)
+  Baseline: 92.10% acc, 0.282221 loss
+  Final: 91.30% acc, 0.312461 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : non-zero only (dense-view search) (K=64)
+  Baseline: 92.10% acc, 0.282221 loss
+  Final: 11.90% acc, 30.095014 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : global weight-bit flip (dense-view search) (K=64)
+  Baseline: 92.15% acc, 0.250502 loss
+  Final: 11.80% acc, 17.961094 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : zero-only (dense-view search) (K=64)
+  Baseline: 92.15% acc, 0.250502 loss
+  Final: 82.65% acc, 0.574317 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+sparse-gated : non-zero only (dense-view search) (K=64)
+  Baseline: 92.15% acc, 0.250502 loss
+  Final: 11.80% acc, 17.961094 loss
+  Acc increase steps: []
+  Loss decrease steps: []
+
+Reproduction command:
+python run_R1_T06_1_sparse_gated_dense_view_exact.py --device cpu --seed 0 1 2 3 4 --physical-budget 50 --calib-samples 256 --eval-samples 2000 --topk 64 --modes global zero_only nonzero_only --ckpt results/legacy_L0/by_task/task28_sparse_mask_fixed_finetune_int8_ckpt.pth --out-dir results/R1/R1_T06_1_5runs_seed0to4

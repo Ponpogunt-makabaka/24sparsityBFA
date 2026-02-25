@@ -1,0 +1,4 @@
+mode,seed,baseline_acc,final_acc,acc_drop,baseline_loss_eval,final_loss_eval,loss_increase
+global,2,92.80%,9.15%,83.65%,0.254427,16.305872,16.051445
+zero_only,4,92.15%,82.65%,9.50%,0.250502,0.574317,0.323816
+nonzero_only,2,92.80%,9.15%,83.65%,0.254427,16.305872,16.051445

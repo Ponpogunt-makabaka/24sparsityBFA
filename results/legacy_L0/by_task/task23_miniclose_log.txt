@@ -1,0 +1,26 @@
+====================================================================================================
+Task 23: Minimal Closed-Loop Summary
+====================================================================================================
+Script: run_task23_miniclose_summary.py
+Timestamp: 2026-02-14 16:19:02
+
+Loaded sources:
+- results/task22_dense_weight_msb_result.pkl
+- results/task19_bitmask_weight_msb_result.pkl
+- results/task20_bitmask_swap_result.pkl
+- results/task21_position_ncsa_result.pkl
+- results/task21_position_weight_msb_result.pkl
+
+Table:
+- A_dense dense_weight_msb (cost=1): 92.53% -> 9.57%
+- B_bitmask bitmask_weight_msb_nonzero (cost=1): 86.57% -> 9.91%
+- B_bitmask bitmask_swap_cost2 (cost=2): 86.57% -> 35.50%
+- C_position position_metadata_ncsa (cost=1): 86.57% -> 9.67%
+- C_position position_weight_msb_nonzero (cost=1): 86.57% -> 9.91%
+
+Artifacts:
+- results/task23_miniclose_curves.png
+- results/task23_miniclose_table.csv
+
+How to run:
+  python run_task23_miniclose_summary.py

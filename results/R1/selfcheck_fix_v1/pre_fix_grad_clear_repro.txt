@@ -1,0 +1,14 @@
+[PTQ] Calibrating quantization parameters...
+[PTQ] Calibration complete!
+Mimic pre-fix stage order with grad-clear between types
+N_weight 10500
+N_index 0
+N_bitmask 0
+index_counter {'total_groups': 0, 'valid_groups': 0, 'candidates_considered': 0, 'candidates_valid': 0, 'candidates_rejected_collision': 0, 'candidates_rejected_no_change': 0, 'candidates_skipped_excluded': 0, 'candidates_skipped_forbidden': 0}
+bitmask_counter {'total_groups': 0, 'valid_groups': 0, 'candidates_considered': 0, 'candidates_valid': 0, 'candidates_skipped_excluded': 0, 'candidates_skipped_forbidden': 0}
+
+Control without manual grad-clear:
+N_index 50137
+N_bitmask 50137
+index_counter {'total_groups': 67564, 'valid_groups': 67456, 'candidates_considered': 269824, 'candidates_valid': 89317, 'candidates_rejected_collision': 89934, 'candidates_rejected_no_change': 0, 'candidates_skipped_excluded': 0, 'candidates_skipped_forbidden': 0}
+bitmask_counter {'total_groups': 67564, 'valid_groups': 67456, 'candidates_considered': 269824, 'candidates_valid': 134106, 'candidates_skipped_excluded': 0, 'candidates_skipped_forbidden': 0}

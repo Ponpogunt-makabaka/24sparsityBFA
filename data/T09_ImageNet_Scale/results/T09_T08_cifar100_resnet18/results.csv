@@ -1,0 +1,2 @@
+seed,arch,initial_acc,final_acc,acc_drop,num_flips
+0,resnet18,69.93,29.07,40.86,50

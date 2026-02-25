@@ -1,0 +1,4 @@
+step,mode,flips_used,cost,layer_name,weight_idx,bit_pos,old_int8,new_int8,delta_value_fp32,proxy_score,exact_score,L_calib,delta_L_calib,L_eval,delta_L_eval,acc_eval,delta_acc_eval,topk_considered,verification_time,objective
+1,zero_only,1,1,conv1,43,7,0,-128,-0.771308,0.044800,0.057324,0.295103,0.057324,0.287796,0.018021,91.6500,-0.7500,64,8.7417,0.018021
+2,zero_only,2,1,conv1,403,6,0,64,0.385654,0.055948,0.080469,0.375573,0.080469,0.341565,0.053769,90.7500,-0.9000,64,8.6851,0.053769
+3,zero_only,3,1,conv1,88,6,0,64,0.385654,0.052194,0.038683,0.414256,0.038683,0.361839,0.020274,89.9000,-0.8500,64,8.6698,0.020274

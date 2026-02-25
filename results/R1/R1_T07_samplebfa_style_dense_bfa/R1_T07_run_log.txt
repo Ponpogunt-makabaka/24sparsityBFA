@@ -1,0 +1,21 @@
+================================================================================
+R1_T07 sampleBFA-style dense-view BFA
+================================================================================
+Timestamp: 2026-02-23 14:28:45
+Checkpoint: /home/lab-2010/24sparsityBFA/results/legacy_L0/by_task/task28_sparse_mask_fixed_finetune_int8_ckpt.pth
+Device: cpu
+Seed: 0
+Physical budget: 50
+Topk per layer: 5
+Attack samples (train subset): 128
+Eval samples (test subset): 2000
+Zero point: 0
+Mask stats: layers=21, total=270256, ones=135344, zeros=134912, density=0.5008
+
+Mode Results:
+- global: baseline_acc=92.4000, final_acc=9.5500, acc_drop=82.8500, baseline_loss=0.26977543, final_loss=420.77079834, applied_flips=50
+- zero_only: baseline_acc=92.4000, final_acc=92.4000, acc_drop=0.0000, baseline_loss=0.26977543, final_loss=0.26977543, applied_flips=0
+- nonzero_only: baseline_acc=92.4000, final_acc=9.5500, acc_drop=82.8500, baseline_loss=0.26977543, final_loss=806.36194287, applied_flips=50
+
+Reproduce:
+python run_R1_T07_samplebfa_style_dense_bfa.py --device cpu --seed 0 --physical-budget 50 --topk 5 --attack-samples 128 --attack-batch-size 128 --eval-samples 2000 --eval-batch-size 256 --ckpt results/legacy_L0/by_task/task28_sparse_mask_fixed_finetune_int8_ckpt.pth --out-dir results/R1/R1_T07_samplebfa_style_dense_bfa

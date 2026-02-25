@@ -1,0 +1,818 @@
+[
+  {
+    "seed": 0,
+    "arch": "mobilenet_v2",
+    "initial_acc": 92.86624203821655,
+    "final_acc": 10.420382165605096,
+    "acc_drop": 82.44585987261146,
+    "num_flips": 50,
+    "attack_history": [
+      {
+        "flip": 1,
+        "param_name": "features.1.conv.1.weight",
+        "group": 85,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.1268858164548874,
+        "stage_a_kept": 173407,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 2,
+        "param_name": "features.2.conv.2.weight",
+        "group": 182,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 3.630812883377075,
+        "stage_a_kept": 173615,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 3,
+        "param_name": "features.1.conv.1.weight",
+        "group": 40,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 1.0492606163024902,
+        "stage_a_kept": 173536,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 4,
+        "param_name": "features.5.conv.1.0.weight",
+        "group": 200,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 3.9949898719787598,
+        "stage_a_kept": 173580,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 5,
+        "param_name": "features.11.conv.1.0.weight",
+        "group": 715,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 1.533268928527832,
+        "stage_a_kept": 173560,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 6,
+        "param_name": "features.2.conv.2.weight",
+        "group": 455,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 2.935364007949829,
+        "stage_a_kept": 173417,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 7,
+        "param_name": "features.11.conv.0.0.weight",
+        "group": 4484,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 1.3588433265686035,
+        "stage_a_kept": 173611,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 8,
+        "param_name": "features.7.conv.0.0.weight",
+        "group": 1042,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "proxy_score": 1.3062372207641602,
+        "stage_a_kept": 173353,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 9,
+        "param_name": "features.16.conv.1.0.weight",
+        "group": 1570,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.883323609828949,
+        "stage_a_kept": 173410,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 10,
+        "param_name": "features.7.conv.0.0.weight",
+        "group": 526,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 4.370607852935791,
+        "stage_a_kept": 173569,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 11,
+        "param_name": "features.7.conv.0.0.weight",
+        "group": 646,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 1.8537797927856445,
+        "stage_a_kept": 173500,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 12,
+        "param_name": "features.13.conv.0.0.weight",
+        "group": 12655,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 1.2248494625091553,
+        "stage_a_kept": 173315,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 13,
+        "param_name": "features.17.conv.1.0.weight",
+        "group": 994,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 1.0397461652755737,
+        "stage_a_kept": 173400,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 14,
+        "param_name": "features.13.conv.0.0.weight",
+        "group": 2980,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 1.3886661529541016,
+        "stage_a_kept": 173485,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 15,
+        "param_name": "features.11.conv.0.0.weight",
+        "group": 3687,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 1.249607801437378,
+        "stage_a_kept": 173592,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 16,
+        "param_name": "features.16.conv.0.0.weight",
+        "group": 20730,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "proxy_score": 0.9312155246734619,
+        "stage_a_kept": 173486,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 17,
+        "param_name": "features.17.conv.0.0.weight",
+        "group": 17653,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 2.273045301437378,
+        "stage_a_kept": 173567,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 18,
+        "param_name": "features.11.conv.0.0.weight",
+        "group": 2279,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 1.5285828113555908,
+        "stage_a_kept": 173406,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 19,
+        "param_name": "features.16.conv.0.0.weight",
+        "group": 20741,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 1.0852614641189575,
+        "stage_a_kept": 173391,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 20,
+        "param_name": "features.16.conv.1.0.weight",
+        "group": 1939,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 1.0279344320297241,
+        "stage_a_kept": 173623,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 21,
+        "param_name": "features.7.conv.0.0.weight",
+        "group": 749,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 1.1153572797775269,
+        "stage_a_kept": 173468,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 22,
+        "param_name": "features.17.conv.0.0.weight",
+        "group": 17641,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 1.4197156429290771,
+        "stage_a_kept": 173454,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 23,
+        "param_name": "features.14.conv.2.weight",
+        "group": 14709,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 1.1772955656051636,
+        "stage_a_kept": 173450,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 24,
+        "param_name": "features.13.conv.1.0.weight",
+        "group": 677,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 1.2391215562820435,
+        "stage_a_kept": 173485,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 25,
+        "param_name": "features.17.conv.0.0.weight",
+        "group": 17667,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 2.912109375,
+        "stage_a_kept": 173401,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 26,
+        "param_name": "features.17.conv.0.0.weight",
+        "group": 17657,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 1.036351203918457,
+        "stage_a_kept": 173613,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 27,
+        "param_name": "features.17.conv.0.0.weight",
+        "group": 12813,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 1.7545994520187378,
+        "stage_a_kept": 173490,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 28,
+        "param_name": "features.17.conv.0.0.weight",
+        "group": 12808,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 1.459453821182251,
+        "stage_a_kept": 173543,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 29,
+        "param_name": "features.15.conv.1.0.weight",
+        "group": 832,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 1.1387120485305786,
+        "stage_a_kept": 173467,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 30,
+        "param_name": "features.17.conv.0.0.weight",
+        "group": 17673,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "proxy_score": 1.0810303688049316,
+        "stage_a_kept": 173255,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 31,
+        "param_name": "features.17.conv.1.0.weight",
+        "group": 993,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 1.1851608753204346,
+        "stage_a_kept": 173401,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 32,
+        "param_name": "features.1.conv.1.weight",
+        "group": 45,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 3.1398675441741943,
+        "stage_a_kept": 173273,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 33,
+        "param_name": "features.14.conv.0.0.weight",
+        "group": 11796,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 1.3561532497406006,
+        "stage_a_kept": 173523,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 34,
+        "param_name": "features.11.conv.0.0.weight",
+        "group": 3684,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 1.4550955295562744,
+        "stage_a_kept": 173452,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 35,
+        "param_name": "features.14.conv.0.0.weight",
+        "group": 1834,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 1.3544827699661255,
+        "stage_a_kept": 173510,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 36,
+        "param_name": "features.14.conv.2.weight",
+        "group": 13438,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 1.0880860090255737,
+        "stage_a_kept": 173597,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 37,
+        "param_name": "features.17.conv.0.0.weight",
+        "group": 38027,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "proxy_score": 1.3299391269683838,
+        "stage_a_kept": 173508,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 38,
+        "param_name": "features.12.conv.1.0.weight",
+        "group": 1138,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.9885245561599731,
+        "stage_a_kept": 173479,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 39,
+        "param_name": "features.7.conv.2.weight",
+        "group": 1556,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 1.630213737487793,
+        "stage_a_kept": 173620,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 40,
+        "param_name": "features.1.conv.1.weight",
+        "group": 86,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 1.5217382907867432,
+        "stage_a_kept": 173456,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 41,
+        "param_name": "features.17.conv.0.0.weight",
+        "group": 12824,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.9846192002296448,
+        "stage_a_kept": 173333,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 42,
+        "param_name": "features.16.conv.1.0.weight",
+        "group": 1939,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 1.668968677520752,
+        "stage_a_kept": 173501,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 43,
+        "param_name": "features.17.conv.2.weight",
+        "group": 18350,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 1.4573674201965332,
+        "stage_a_kept": 173658,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 44,
+        "param_name": "features.1.conv.1.weight",
+        "group": 29,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 1.2754251956939697,
+        "stage_a_kept": 173356,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 45,
+        "param_name": "features.6.conv.2.weight",
+        "group": 1244,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.984580934047699,
+        "stage_a_kept": 173375,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 46,
+        "param_name": "features.16.conv.0.0.weight",
+        "group": 4947,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 1.0202239751815796,
+        "stage_a_kept": 173506,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 47,
+        "param_name": "features.12.conv.0.0.weight",
+        "group": 11130,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 1.3696333169937134,
+        "stage_a_kept": 173402,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 48,
+        "param_name": "features.2.conv.1.0.weight",
+        "group": 204,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 1.5959866046905518,
+        "stage_a_kept": 173460,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 49,
+        "param_name": "features.14.conv.1.0.weight",
+        "group": 418,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.9613364934921265,
+        "stage_a_kept": 173485,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 50,
+        "param_name": "features.17.conv.2.weight",
+        "group": 54896,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.8581385612487793,
+        "stage_a_kept": 173493,
+        "stage_b_tested": 64
+      }
+    ],
+    "config": {
+      "physical_budget": 50,
+      "top_m_per_group": 3,
+      "top_k_verify": 64,
+      "max_groups_per_layer": 2000
+    }
+  }
+]

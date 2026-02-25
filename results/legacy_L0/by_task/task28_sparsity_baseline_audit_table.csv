@@ -1,0 +1,8 @@
+stage_name,ckpt_path,sha1,top1,effective_nonzeros,effective_total,effective_sparsity,group_valid_frac,notes
+dense_fp32,models/dense_model.pth,2176f824c65ccf4d538de22540a57420a54d1bad,92.45,270896,270896,0.0,0.0,dense resnet20
+dense_int8_ptq,models/dense_model.pth,e2aab472e6e9e5b8b71de0b8edaf707bfd3387e1,92.46,270896,270896,0.0,0.0,Int8QuantizedResNet(calibrated)
+sparse_fp32_existing,models/sparse_model.pth,15d579ff6881f730c8573404cf0da705fa6bae75,86.5,135984,270896,0.49802138089894277,1.0,SparseConv dynamic mask (top-2 per 4) in forward
+sparse_int8_existing,models/sparse_model.pth,6b41ce157cae918a1d6df7fb93fb91d1d792698b,86.54,135984,270896,0.49802138089894277,1.0,Int8QuantizedResNet + copied cached masks
+sparse_fp32_from_dense_maskfixed_init,models/dense_model.pth,2176f824c65ccf4d538de22540a57420a54d1bad,58.28,135984,270896,0.49802138089894277,1.0,dense weights + fixed 2:4 mask (top-2 magnitude) no finetune
+sparse_fp32_maskfixed_finetuned,results/task28_sparse_mask_fixed_finetune_ckpt.pth,d4a36da6a7eae930c3d068a3152c00970ac9b0a3,92.17,135984,270896,0.49802138089894277,1.0,mask-fixed finetune from dense; best_val_acc=92.17; reload_eval=92.17
+sparse_int8_maskfixed_finetuned,results/task28_sparse_mask_fixed_finetune_int8_ckpt.pth,87d5b414f0daa478ba4e275176ffd9896290d203,92.21,135984,270896,0.49802138089894277,1.0,finetuned sparse -> Int8QuantizedResNet calibrated

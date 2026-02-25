@@ -1,0 +1,820 @@
+[
+  {
+    "seed": 0,
+    "arch": "deit_tiny",
+    "initial_acc": 23.18,
+    "final_acc": 20.1,
+    "acc_drop": 3.0799999999999983,
+    "num_flips": 50,
+    "attack_history": [
+      {
+        "flip": 1,
+        "param_name": "conv_proj.weight",
+        "group": 1026,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0006697700591757894,
+        "stage_a_kept": 5834,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 2,
+        "param_name": "heads.head.weight",
+        "group": 1125,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.003812826005741954,
+        "stage_a_kept": 5804,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 3,
+        "param_name": "conv_proj.weight",
+        "group": 654,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.00058123585768044,
+        "stage_a_kept": 5787,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 4,
+        "param_name": "heads.head.weight",
+        "group": 1101,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0021307512652128935,
+        "stage_a_kept": 5765,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 5,
+        "param_name": "conv_proj.weight",
+        "group": 2272,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0014975059311836958,
+        "stage_a_kept": 5845,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 6,
+        "param_name": "conv_proj.weight",
+        "group": 2167,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.002763153053820133,
+        "stage_a_kept": 5810,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 7,
+        "param_name": "conv_proj.weight",
+        "group": 421,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.0008637304417788982,
+        "stage_a_kept": 5812,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 8,
+        "param_name": "conv_proj.weight",
+        "group": 923,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.0016259039985015988,
+        "stage_a_kept": 5803,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 9,
+        "param_name": "conv_proj.weight",
+        "group": 1266,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.00043089373502880335,
+        "stage_a_kept": 5852,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 10,
+        "param_name": "heads.head.weight",
+        "group": 13,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0017398488707840443,
+        "stage_a_kept": 5829,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 11,
+        "param_name": "conv_proj.weight",
+        "group": 1134,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0007248597103171051,
+        "stage_a_kept": 5813,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 12,
+        "param_name": "conv_proj.weight",
+        "group": 12,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.0008080398547463119,
+        "stage_a_kept": 5829,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 13,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 21507,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.0005003933911211789,
+        "stage_a_kept": 5849,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 14,
+        "param_name": "heads.head.weight",
+        "group": 2286,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.004327737260609865,
+        "stage_a_kept": 5821,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 15,
+        "param_name": "conv_proj.weight",
+        "group": 1580,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.002436730545014143,
+        "stage_a_kept": 5800,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 16,
+        "param_name": "conv_proj.weight",
+        "group": 651,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.00069063575938344,
+        "stage_a_kept": 5810,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 17,
+        "param_name": "conv_proj.weight",
+        "group": 285,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.0008396675111725926,
+        "stage_a_kept": 5867,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 18,
+        "param_name": "conv_proj.weight",
+        "group": 276,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "proxy_score": 0.0010769916698336601,
+        "stage_a_kept": 5830,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 19,
+        "param_name": "conv_proj.weight",
+        "group": 1037,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.00786653533577919,
+        "stage_a_kept": 5859,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 20,
+        "param_name": "conv_proj.weight",
+        "group": 1372,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.001714590354822576,
+        "stage_a_kept": 5820,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 21,
+        "param_name": "conv_proj.weight",
+        "group": 1020,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.002161754760891199,
+        "stage_a_kept": 5823,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 22,
+        "param_name": "heads.head.weight",
+        "group": 3415,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0016155254561454058,
+        "stage_a_kept": 5839,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 23,
+        "param_name": "conv_proj.weight",
+        "group": 914,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0029981776606291533,
+        "stage_a_kept": 5824,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 24,
+        "param_name": "conv_proj.weight",
+        "group": 1321,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.0016283168224617839,
+        "stage_a_kept": 5809,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 25,
+        "param_name": "conv_proj.weight",
+        "group": 855,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.002019540872424841,
+        "stage_a_kept": 5866,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 26,
+        "param_name": "conv_proj.weight",
+        "group": 255,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0031456705182790756,
+        "stage_a_kept": 5820,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 27,
+        "param_name": "conv_proj.weight",
+        "group": 1707,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.0024137338623404503,
+        "stage_a_kept": 5812,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 28,
+        "param_name": "conv_proj.weight",
+        "group": 1544,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.001942802220582962,
+        "stage_a_kept": 5798,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 29,
+        "param_name": "conv_proj.weight",
+        "group": 712,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.00402664253488183,
+        "stage_a_kept": 5865,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 30,
+        "param_name": "conv_proj.weight",
+        "group": 532,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.0014931620098650455,
+        "stage_a_kept": 5826,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 31,
+        "param_name": "conv_proj.weight",
+        "group": 767,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.0034451098181307316,
+        "stage_a_kept": 5838,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 32,
+        "param_name": "conv_proj.weight",
+        "group": 2149,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.002786849159747362,
+        "stage_a_kept": 5805,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 33,
+        "param_name": "conv_proj.weight",
+        "group": 529,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.003926876932382584,
+        "stage_a_kept": 5838,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 34,
+        "param_name": "conv_proj.weight",
+        "group": 427,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.004843490198254585,
+        "stage_a_kept": 5799,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 35,
+        "param_name": "conv_proj.weight",
+        "group": 1730,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.0010517134796828032,
+        "stage_a_kept": 5859,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 36,
+        "param_name": "conv_proj.weight",
+        "group": 1565,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.0033817333169281483,
+        "stage_a_kept": 5796,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 37,
+        "param_name": "conv_proj.weight",
+        "group": 1028,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.003743044100701809,
+        "stage_a_kept": 5831,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 38,
+        "param_name": "conv_proj.weight",
+        "group": 1377,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.0036094870883971453,
+        "stage_a_kept": 5828,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 39,
+        "param_name": "conv_proj.weight",
+        "group": 1811,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.0023061796091496944,
+        "stage_a_kept": 5848,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 40,
+        "param_name": "conv_proj.weight",
+        "group": 2152,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0023644440807402134,
+        "stage_a_kept": 5803,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 41,
+        "param_name": "conv_proj.weight",
+        "group": 2153,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.004872250370681286,
+        "stage_a_kept": 5807,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 42,
+        "param_name": "conv_proj.weight",
+        "group": 510,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.0074914973229169846,
+        "stage_a_kept": 5851,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 43,
+        "param_name": "conv_proj.weight",
+        "group": 2279,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.002617559628561139,
+        "stage_a_kept": 5828,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 44,
+        "param_name": "conv_proj.weight",
+        "group": 1558,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.009608199819922447,
+        "stage_a_kept": 5827,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 45,
+        "param_name": "conv_proj.weight",
+        "group": 1711,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.004823020659387112,
+        "stage_a_kept": 5782,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 46,
+        "param_name": "conv_proj.weight",
+        "group": 857,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.006220826413482428,
+        "stage_a_kept": 5773,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 47,
+        "param_name": "conv_proj.weight",
+        "group": 818,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0025331033393740654,
+        "stage_a_kept": 5780,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 48,
+        "param_name": "conv_proj.weight",
+        "group": 299,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.008555067703127861,
+        "stage_a_kept": 5788,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 49,
+        "param_name": "conv_proj.weight",
+        "group": 689,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.0012049023061990738,
+        "stage_a_kept": 5844,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 50,
+        "param_name": "conv_proj.weight",
+        "group": 714,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.0034931031987071037,
+        "stage_a_kept": 5809,
+        "stage_b_tested": 64
+      }
+    ],
+    "config": {
+      "dataset": "cifar100",
+      "dataset_root": "data/cifar100",
+      "physical_budget": 50,
+      "top_m_per_group": 3,
+      "top_k_verify": 64,
+      "max_groups_per_layer": 50
+    }
+  }
+]

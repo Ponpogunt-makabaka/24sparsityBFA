@@ -1,0 +1,1432 @@
+{
+  "audit_results": [
+    {
+      "path": "/home/fuq/testarea/24sparsityBFA/data/T09_ImageNet_Scale/weights/deit_tiny_2_4_sparse_imagenette.pth",
+      "format": "model_state_dict",
+      "layers": [
+        {
+          "name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+          "type": "Linear",
+          "shape": [
+            768,
+            192
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_0.mlp.3.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            768
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_0.self_attention.in_proj_weight",
+          "type": "Linear",
+          "shape": [
+            576,
+            192
+          ],
+          "groups": 27648,
+          "valid": 27648,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            192
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_1.mlp.0.weight",
+          "type": "Linear",
+          "shape": [
+            768,
+            192
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_1.mlp.3.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            768
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_1.self_attention.in_proj_weight",
+          "type": "Linear",
+          "shape": [
+            576,
+            192
+          ],
+          "groups": 27648,
+          "valid": 27648,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_1.self_attention.out_proj.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            192
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_10.mlp.0.weight",
+          "type": "Linear",
+          "shape": [
+            768,
+            192
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_10.mlp.3.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            768
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_10.self_attention.in_proj_weight",
+          "type": "Linear",
+          "shape": [
+            576,
+            192
+          ],
+          "groups": 27648,
+          "valid": 27648,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_10.self_attention.out_proj.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            192
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_11.mlp.0.weight",
+          "type": "Linear",
+          "shape": [
+            768,
+            192
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_11.mlp.3.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            768
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_11.self_attention.in_proj_weight",
+          "type": "Linear",
+          "shape": [
+            576,
+            192
+          ],
+          "groups": 27648,
+          "valid": 27648,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_11.self_attention.out_proj.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            192
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_2.mlp.0.weight",
+          "type": "Linear",
+          "shape": [
+            768,
+            192
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_2.mlp.3.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            768
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+          "type": "Linear",
+          "shape": [
+            576,
+            192
+          ],
+          "groups": 27648,
+          "valid": 27648,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_2.self_attention.out_proj.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            192
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_3.mlp.0.weight",
+          "type": "Linear",
+          "shape": [
+            768,
+            192
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_3.mlp.3.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            768
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_3.self_attention.in_proj_weight",
+          "type": "Linear",
+          "shape": [
+            576,
+            192
+          ],
+          "groups": 27648,
+          "valid": 27648,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_3.self_attention.out_proj.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            192
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_4.mlp.0.weight",
+          "type": "Linear",
+          "shape": [
+            768,
+            192
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_4.mlp.3.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            768
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_4.self_attention.in_proj_weight",
+          "type": "Linear",
+          "shape": [
+            576,
+            192
+          ],
+          "groups": 27648,
+          "valid": 27648,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_4.self_attention.out_proj.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            192
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_5.mlp.0.weight",
+          "type": "Linear",
+          "shape": [
+            768,
+            192
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_5.mlp.3.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            768
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_5.self_attention.in_proj_weight",
+          "type": "Linear",
+          "shape": [
+            576,
+            192
+          ],
+          "groups": 27648,
+          "valid": 27648,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_5.self_attention.out_proj.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            192
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_6.mlp.0.weight",
+          "type": "Linear",
+          "shape": [
+            768,
+            192
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_6.mlp.3.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            768
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_6.self_attention.in_proj_weight",
+          "type": "Linear",
+          "shape": [
+            576,
+            192
+          ],
+          "groups": 27648,
+          "valid": 27648,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_6.self_attention.out_proj.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            192
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+          "type": "Linear",
+          "shape": [
+            768,
+            192
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_7.mlp.3.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            768
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_7.self_attention.in_proj_weight",
+          "type": "Linear",
+          "shape": [
+            576,
+            192
+          ],
+          "groups": 27648,
+          "valid": 27648,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_7.self_attention.out_proj.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            192
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+          "type": "Linear",
+          "shape": [
+            768,
+            192
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_8.mlp.3.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            768
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_8.self_attention.in_proj_weight",
+          "type": "Linear",
+          "shape": [
+            576,
+            192
+          ],
+          "groups": 27648,
+          "valid": 27648,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_8.self_attention.out_proj.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            192
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_9.mlp.0.weight",
+          "type": "Linear",
+          "shape": [
+            768,
+            192
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_9.mlp.3.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            768
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_9.self_attention.in_proj_weight",
+          "type": "Linear",
+          "shape": [
+            576,
+            192
+          ],
+          "groups": 27648,
+          "valid": 27648,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "encoder.layers.encoder_layer_9.self_attention.out_proj.weight",
+          "type": "Linear",
+          "shape": [
+            192,
+            192
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "heads.head.weight",
+          "type": "Linear",
+          "shape": [
+            1000,
+            192
+          ],
+          "groups": 48000,
+          "valid": 48000,
+          "invalid": 0,
+          "violations": 0
+        }
+      ],
+      "total_groups": 1375104,
+      "total_valid": 1375104,
+      "total_invalid": 0,
+      "total_violations": 0,
+      "skipped_layers": 1,
+      "compliance_rate": 100.0,
+      "status": "PASS",
+      "val_top1": 93.96178343949045
+    },
+    {
+      "path": "/home/fuq/testarea/24sparsityBFA/data/T09_ImageNet_Scale/weights/mobilenet_v2_2_4_sparse_imagenette.pth",
+      "format": "model_state_dict",
+      "layers": [
+        {
+          "name": "classifier.1.weight",
+          "type": "Linear",
+          "shape": [
+            1000,
+            1280
+          ],
+          "groups": 320000,
+          "valid": 320000,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.1.conv.1.weight",
+          "type": "Conv2d",
+          "shape": [
+            16,
+            32,
+            1,
+            1
+          ],
+          "groups": 128,
+          "valid": 128,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.10.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            384,
+            64,
+            1,
+            1
+          ],
+          "groups": 6144,
+          "valid": 6144,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.10.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            64,
+            384,
+            1,
+            1
+          ],
+          "groups": 6144,
+          "valid": 6144,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.11.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            384,
+            64,
+            1,
+            1
+          ],
+          "groups": 6144,
+          "valid": 6144,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.11.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            96,
+            384,
+            1,
+            1
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.12.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            576,
+            96,
+            1,
+            1
+          ],
+          "groups": 13824,
+          "valid": 13824,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.12.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            96,
+            576,
+            1,
+            1
+          ],
+          "groups": 13824,
+          "valid": 13824,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.13.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            576,
+            96,
+            1,
+            1
+          ],
+          "groups": 13824,
+          "valid": 13824,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.13.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            96,
+            576,
+            1,
+            1
+          ],
+          "groups": 13824,
+          "valid": 13824,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.14.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            576,
+            96,
+            1,
+            1
+          ],
+          "groups": 13824,
+          "valid": 13824,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.14.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            160,
+            576,
+            1,
+            1
+          ],
+          "groups": 23040,
+          "valid": 23040,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.15.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            960,
+            160,
+            1,
+            1
+          ],
+          "groups": 38400,
+          "valid": 38400,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.15.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            160,
+            960,
+            1,
+            1
+          ],
+          "groups": 38400,
+          "valid": 38400,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.16.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            960,
+            160,
+            1,
+            1
+          ],
+          "groups": 38400,
+          "valid": 38400,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.16.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            160,
+            960,
+            1,
+            1
+          ],
+          "groups": 38400,
+          "valid": 38400,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.17.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            960,
+            160,
+            1,
+            1
+          ],
+          "groups": 38400,
+          "valid": 38400,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.17.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            320,
+            960,
+            1,
+            1
+          ],
+          "groups": 76800,
+          "valid": 76800,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.18.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            1280,
+            320,
+            1,
+            1
+          ],
+          "groups": 102400,
+          "valid": 102400,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.2.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            96,
+            16,
+            1,
+            1
+          ],
+          "groups": 384,
+          "valid": 384,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.2.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            24,
+            96,
+            1,
+            1
+          ],
+          "groups": 576,
+          "valid": 576,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.3.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            144,
+            24,
+            1,
+            1
+          ],
+          "groups": 864,
+          "valid": 864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.3.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            24,
+            144,
+            1,
+            1
+          ],
+          "groups": 864,
+          "valid": 864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.4.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            144,
+            24,
+            1,
+            1
+          ],
+          "groups": 864,
+          "valid": 864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.4.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            32,
+            144,
+            1,
+            1
+          ],
+          "groups": 1152,
+          "valid": 1152,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.5.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            192,
+            32,
+            1,
+            1
+          ],
+          "groups": 1536,
+          "valid": 1536,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.5.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            32,
+            192,
+            1,
+            1
+          ],
+          "groups": 1536,
+          "valid": 1536,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.6.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            192,
+            32,
+            1,
+            1
+          ],
+          "groups": 1536,
+          "valid": 1536,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.6.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            32,
+            192,
+            1,
+            1
+          ],
+          "groups": 1536,
+          "valid": 1536,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.7.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            192,
+            32,
+            1,
+            1
+          ],
+          "groups": 1536,
+          "valid": 1536,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.7.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            64,
+            192,
+            1,
+            1
+          ],
+          "groups": 3072,
+          "valid": 3072,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.8.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            384,
+            64,
+            1,
+            1
+          ],
+          "groups": 6144,
+          "valid": 6144,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.8.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            64,
+            384,
+            1,
+            1
+          ],
+          "groups": 6144,
+          "valid": 6144,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.9.conv.0.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            384,
+            64,
+            1,
+            1
+          ],
+          "groups": 6144,
+          "valid": 6144,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "features.9.conv.2.weight",
+          "type": "Conv2d",
+          "shape": [
+            64,
+            384,
+            1,
+            1
+          ],
+          "groups": 6144,
+          "valid": 6144,
+          "invalid": 0,
+          "violations": 0
+        }
+      ],
+      "total_groups": 851168,
+      "total_valid": 851168,
+      "total_invalid": 0,
+      "total_violations": 0,
+      "skipped_layers": 18,
+      "compliance_rate": 100.0,
+      "status": "PASS",
+      "val_top1": 92.86624203821655
+    },
+    {
+      "path": "/home/fuq/testarea/24sparsityBFA/data/T09_ImageNet_Scale/weights/resnet18_2_4_sparse_imagenette.pth",
+      "format": "model_state_dict",
+      "layers": [
+        {
+          "name": "fc.weight",
+          "type": "Linear",
+          "shape": [
+            1000,
+            512
+          ],
+          "groups": 128000,
+          "valid": 128000,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer1.0.conv1.weight",
+          "type": "Conv2d",
+          "shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer1.0.conv2.weight",
+          "type": "Conv2d",
+          "shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer1.1.conv1.weight",
+          "type": "Conv2d",
+          "shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer1.1.conv2.weight",
+          "type": "Conv2d",
+          "shape": [
+            64,
+            64,
+            3,
+            3
+          ],
+          "groups": 9216,
+          "valid": 9216,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer2.0.conv1.weight",
+          "type": "Conv2d",
+          "shape": [
+            128,
+            64,
+            3,
+            3
+          ],
+          "groups": 18432,
+          "valid": 18432,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer2.0.conv2.weight",
+          "type": "Conv2d",
+          "shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer2.0.downsample.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            128,
+            64,
+            1,
+            1
+          ],
+          "groups": 2048,
+          "valid": 2048,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer2.1.conv1.weight",
+          "type": "Conv2d",
+          "shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer2.1.conv2.weight",
+          "type": "Conv2d",
+          "shape": [
+            128,
+            128,
+            3,
+            3
+          ],
+          "groups": 36864,
+          "valid": 36864,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer3.0.conv1.weight",
+          "type": "Conv2d",
+          "shape": [
+            256,
+            128,
+            3,
+            3
+          ],
+          "groups": 73728,
+          "valid": 73728,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer3.0.conv2.weight",
+          "type": "Conv2d",
+          "shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "groups": 147456,
+          "valid": 147456,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer3.0.downsample.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            256,
+            128,
+            1,
+            1
+          ],
+          "groups": 8192,
+          "valid": 8192,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer3.1.conv1.weight",
+          "type": "Conv2d",
+          "shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "groups": 147456,
+          "valid": 147456,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer3.1.conv2.weight",
+          "type": "Conv2d",
+          "shape": [
+            256,
+            256,
+            3,
+            3
+          ],
+          "groups": 147456,
+          "valid": 147456,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer4.0.conv1.weight",
+          "type": "Conv2d",
+          "shape": [
+            512,
+            256,
+            3,
+            3
+          ],
+          "groups": 294912,
+          "valid": 294912,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer4.0.conv2.weight",
+          "type": "Conv2d",
+          "shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "groups": 589824,
+          "valid": 589824,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer4.0.downsample.0.weight",
+          "type": "Conv2d",
+          "shape": [
+            512,
+            256,
+            1,
+            1
+          ],
+          "groups": 32768,
+          "valid": 32768,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer4.1.conv1.weight",
+          "type": "Conv2d",
+          "shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "groups": 589824,
+          "valid": 589824,
+          "invalid": 0,
+          "violations": 0
+        },
+        {
+          "name": "layer4.1.conv2.weight",
+          "type": "Conv2d",
+          "shape": [
+            512,
+            512,
+            3,
+            3
+          ],
+          "groups": 589824,
+          "valid": 589824,
+          "invalid": 0,
+          "violations": 0
+        }
+      ],
+      "total_groups": 2917376,
+      "total_valid": 2917376,
+      "total_invalid": 0,
+      "total_violations": 0,
+      "skipped_layers": 1,
+      "compliance_rate": 100.0,
+      "status": "PASS",
+      "val_top1": 98.47133757961784
+    }
+  ],
+  "gap_analysis": {
+    "cifar100": {
+      "target": "CIFAR-100",
+      "dataset_downloaded": true,
+      "dataloader_script_exists": true,
+      "dataloader_path": "data/T09_ImageNet_Scale/scripts/download_cifar100.py",
+      "missing_items": [],
+      "status": "READY"
+    },
+    "mobilenet_v2": {
+      "target": "MobileNet-V2",
+      "dense_weights_downloaded": true,
+      "sparse_checkpoint_exists": true,
+      "sparse_path": "data/T09_ImageNet_Scale/weights/mobilenet_v2_2_4_sparse_imagenette.pth",
+      "missing_items": [],
+      "status": "READY"
+    },
+    "vit_transformer": {
+      "target": "ViT-Transformer (DeiT-Tiny)",
+      "dense_weights_downloaded": true,
+      "sparse_checkpoint_exists": true,
+      "sparse_path": "data/T09_ImageNet_Scale/weights/deit_tiny_2_4_sparse_imagenette.pth",
+      "model_factory_support": true,
+      "missing_items": [],
+      "status": "READY"
+    }
+  },
+  "summary": {
+    "ready": 3,
+    "partial": 0,
+    "not_ready": 0
+  }
+}

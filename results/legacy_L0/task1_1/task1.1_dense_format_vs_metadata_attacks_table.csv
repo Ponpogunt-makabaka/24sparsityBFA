@@ -1,0 +1,5 @@
+curve_name,baseline_acc,final_acc@50,drop,notes
+Dense-format: Global (Task 1),92.10,10.00,82.10,All dense weights attackable
+Dense-format: Zero-only (Task 2),92.10,12.43,79.67,Only zero-weight positions
+Dense-format: Nonzero-only (Task 3),92.10,10.00,82.10,Only nonzero-weight positions
+"Group Metadata Attack (Task 1.1, fixed)",92.33,38.67,53.66,"2:4 group position encoding, calibrated"

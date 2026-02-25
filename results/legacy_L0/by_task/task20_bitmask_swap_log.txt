@@ -1,0 +1,37 @@
+====================================================================================================
+Task 20: Bitmask Metadata Swap Attack (Cost=2)
+====================================================================================================
+Script: run_task20_bitmask_swap_cost2.py
+Timestamp: 2026-02-14 16:11:21
+Seed: 123
+Device: cpu
+Dataset path: /home/lab-2010/24sparsityBFA/data
+Model checkpoint path: /home/lab-2010/24sparsityBFA/models/sparse_model.pth
+
+Threat model:
+- physical_budget: 50
+- cost_per_swap:   2
+- logical_steps:   25
+
+Config:
+- calib_samples: 256
+- eval_samples:  2000
+- max_groups_per_layer: 2000
+
+Attack:
+- swap = (turn 1->0) + (turn 0->1) within same 2:4 group (popcount preserved)
+- score surrogate: w_fp * (g_new - g_old)
+
+Results:
+- init_acc:  86.57%
+- final_acc: 35.50%
+- swaps_done: 25 (should be <= logical_steps)
+- physical_cost_used: 50
+- drop: 51.07 pts
+
+Artifacts:
+- results/task20_bitmask_swap_result.pkl
+- results/task20_bitmask_swap_curve.png
+
+How to run:
+  python run_task20_bitmask_swap_cost2.py --device cpu --seed 123 --physical-budget 50 --cost-per-swap 2

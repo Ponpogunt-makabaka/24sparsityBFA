@@ -1,0 +1,85 @@
+================================================================================
+R1_T03.1: Group-based 2:4 Metadata Attack (Bitmask Encoding, Cost-2 Swap, Exact Verification)
+================================================================================
+Script: run_R1_T03_1_group_metadata_bitmask_swap_cost2_exact.py
+Timestamp: 2026-02-21 14:17:29
+Device: cpu
+Dataset: cifar10
+Model: resnet20
+Checkpoint: /home/lab-2010/24sparsityBFA/results/legacy_L0/by_task/task28_sparse_mask_fixed_finetune_int8_ckpt.pth
+
+Constraint:
+  Bitmask encoding: 4-bit mask with popcount=2 for validity
+  Cost-2 swap: flip one 1->0 and one 0->1 (maintains popcount=2)
+  Physical budget: 50 flips
+  Logical swaps: 25 (each costs 2 physical flips)
+
+Method:
+  Top-K Exact Verification: K=64
+  Stage 1: Proxy Screening (first-order Taylor expansion)
+  Stage 2: Exact Verification (real forward pass on calib subset)
+  Revert: Model state restored after each verification
+
+Config:
+  seed: 0
+  physical_budget: 50
+  calib_samples: 256
+  eval_samples: 2000
+  topk: 64
+
+Results:
+  baseline_acc: 92.33%
+  final_acc: 44.34%
+  acc_drop: 48.00%
+  logical_swaps: 25
+
+Counters:
+  total_groups: 1689100
+  valid_groups: 1686110
+  candidates_considered: 6744430
+  candidates_valid: 6744430
+  candidates_skipped_excluded: 290
+  candidates_skipped_forbidden: 10
+
+Timing:
+  wall_sec: 797.98
+
+Metadata hashes:
+  initial: 1c24a7ed5f32e3c5
+  final: 7dd9e72edbf53b46
+
+Step-by-step details:
+--------------------------------------------------------------------------------
+Swap 0 (physical=2): layer2.0.downsample.0 g=22 5(0b0101) -> 6(0b0110) | bit0->0, bit1->1 | (0, 2) -> (1, 2) | proxy=0.0111 exact_L=0.2021 (Δ+0.0265) | acc=91.85% loss=0.2644 | topk=64 verify_t=14.51s
+Swap 1 (physical=4): layer2.0.downsample.0 g=62 10(0b1010) -> 3(0b0011) | bit3->0, bit0->1 | (1, 3) -> (0, 1) | proxy=0.0085 exact_L=0.2287 (Δ+0.0267) | acc=91.16% loss=0.2737 | topk=64 verify_t=13.64s
+Swap 2 (physical=6): layer1.0.conv1 g=160 12(0b1100) -> 5(0b0101) | bit3->0, bit0->1 | (2, 3) -> (0, 2) | proxy=0.0155 exact_L=0.2695 (Δ+0.0408) | acc=90.97% loss=0.2899 | topk=64 verify_t=11.41s
+Swap 3 (physical=8): layer1.1.conv1 g=125 9(0b1001) -> 10(0b1010) | bit0->0, bit1->1 | (0, 3) -> (1, 3) | proxy=0.0198 exact_L=0.3018 (Δ+0.0323) | acc=90.58% loss=0.2995 | topk=64 verify_t=9.63s
+Swap 4 (physical=10): layer1.0.conv1 g=559 6(0b0110) -> 5(0b0101) | bit1->0, bit0->1 | (1, 2) -> (0, 2) | proxy=0.0289 exact_L=0.3402 (Δ+0.0384) | acc=90.62% loss=0.3204 | topk=64 verify_t=9.93s
+Swap 5 (physical=12): layer1.2.conv1 g=453 3(0b0011) -> 6(0b0110) | bit0->0, bit2->1 | (0, 1) -> (1, 2) | proxy=0.0326 exact_L=0.3834 (Δ+0.0432) | acc=89.75% loss=0.3502 | topk=64 verify_t=11.42s
+Swap 6 (physical=14): layer1.0.conv2 g=163 9(0b1001) -> 10(0b1010) | bit0->0, bit1->1 | (0, 3) -> (1, 3) | proxy=0.0296 exact_L=0.4350 (Δ+0.0516) | acc=88.77% loss=0.3923 | topk=64 verify_t=15.60s
+Swap 7 (physical=16): layer1.0.conv2 g=159 3(0b0011) -> 6(0b0110) | bit0->0, bit2->1 | (0, 1) -> (1, 2) | proxy=0.0393 exact_L=0.5007 (Δ+0.0657) | acc=87.30% loss=0.4564 | topk=64 verify_t=18.99s
+Swap 8 (physical=18): layer2.0.downsample.0 g=59 10(0b1010) -> 3(0b0011) | bit3->0, bit0->1 | (1, 3) -> (0, 1) | proxy=0.0350 exact_L=0.5905 (Δ+0.0898) | acc=85.89% loss=0.5036 | topk=64 verify_t=15.48s
+Swap 9 (physical=20): layer1.2.conv1 g=353 3(0b0011) -> 6(0b0110) | bit0->0, bit2->1 | (0, 1) -> (1, 2) | proxy=0.0844 exact_L=0.6855 (Δ+0.0950) | acc=84.62% loss=0.5843 | topk=64 verify_t=13.07s
+Swap 10 (physical=22): layer1.2.conv1 g=445 3(0b0011) -> 6(0b0110) | bit0->0, bit2->1 | (0, 1) -> (1, 2) | proxy=0.1270 exact_L=0.7817 (Δ+0.0962) | acc=82.76% loss=0.6800 | topk=64 verify_t=10.01s
+Swap 11 (physical=24): layer2.0.downsample.0 g=115 10(0b1010) -> 3(0b0011) | bit3->0, bit0->1 | (1, 3) -> (0, 1) | proxy=0.1160 exact_L=0.9144 (Δ+0.1327) | acc=80.08% loss=0.8265 | topk=64 verify_t=9.94s
+Swap 12 (physical=26): layer1.0.conv1 g=300 10(0b1010) -> 3(0b0011) | bit3->0, bit0->1 | (1, 3) -> (0, 1) | proxy=0.2051 exact_L=1.0780 (Δ+0.1636) | acc=76.61% loss=1.0004 | topk=64 verify_t=12.23s
+Swap 13 (physical=28): layer2.0.downsample.0 g=51 12(0b1100) -> 5(0b0101) | bit3->0, bit0->1 | (2, 3) -> (0, 2) | proxy=0.1616 exact_L=1.2654 (Δ+0.1874) | acc=74.95% loss=1.1945 | topk=64 verify_t=15.84s
+Swap 14 (physical=30): layer1.0.conv2 g=127 5(0b0101) -> 6(0b0110) | bit0->0, bit1->1 | (0, 2) -> (1, 2) | proxy=0.1471 exact_L=1.4654 (Δ+0.2000) | acc=71.39% loss=1.4059 | topk=64 verify_t=17.76s
+Swap 15 (physical=32): layer1.2.conv1 g=465 3(0b0011) -> 6(0b0110) | bit0->0, bit2->1 | (0, 1) -> (1, 2) | proxy=0.3280 exact_L=1.6970 (Δ+0.2316) | acc=68.31% loss=1.6473 | topk=64 verify_t=16.17s
+Swap 16 (physical=34): layer1.0.conv1 g=305 9(0b1001) -> 10(0b1010) | bit0->0, bit1->1 | (0, 3) -> (1, 3) | proxy=0.2145 exact_L=1.9532 (Δ+0.2562) | acc=64.65% loss=1.9399 | topk=64 verify_t=13.20s
+Swap 17 (physical=36): layer1.2.conv1 g=327 10(0b1010) -> 9(0b1001) | bit1->0, bit0->1 | (1, 3) -> (0, 3) | proxy=0.2427 exact_L=2.2209 (Δ+0.2676) | acc=61.67% loss=2.1985 | topk=64 verify_t=10.35s
+Swap 18 (physical=38): layer2.0.conv1 g=763 10(0b1010) -> 3(0b0011) | bit3->0, bit0->1 | (1, 3) -> (0, 1) | proxy=0.4390 exact_L=2.5057 (Δ+0.2848) | acc=59.23% loss=2.4665 | topk=64 verify_t=9.94s
+Swap 19 (physical=40): layer1.0.conv2 g=121 5(0b0101) -> 6(0b0110) | bit0->0, bit1->1 | (0, 2) -> (1, 2) | proxy=0.2727 exact_L=2.8261 (Δ+0.3205) | acc=56.10% loss=2.8038 | topk=64 verify_t=15.23s
+Swap 20 (physical=42): layer1.1.conv1 g=209 9(0b1001) -> 10(0b1010) | bit0->0, bit1->1 | (0, 3) -> (1, 3) | proxy=0.2872 exact_L=3.1581 (Δ+0.3320) | acc=53.61% loss=3.1157 | topk=64 verify_t=14.40s
+Swap 21 (physical=44): layer1.2.conv1 g=233 3(0b0011) -> 6(0b0110) | bit0->0, bit2->1 | (0, 1) -> (1, 2) | proxy=0.2177 exact_L=3.4476 (Δ+0.2895) | acc=50.93% loss=3.4434 | topk=64 verify_t=14.78s
+Swap 22 (physical=46): layer1.2.conv1 g=249 3(0b0011) -> 6(0b0110) | bit0->0, bit2->1 | (0, 1) -> (1, 2) | proxy=0.4320 exact_L=3.8143 (Δ+0.3667) | acc=48.78% loss=3.8099 | topk=64 verify_t=16.85s
+Swap 23 (physical=48): layer1.2.conv1 g=521 3(0b0011) -> 6(0b0110) | bit0->0, bit2->1 | (0, 1) -> (1, 2) | proxy=0.3333 exact_L=4.1595 (Δ+0.3453) | acc=45.85% loss=4.2014 | topk=64 verify_t=15.79s
+Swap 24 (physical=50): layer1.0.conv1 g=307 6(0b0110) -> 5(0b0101) | bit1->0, bit0->1 | (1, 2) -> (0, 2) | proxy=0.2944 exact_L=4.5087 (Δ+0.3492) | acc=44.34% loss=4.5338 | topk=64 verify_t=15.70s
+
+================================================================================
+Reproduction command:
+  python run_R1_T03_1_group_metadata_bitmask_swap_cost2_exact.py \
+    --device cpu --seed 0 --physical-budget 50 \
+    --calib-samples 256 --eval-samples 2000 \
+    --topk 64 \
+    --ckpt results/legacy_L0/by_task/task28_sparse_mask_fixed_finetune_int8_ckpt.pth

@@ -1,0 +1,4 @@
+mode,mode_display,seed,topk,baseline_acc,final_acc,acc_drop,baseline_loss_eval,final_loss_eval,loss_increase,n_acc_increase_steps,n_loss_decrease_steps,acc_increase_steps,loss_decrease_steps,wall_time_sec
+global,sparse-gated : global weight-bit flip (dense-view search),0,64,92.40%,10.20%,82.20%,0.269775,17.575377,17.305602,0,0,[],[],82.51
+zero_only,sparse-gated : zero-only (dense-view search),0,64,92.40%,89.90%,2.50%,0.269775,0.361839,0.092063,0,0,[],[],49.25
+nonzero_only,sparse-gated : non-zero only (dense-view search),0,64,92.40%,10.15%,82.25%,0.269775,14.784735,14.514960,0,0,[],[],62.78

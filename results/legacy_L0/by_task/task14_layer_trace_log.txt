@@ -1,0 +1,55 @@
+====================================================================================================
+Task 14: Layer-wise Vulnerability / Flip Localization
+====================================================================================================
+Script: run_task14_layer_localization.py
+Timestamp: 2026-02-12 08:07:34
+Seed: 123
+Device: cpu
+Dataset path: /home/lab-2010/24sparsityBFA/data
+Model checkpoint path: /home/lab-2010/24sparsityBFA/models/sparse_model.pth
+
+Config:
+- seed: 123
+- batch_size: 256
+- data_dir: ./data
+- ckpt: models/sparse_model.pth
+- max_flips: 50
+- calib_samples: 256
+- eval_samples: 2000
+- max_groups_per_layer: 2000
+- allow_nonpositive: False
+- use_cuda: False
+- topk_layers: 15
+
+Headline:
+- init_acc=86.57% final_acc=9.67% drop=76.90% total_flips=50
+
+Layer frequency (Top-15):
+- layer1.0.conv2: 13
+- layer1.1.conv1: 10
+- layer2.0.downsample.0: 7
+- layer1.2.conv1: 6
+- layer1.0.conv1: 4
+- layer1.1.conv2: 3
+- layer3.0.downsample.0: 2
+- layer2.0.conv2: 1
+- layer2.2.conv1: 1
+- layer2.1.conv1: 1
+- layer3.0.conv2: 1
+- layer3.1.conv1: 1
+
+Category frequency:
+- stage1: 36
+- stage2: 10
+- stage3: 4
+
+Category cumulative accuracy drop contribution:
+- stage1: 63.8672
+- stage2: 11.9629
+- stage3: 1.0742
+
+Outputs:
+- results/task14_layer_histogram.png
+- results/task14_layer_impact.png
+- results/task14_layer_trace.pkl
+- results/task14_layer_trace_log.txt

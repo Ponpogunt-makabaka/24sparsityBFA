@@ -1,0 +1,31 @@
+====================================================================================================
+Task 16: Runtime/Overhead Characterization
+====================================================================================================
+Script: run_task16_runtime_overhead.py
+Timestamp: 2026-02-12 15:48:17
+Seed: 123
+Device: cpu
+Dataset path: /home/lab-2010/24sparsityBFA/data
+Model checkpoint path: /home/lab-2010/24sparsityBFA/models/sparse_model.pth
+
+Config:
+- seed: 123
+- batch_size: 256
+- data_dir: ./data
+- ckpt: models/sparse_model.pth
+- max_flips: 50
+- calib_samples: 256
+- max_groups_per_layer: 2000
+- allow_nonpositive: False
+- line_bytes: 64
+- mitigation: revert
+- use_cuda: False
+
+Profile summary:
+- none: search=1600.522ms apply=0.224ms defense=0.001ms total=1600.746ms thr=0.62/s impact=0.00%
+- parity: search=1575.833ms apply=0.219ms defense=0.136ms total=1576.188ms thr=0.63/s impact=-1.53%
+- crc: search=1565.183ms apply=0.222ms defense=2.005ms total=1567.410ms thr=0.64/s impact=-2.08%
+
+Outputs:
+- results/task16_runtime_overhead_table.csv
+- results/task16_runtime_overhead_log.txt

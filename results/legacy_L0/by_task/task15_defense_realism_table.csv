@@ -1,0 +1,8 @@
+name,defense,bypass_parity,bypass_crc,logical_flips,physical_flips,physical_cost_per_logical,extra_flips_total,initial_accuracy,final_accuracy,accuracy_drop,detected,mitigated,detected_rate,mitigated_rate,wall_sec
+baseline_none,none,False,False,50,50,1,0,86.572266,13.378906,73.193359,0,0,0.000000,0.000000,133.251019
+parity_trusted,parity,False,False,50,50,1,0,86.572266,86.572266,0.000000,50,50,1.000000,1.000000,135.039084
+parity_adaptive_bypass,parity,True,False,50,50,1,0,86.572266,13.378906,73.193359,0,0,0.000000,0.000000,133.433318
+parity_budgeted_bypass,parity,True,False,25,50,2,25,86.572266,35.498047,51.074219,0,0,0.000000,0.000000,67.772182
+crc_trusted,crc,False,False,50,50,1,0,86.572266,86.572266,0.000000,50,50,1.000000,1.000000,135.013346
+crc_adaptive_bypass,crc,False,True,50,50,1,0,86.572266,13.378906,73.193359,0,0,0.000000,0.000000,136.081533
+crc_budgeted_bypass,crc,False,True,25,50,2,25,86.572266,35.498047,51.074219,0,0,0.000000,0.000000,67.964566

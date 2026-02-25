@@ -1,0 +1,72 @@
+====================================================================================================
+Task 10: Flip Outcome Taxonomy + Effective-Rewire Analysis
+====================================================================================================
+Script: run_task10_flip_outcome_analysis.py
+Timestamp: 2026-02-09 15:17:10
+Seed: 1234
+Device: cpu
+Dataset path: N/A (offline analysis)
+Model checkpoint path: models/sparse_model.pth (for Task4 structural replay)
+
+== Task9-Inferred CSR Collision Effect ==
+- collision_effect: delete
+- task9_info: {'kind': 'csr_conv', 'dominant': 'mask_last', 'counts': {'merge_add': 0, 'mask_first': 0, 'mask_last': 20, 'drop': 0}}
+
+== Attempted Flip Outcome Counts ==
+
+[Task4] attempted_total=1294256
+- rewire        : 628692
+- delete        : 664425
+- merge         : 0
+- clamp-noop    : 1139
+- invalid-skipped: 0
+- other         : 0
+
+[Task5] attempted_total=13502300
+- rewire        : 8989650
+- delete        : 0
+- merge         : 0
+- clamp-noop    : 0
+- invalid-skipped: 4512650
+- other         : 0
+
+[Task6] attempted_total=1598186
+- rewire        : 1066897
+- delete        : 0
+- merge         : 0
+- clamp-noop    : 0
+- invalid-skipped: 531289
+- other         : 0
+
+[Task7] attempted_total=699896
+- rewire        : 467904
+- delete        : 0
+- merge         : 0
+- clamp-noop    : 0
+- invalid-skipped: 231992
+- other         : 0
+
+[Task8] attempted_total=35971880
+- rewire        : 24007359
+- delete        : 0
+- merge         : 0
+- clamp-noop    : 0
+- invalid-skipped: 11964521
+- other         : 0
+
+== Task4 Executed Flip Categories (50 flips) ==
+- rewire        : 11
+- delete        : 26
+- merge         : 0
+- clamp-noop    : 13
+- invalid-skipped: 0
+- other         : 0
+
+Outputs:
+- results/task10_flip_outcome_breakdown.png
+- results/task10_acc_vs_effective_rewire.png
+- results/task10_flip_outcome_summary.pkl
+- results/task10_flip_outcome_log.txt
+
+How to run:
+  python run_task10_flip_outcome_analysis.py --include-imagenet-tasks

@@ -1,0 +1,176 @@
+{
+  "audit_date": "2026-02-24T18:10:35.319467",
+  "tasks": {
+    "task1": {
+      "task": "Task_1_Baseline_Consistency",
+      "status": "PASS",
+      "findings": [],
+      "details": {
+        "finetune_transforms": {
+          "crop_size": 224,
+          "resize_size": 256,
+          "mean": [
+            0.485,
+            0.456,
+            0.406
+          ],
+          "std": [
+            0.229,
+            0.224,
+            0.225
+          ],
+          "found": true
+        },
+        "attack_transforms": {
+          "crop_size": 224,
+          "resize_size": 256,
+          "mean": [
+            0.485,
+            0.456,
+            0.406
+          ],
+          "std": [
+            0.229,
+            0.224,
+            0.225
+          ],
+          "found": true
+        }
+      }
+    },
+    "task2": {
+      "task": "Task_2_Sparsity_Constraints",
+      "status": "PASS",
+      "models": {
+        "resnet18": {
+          "path": "data/T09_ImageNet_Scale/weights/resnet18_2_4_sparse_imagenette.pth",
+          "exists": true,
+          "loadable": true,
+          "max_pruned_value": 0.0,
+          "max_pruned_layer": null,
+          "total_pruned_elements": 0,
+          "strict_zero_count": 0,
+          "non_zero_pruned_count": 0,
+          "layers_checked": 0,
+          "layers_with_leakage": 0,
+          "status": "NO_MASK_FOUND"
+        },
+        "mobilenet_v2": {
+          "path": "data/T09_ImageNet_Scale/weights/mobilenet_v2_2_4_sparse_imagenette.pth",
+          "exists": true,
+          "loadable": true,
+          "max_pruned_value": 0.0,
+          "max_pruned_layer": null,
+          "total_pruned_elements": 0,
+          "strict_zero_count": 0,
+          "non_zero_pruned_count": 0,
+          "layers_checked": 0,
+          "layers_with_leakage": 0,
+          "status": "NO_MASK_FOUND"
+        },
+        "deit_tiny": {
+          "path": "data/T09_ImageNet_Scale/weights/deit_tiny_2_4_sparse_imagenette.pth",
+          "exists": true,
+          "loadable": true,
+          "max_pruned_value": 0.0,
+          "max_pruned_layer": null,
+          "total_pruned_elements": 0,
+          "strict_zero_count": 0,
+          "non_zero_pruned_count": 0,
+          "layers_checked": 0,
+          "layers_with_leakage": 0,
+          "status": "NO_MASK_FOUND"
+        }
+      },
+      "findings": []
+    },
+    "task3": {
+      "task": "Task_3_Attack_Trace",
+      "status": "FAIL",
+      "models": {
+        "resnet18": {
+          "model": "resnet18",
+          "file_found": false,
+          "total_steps": 0,
+          "steps_completed": 0,
+          "action_types": {},
+          "collision_errors": 0,
+          "exact_50_steps": false,
+          "only_index_1bit": false,
+          "status": "UNKNOWN",
+          "findings": [
+            "\u672a\u627e\u5230\u653b\u51fb\u7ed3\u679c\u6587\u4ef6"
+          ]
+        },
+        "mobilenet_v2": {
+          "model": "mobilenet_v2",
+          "file_found": false,
+          "total_steps": 0,
+          "steps_completed": 0,
+          "action_types": {},
+          "collision_errors": 0,
+          "exact_50_steps": false,
+          "only_index_1bit": false,
+          "status": "UNKNOWN",
+          "findings": [
+            "\u672a\u627e\u5230\u653b\u51fb\u7ed3\u679c\u6587\u4ef6"
+          ]
+        },
+        "deit_tiny": {
+          "model": "deit_tiny",
+          "file_found": false,
+          "total_steps": 0,
+          "steps_completed": 0,
+          "action_types": {},
+          "collision_errors": 0,
+          "exact_50_steps": false,
+          "only_index_1bit": false,
+          "status": "UNKNOWN",
+          "findings": [
+            "\u672a\u627e\u5230\u653b\u51fb\u7ed3\u679c\u6587\u4ef6"
+          ]
+        }
+      },
+      "findings": [
+        "resnet18: \u672a\u627e\u5230\u653b\u51fb\u7ed3\u679c\u6587\u4ef6",
+        "mobilenet_v2: \u672a\u627e\u5230\u653b\u51fb\u7ed3\u679c\u6587\u4ef6",
+        "deit_tiny: \u672a\u627e\u5230\u653b\u51fb\u7ed3\u679c\u6587\u4ef6"
+      ]
+    },
+    "task4": {
+      "task": "Task_4_Metrics_Coherence",
+      "status": "PASS",
+      "models": {
+        "resnet18": {
+          "json_acc": null,
+          "log_initial_acc": null,
+          "log_final_acc": null,
+          "log_acc_drop": null,
+          "match": false,
+          "acc_drop_match": false,
+          "status": "NO_DATA"
+        },
+        "mobilenet_v2": {
+          "json_acc": null,
+          "log_initial_acc": null,
+          "log_final_acc": null,
+          "log_acc_drop": null,
+          "match": false,
+          "acc_drop_match": false,
+          "status": "NO_DATA"
+        },
+        "deit_tiny": {
+          "json_acc": null,
+          "log_initial_acc": null,
+          "log_final_acc": null,
+          "log_acc_drop": null,
+          "match": false,
+          "acc_drop_match": false,
+          "status": "NO_DATA"
+        }
+      },
+      "findings": []
+    }
+  },
+  "overall_status": "FAIL"
+}

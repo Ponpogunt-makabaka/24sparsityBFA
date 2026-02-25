@@ -1,0 +1,11 @@
+experiment_id,hypothesis,modification,runtime_cost,pass/fail criterion,expected interpretation
+E01_T02_proxy_vs_exact_10steps,"T02 的回弹主要来自 proxy 误差而非实现 bug","同 seed/同 ckpt 跑 T02 与 T02.1 各 10 步；固定 eval/calib indices","CPU 20~30min","若 T02.1 的 n_acc_increase_steps 与 n_loss_decrease_steps 显著低于 T02 则 Pass","回弹主因是选择策略差异，不是语义错误"
+E02_T03_proxy_vs_exact_10steps,"T03 的回弹主要来自 proxy 误差","同 seed/同 ckpt 跑 T03 与 T03.1 各 10 步","CPU 20~30min","若 T03.1 曲线更单调且 final_acc 更低则 Pass","bitmask 家族同样受益于 exact verify"
+E03_T05_weight_only_ablation,"T05 全选 weight 不是死代码，而是联合比较后的最优选择","T05 加 --mode weight_only，跑 10 步并对照 joint","CPU 20~30min","若 joint 与 weight_only 前10步接近、且 joint action 仍以 weight 为主则 Pass","说明 metadata 被比较过但不占优"
+E04_T05_stratified_topk_diag,"若 metadata 只是被候选数量挤占，分层 topK 会改变最终动作类型","T05 debug 开关 --topk-stratified 32,16,16，跑10步","CPU 25~35min","若仍以 weight 为主则 Pass；若 metadata 大量反超则 Fail","区分真实 dominance 与 topK 挤占偏置"
+E05_T05_equal_sampling_diag,"候选数量不平衡是否主导了 T05 选择","Stage A 对三类动作做 equal sampling（每类上限相同），跑10步","CPU 25~35min","若选择结果变化很小则 Pass；变化显著则 Fail","定位“候选池规模偏置”影响程度"
+E06_T05_revert_hash_invariant,"T05 Stage-B 不应有状态泄漏","在 Stage-B 对每个候选做 apply-eval-revert 后验证 int8_hash/mask_hash","CPU 5~10min","所有候选都 hash 回归为 Pass；任一漂移为 Fail","直接验证最关键正确性不变量"
+E07_T05_exception_safety,"T05 在异常路径也必须可恢复","在 Stage-B 第 N 个候选注入异常，检查 finally revert","CPU 5~10min","异常后 hash 不变为 Pass","防止隐式状态污染"
+E08_T05_vs_T06_shared_flips,"T05 与 T06 差异可拆分为语义差异与搜索器差异","取 T05 前10步 flips，在 T06 语义 replay；再反向 replay","CPU 10~20min","若同 flips 下曲线仍差异明显则语义差异为主","提供严格归因证据"
+E09_T07_anchor_check,"T07 是传统 baseline，不应与 joint/metadata 任务直接同类比较","T07 global 与 T05 weight_only 在同数据口径跑10步","CPU 10~20min","若两者趋势接近但幅度不同则 Pass","确认 T07 定位为 baseline，T05 为增强攻击者"
+E10_Data_split_sensitivity,"eval/calib 同源会放大波动并影响可比性","T02/T05 各跑一次 old(同源) 与 new(分离) 10步","CPU 20~30min","若分离后曲线更稳定或可复现性提升则 Pass","支持 Layer1 数据口径统一的必要性"

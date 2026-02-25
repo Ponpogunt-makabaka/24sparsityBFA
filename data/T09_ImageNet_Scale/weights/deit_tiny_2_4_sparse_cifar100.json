@@ -1,0 +1,16 @@
+{
+  "output_checkpoint": "data/T09_ImageNet_Scale/weights/deit_tiny_2_4_sparse_cifar100.pth",
+  "metrics": {
+    "arch": "deit_tiny",
+    "dense_val_top1": 1.0,
+    "sparse_init_val_top1": 1.0,
+    "final_val_top1": 23.18,
+    "final_val_loss": 3.1764387550354005,
+    "final_max_abs_masked": 0.0,
+    "elapsed_sec": 223.70139408111572,
+    "epochs": 1,
+    "batch_size": 256,
+    "lr": 0.0005,
+    "best_val_top1": 23.18
+  }
+}

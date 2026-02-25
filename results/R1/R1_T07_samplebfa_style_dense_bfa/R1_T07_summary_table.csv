@@ -1,0 +1,4 @@
+mode,display_name,seed,physical_budget,topk_per_layer,attack_samples,eval_samples,baseline_eval_acc,final_eval_acc,acc_drop,baseline_eval_loss,final_eval_loss,loss_increase,applied_flips
+global,global,0,50,5,128,2000,92.4000,9.5500,82.8500,0.26977543,420.77079834,420.50102291,50
+zero_only,zero-only,0,50,5,128,2000,92.4000,92.4000,0.0000,0.26977543,0.26977543,0.00000000,0
+nonzero_only,non-zero-only,0,50,5,128,2000,92.4000,9.5500,82.8500,0.26977543,806.36194287,806.09216744,50

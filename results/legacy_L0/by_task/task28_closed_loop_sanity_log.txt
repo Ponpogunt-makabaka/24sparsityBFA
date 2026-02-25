@@ -1,0 +1,28 @@
+====================================================================================================
+Task 28 Sanity: Minimal Closed-Loop Compatibility Check
+====================================================================================================
+Script: run_task28_closed_loop_sanity.py
+Timestamp: 2026-02-14 19:31:51
+Seed: 123
+Device: cpu
+Dataset path: /home/lab-2010/24sparsityBFA/data
+Dense ckpt: /home/lab-2010/24sparsityBFA/models/dense_model.pth
+Sparse ckpt (improved): /home/lab-2010/24sparsityBFA/results/task28_sparse_mask_fixed_finetune_ckpt.pth
+
+Config:
+- max_flips: 10
+- calib_samples: 256
+- eval_samples: 2000
+
+Results:
+- dense_weight_msb_int8: 92.53% -> 11.18% (10 flips)
+- sparse_metadata_ncsa_noncollision_int8: 92.33% -> 71.44% (10 flips)
+
+Artifacts:
+- results/task28_closed_loop_sanity_log.txt
+- results/task28_closed_loop_sanity_table.csv
+- results/task28_closed_loop_sanity_curves.png
+- results/task28_closed_loop_sanity_result.pkl
+
+How to run:
+  python run_task28_closed_loop_sanity.py --device cpu --seed 123 --max-flips 10 --eval-samples 2000

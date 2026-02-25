@@ -1,0 +1,12 @@
+{
+  "data_root": "/home/fuq/testarea/24sparsityBFA/data/cifar100",
+  "extracted_dir": "/home/fuq/testarea/24sparsityBFA/data/cifar100/cifar-100-python",
+  "train_samples": 50000,
+  "test_samples": 10000,
+  "num_classes": 100,
+  "files": {
+    "train": "/home/fuq/testarea/24sparsityBFA/data/cifar100/cifar-100-python/train",
+    "test": "/home/fuq/testarea/24sparsityBFA/data/cifar100/cifar-100-python/test",
+    "meta": "/home/fuq/testarea/24sparsityBFA/data/cifar100/cifar-100-python/meta"
+  }
+}

@@ -1,0 +1,8 @@
+task_family,old_exists,new_exists,old_paths,new_paths,action_needed,notes
+T02,Yes,Yes,"run_R1_T02_group_metadata_index_1bit.py; results/R1/R1_T02_group_metadata_index_1bit_*; results/R1/R1_T02_group_metadata_index_1bit_rerun_*; results/R1/R1_T02_loss_change_detailed.png","run_R1_T02_1_group_metadata_index_1bit_exact.py; results/R1/R1_T02_1_group_metadata_index_1bit_exact_*",delete_old,"T02.1 is exact verification version; T02 is proxy-only"
+T03,Yes,Yes,"run_R1_T03_group_metadata_bitmask_swap_cost2.py; results/R1/R1_T03_group_metadata_bitmask_swap_cost2_*","run_R1_T03_1_group_metadata_bitmask_swap_cost2_exact.py; results/R1/R1_T03_1_group_metadata_bitmask_swap_cost2_exact_*",delete_old,"T03.1 is exact verification version; T03 is proxy-only"
+T01,No,No,"N/A","run_R1_T01_group_metadata_index_anypattern.py; results/R1/R1_T01_*",no_change,"No T01.1 exists; T01 is latest"
+T04,No,No,"N/A","run_R1_T04_bitmask_swaps50.py; results/R1/R1_T04_*",no_change,"No T04.1 exists; T04 is latest"
+T05,No,No,"N/A","run_R1_T05_joint_best_step_attack.py; results/R1/R1_T05_*",no_change,"No T05.1 exists; T05 is latest"
+T06,Partial,Yes,"run_R1_T06_1_samplebfa_style_dense_bfa.py (note: named T06.1 but different semantics)","run_R1_T06_1_sparse_gated_dense_view_exact.py; results/R1/R1_T06_1_*",review_needed,"Two T06.1 versions exist with different semantics"
+T07,No,No,"N/A","run_R1_T07_samplebfa_style_dense_bfa.py; results/R1/R1_T07_*",no_change,"No T07.1 exists; T07 is latest"

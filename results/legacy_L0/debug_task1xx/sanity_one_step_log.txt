@@ -1,0 +1,48 @@
+================================================================================
+Step 2: One-Step Metadata Sanity Test
+================================================================================
+Timestamp: 2026-02-16 14:23:17
+Device: cpu
+Checkpoint: results/task28_sparse_mask_fixed_finetune_int8_ckpt.pth
+Seed: 0
+
+[1] Loading model...
+    Is Int8 checkpoint: True
+[2] Getting fixed mini-batch...
+    Probe batch shape: torch.Size([32, 3, 32, 32])
+[3] Computing baseline logits/loss...
+    logits0 shape: torch.Size([32, 10])
+    loss0: 0.053368
+[4] Finding a target group with large weights...
+    Target: layer2.0.downsample.0, group=27
+    Old pattern: (0, 3)
+    w_tilde_before: [0.18240761756896973, 0.0, 0.0, 0.5791441798210144]
+    Magnitude: 0.761552
+    sparse_mask hash before: -0x4ca9203a6c7d274a
+    int8_weights hash before: 0x4681beefe227c40e
+    New pattern: (0, 1)
+[5] Applying pattern change...
+    sparse_mask hash after: -0x4ca9203a6c7d274a
+    int8_weights hash after: 0x4681beefe227c40e
+    w_tilde_after: [[[0.009120380505919456]], [[0.0]], [[0.0]], [[-0.04104171320796013]], [[0.0]], [[0.0]], [[-0.004560190252959728]], [[0.1596066653728485]], [[0.0]], [[0.0]], [[-0.1322455108165741]], [[-0.07752323150634766]], [[0.0]], [[-0.05928247421979904]], [[0.009120380505919456]], [[0.0]]]
+    Hashes changed: False
+[6] Computing new logits/loss...
+    loss1: 0.053368
+
+[7] Results:
+    loss_delta: 0.000000
+    max_abs_diff(logits): 0.00000000
+    l2_norm_diff(logits): 0.00000000
+    mean_abs_diff(logits): 0.00000000
+    acc0: 96.88%
+    acc1: 96.88%
+    acc_delta: 0.00%
+    predictions_changed: 0/32
+
+[8] Criterion:
+    RESULT: logits diff ~ 0 and loss_delta ~ 0
+    CONCLUSION: metadata does NOT affect forward pass
+    → CHECK: Are we modifying the right object?
+
+[9] Saved result to results/debug_task1xx/sanity_one_step_result.json
+================================================================================

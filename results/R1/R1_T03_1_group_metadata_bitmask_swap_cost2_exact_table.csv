@@ -1,0 +1,2 @@
+baseline_acc,final_acc,acc_drop,physical_budget,logical_swaps,topk,runtime_sec,num_groups_total,num_groups_valid,candidates_considered,candidates_valid
+92.33,44.34,48.00,50,25,64,797.98,1689100,1686110,6744430,6744430

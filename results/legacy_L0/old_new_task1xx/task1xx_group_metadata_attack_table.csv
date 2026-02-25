@@ -1,0 +1,2 @@
+baseline_acc,final_acc,max_flips,encoding,eval_samples,calib_samples,seed,topk_verify_K,num_groups_total,num_groups_valid,candidates_total,candidates_valid
+92.33,38.67,50,position,2000,256,0,0,3378200,3372010,16859739,16859739

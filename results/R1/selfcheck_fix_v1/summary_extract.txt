@@ -1,0 +1,40 @@
+baseline action breakdown {'weight_bit': 50, 'index_1bit': 0, 'bitmask_swap': 0} init 92.96875 final 11.71875
+
+STEP 0
+weight_bit N_total 10500 N_topk 63 max 0.2001410938018644 p99 0.06389999539905311 median 0.011857996137482951 min 0.0017388914740584238 thr 0.07729020268616171
+index_1bit N_total 50137 N_topk 1 max 0.07750987261533737 p99 0.007737832143902779 median 0.0004401831538416445 min 3.015250715776574e-09 thr 0.07729020268616171
+bitmask_swap N_total 50137 N_topk 0 max 0.038754936307668686 p99 0.0038689160719513893 median 0.00022009157692082226 min 1.507625357888287e-09 thr 0.07729020268616171
+
+STEP 1
+weight_bit N_total 10500 N_topk 64 max 0.48766668720180917 p99 0.17791039246337448 median 0.024989146929104367 min 0.0042176181029750515 thr 0.20344077872685684
+index_1bit N_total 49876 N_topk 0 max 0.19757123291492462 p99 0.016370318830013275 median 0.0007802677864674479 min 3.876873577723927e-08 thr 0.20344077872685684
+bitmask_swap N_total 49876 N_topk 0 max 0.09878561645746231 p99 0.008185159415006638 median 0.00039013389323372394 min 1.9384367888619636e-08 thr 0.20344077872685684
+
+STEP 10
+weight_bit N_total 10500 N_topk 64 max 3.6920427413152765 p99 1.8693074334384505 median 0.23857324086192122 min 0.02321995823263112 thr 2.173055136281249
+index_1bit N_total 49623 N_topk 0 max 1.2765392065048218 p99 0.23717474937438965 median 0.0035195278469473124 min 1.531450227413199e-23 thr 2.173055136281249
+bitmask_swap N_total 49623 N_topk 0 max 0.6382696032524109 p99 0.11858737468719482 median 0.0017597639234736562 min 7.657251137065994e-24 thr 2.173055136281249
+
+STEP 49
+weight_bit N_total 10500 N_topk 63 max 39.895988536142795 p99 8.583377617567521 median 0.3972793911971424 min 0.044208685987298324 thr 9.807245406480433
+index_1bit N_total 43678 N_topk 1 max 15.584370613098145 p99 0.6273385286331177 median 0.005801712395623326 min 3.2589342335853644e-10 thr 9.807245406480433
+bitmask_swap N_total 43678 N_topk 0 max 7.792185306549072 p99 0.31366926431655884 median 0.002900856197811663 min 1.6294671167926822e-10 thr 9.807245406480433
+
+StageB step 0 post_eq_pre 64 / 64 post_eq_baseline 64 / 64 repeat_ok 64 / 64
+
+StageB step 10 post_eq_pre 64 / 64 post_eq_baseline 64 / 64 repeat_ok 64 / 64
+
+BEST_OF_TYPE_STEP0
+{'action_type': 'weight_bit', 'layer_name': 'layer2.0.downsample.0', 'cost': '1', 'proxy_raw': '0.2001410938018644', 'proxy_norm': '0.2001410938018644', 'exact_delta': '0.5389866083860397', 'exact_norm': '0.5389866083860397'}
+{'action_type': 'index_1bit', 'layer_name': 'layer2.0.downsample.0', 'cost': '1', 'proxy_raw': '0.07750987261533737', 'proxy_norm': '0.07750987261533737', 'exact_delta': '0.015646055340766907', 'exact_norm': '0.015646055340766907'}
+{'action_type': 'bitmask_swap', 'layer_name': 'layer2.0.downsample.0', 'cost': '2', 'proxy_raw': '0.07750987261533737', 'proxy_norm': '0.038754936307668686', 'exact_delta': '0.011658251285552979', 'exact_norm': '0.005829125642776489'}
+
+ c1_stratified breakdown {'weight_bit': 10, 'index_1bit': 0, 'bitmask_swap': 0} drop 81.25 final 11.71875 steps 10
+
+ c2_equal_sampling breakdown {'weight_bit': 10, 'index_1bit': 0, 'bitmask_swap': 0} drop 80.46875 final 12.5 steps 10
+
+ f1_weight_only breakdown {'weight_bit': 10, 'index_1bit': 0, 'bitmask_swap': 0} drop 81.25 final 11.71875 steps 10
+
+ f2_index_only breakdown {'weight_bit': 0, 'index_1bit': 10, 'bitmask_swap': 0} drop 21.09375 final 71.875 steps 10
+
+ f3_bitmask_only breakdown {'weight_bit': 0, 'index_1bit': 0, 'bitmask_swap': 5} drop 2.34375 final 90.625 steps 5

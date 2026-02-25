@@ -1,0 +1,11 @@
+experiment_id,hypothesis,modification,runtime_cost,pass/fail_criterion,expected_interpretation,priority
+E01,T02.1 proxy screening is necessary,Remove exact verification from T02.1 (proxy-only),Medium (10 min),If loss decreases appear >0, proxy is insufficient; if 0, may be adequate,Confirms proxy-only causes non-monotonicity,High
+E02,T03.1 cost-2 constraint reduces effectiveness,Compare T03.1 (cost-2) vs T02.1 (1-bit) on same groups,Medium (15 min),If T03.1 drop < T02.1 drop, constraint is limiting factor,Quantifies cost-2 penalty,Medium
+E03,T05 metadata candidates are competitive,Force T05 to choose metadata-only (weight_bit=False),High (30 min),If metadata-only achieves <50% drop, confirms weight-bit superiority,Validates T05's 100% weight_bit choice,High
+E04,T01 any pattern collision rate,Analyze T01 flip outcomes for collision,Low (5 min),If collision rate >20%, explains lower effectiveness,Diagnoses T01 weakness,Medium
+E05,T06.1 zero-only semantic verification,Apply zero-only flip, check if sparse_mask is used,Low (5 min),If loss_delta ≈ 0, sparse_mask is correctly preserving zero positions,Confirms sparse-gated semantics,Low
+E06,T05 vs T06.1 proxy method impact,Unify proxy screening (both use |grad|),Medium (20 min),If final acc diff <0.2% after unification, proxy method is minor factor,Quantifies proxy screening contribution,Medium
+E07,T02.1 step 2 acc increase cause,Re-run step 1-2 with multiple eval sets,Low (10 min),If acc increase varies across eval sets, confirms noise hypothesis,Validates step 2 is not pathological,Low
+E08,T06.1 baseline matching,Use exact same checkpoint load as T02.1,Low (5 min),If baseline becomes 92.33%, confirms load timing issue,Unifies baseline across tasks,Low
+E09,T03.1 extended to 50 swaps,Run T03.1 with physical_budget=100 (50 swaps),High (40 min),Compare effectiveness vs T02.1 at 50 physical flips,Tests cost-2 scalability,Low
+E10,Joint attack with forced metadata ratio,Modify T05 to require 50% metadata selection,Medium (25 min),If mixed attack achieves similar effectiveness, joint has value,Explores hybrid strategy potential,Medium

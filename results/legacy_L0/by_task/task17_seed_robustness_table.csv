@@ -1,0 +1,4 @@
+task,seed,initial_accuracy,final_accuracy,accuracy_drop,total_flips,attempted_flips,collisions_skipped,wall_sec,note
+Task5_ResNet20_CIFAR10,123,86.572266,9.667969,76.904297,50,5442154,1816747,143.243414,
+Task5_ResNet20_CIFAR10,456,86.572266,13.378906,73.193359,50,5442132,1814891,144.278619,
+Task5_ResNet20_CIFAR10,789,86.572266,13.671875,72.900391,50,5442146,1816687,141.290072,

@@ -1,0 +1,6 @@
+case,attack,cost_per_step,physical_budget,logical_steps,baseline_acc,final_acc,drop,notes
+A_dense,dense_weight_msb,1,50,50,92.529296875,9.5703125,82.958984375,results/task22_dense_weight_msb_result.pkl
+B_bitmask,bitmask_weight_msb_nonzero,1,50,50,86.572265625,9.912109375,76.66015625,results/task19_bitmask_weight_msb_result.pkl
+B_bitmask,bitmask_swap_cost2,2,50,25,86.572265625,35.498046875,51.07421875,results/task20_bitmask_swap_result.pkl
+C_position,position_metadata_ncsa,1,50,50,86.572265625,9.66796875,76.904296875,results/task21_position_ncsa_result.pkl
+C_position,position_weight_msb_nonzero,1,50,50,86.572265625,9.912109375,76.66015625,results/task21_position_weight_msb_result.pkl

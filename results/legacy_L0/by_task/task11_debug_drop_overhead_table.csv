@@ -1,0 +1,4 @@
+defense,baseline_bits_per_group,added_bits_per_group,total_bits_per_group,storage_overhead_pct,metadata_only_overhead_pct,line_size_bytes,crc_bits,groups_per_line
+none,20.000000,0.000000,20.000000,0.000000,0.000000,64,,
+parity,20.000000,1.000000,21.000000,5.000000,25.000000,64,,
+crc8,20.000000,0.062500,20.062500,0.312500,1.562500,64,8,128

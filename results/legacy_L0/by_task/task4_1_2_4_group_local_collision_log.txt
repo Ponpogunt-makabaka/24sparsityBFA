@@ -1,0 +1,56 @@
+====================================================================================================
+Task 4.1: 2:4 Group-Local Position Index Attack (Collision Allowed)
+====================================================================================================
+Script: run_task4_1_2_4_group_local_collision.py
+Timestamp: 2026-02-13 17:02:24
+Seed: 0
+Device: cpu
+Dataset path: /home/lab-2010/24sparsityBFA/data
+Model checkpoint path: /home/lab-2010/24sparsityBFA/models/sparse_model.pth
+
+Config:
+- max_flips: 50
+- calib_samples: 256
+- eval_samples: 2000
+- max_groups_per_layer: 2000
+- allow_nonpositive: False
+
+Assumptions / Semantics:
+- Collision allowed; applied via Task5 update rule (move+mask XOR). If target slot already active, XOR toggles both mask bits OFF => effective drop of both nonzeros (Task9 nm_linear classified as drop).
+
+Results:
+- baseline_acc: 86.57%
+- final_acc:    10.84%
+- drop:         75.73 pts
+- successful_flips: 50
+
+Outcome counts (applied flips):
+- collision_count:           21
+- noncollision_rewire_count: 29
+- delete_or_drop_count:      21
+- noop_count:                0
+
+Search counters:
+- attempted_candidates:      5440354
+- collision_candidate_count: 926462
+
+How to run:
+  python run_task4_1_2_4_group_local_collision.py --device cpu --max-flips 50
+
+====================================================================================================
+Comparison vs Task5 (Non-Collision)
+====================================================================================================
+- Task5 reference label: Task5 (rerun non-collision NCSA)
+- Task5 baseline/final: 86.57% -> 9.67% (@50 flips)
+- Task4.1 baseline/final: 86.57% -> 10.84% (@50 flips)
+
+(i) Strength vs Task5:
+- Under same flip budget (50), Task4.1 is weaker (higher final acc) vs Task5 reference.
+
+(ii) Collision vs Rewire contribution:
+- collisions_applied=21/50 (each collision uses 'drop' semantics).
+- rewires_applied=29/50.
+
+(iii) Noop/clamp waste vs CSR-absolute index flips (Task4):
+- Task4.1 flips are always in-range (2-bit index within {0,1,2,3}) so clamp-noop is structurally avoided.
+- Observed noop_count=0 (applied move failures).

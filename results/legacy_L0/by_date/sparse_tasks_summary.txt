@@ -1,0 +1,25 @@
+======================================================================
+Sparse INT8 Phase Summary (Tasks 1-4)
+======================================================================
+
+Zero point detected: 0
+
+Task 1 (Dense Global):
+  Initial Acc: 92.10%
+  Final Acc:   10.00%
+  Flips:       50
+
+Task 2 (Dense Zero-Only):
+  Initial Acc: 92.10%
+  Final Acc:   12.43%
+  Flips:       50
+
+Task 3 (Dense NonZero-Only):
+  Initial Acc: 92.10%
+  Final Acc:   10.00%
+  Flips:       50
+
+Task 4 (CSR Index Attack):
+  Initial Acc: 86.54%
+  Final Acc:   53.94%
+  Flips:       50

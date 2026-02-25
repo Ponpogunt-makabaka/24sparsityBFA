@@ -1,0 +1,33 @@
+====================================================================================================
+Task 12: NCSA vs Baselines / Scoring Ablations
+====================================================================================================
+Script: run_task12_ablation_greedy_vs_random.py
+Timestamp: 2026-02-12 07:50:08
+Seed: 123
+Device: cpu
+Dataset path: /home/lab-2010/24sparsityBFA/data
+Model checkpoint path: /home/lab-2010/24sparsityBFA/models/sparse_model.pth
+
+Config:
+- seed: 123
+- batch_size: 256
+- data_dir: ./data
+- ckpt: models/sparse_model.pth
+- max_flips: 50
+- calib_samples: 256
+- eval_samples: 2000
+- max_groups_per_layer: 2000
+- allow_nonpositive: False
+- use_cuda: False
+
+Results Summary:
+- NCSA (w*Δg): init=86.57% final=9.67% drop=76.90% flips_to_50=24 flips_to_20=30 rewires=50
+- Random-valid: init=86.57% final=86.91% drop=-0.34% flips_to_50=None flips_to_20=None rewires=50
+- Grad-only (Δg): init=86.57% final=88.72% drop=-2.15% flips_to_50=None flips_to_20=None rewires=50
+- Weight-only (|w|): init=86.57% final=86.13% drop=0.44% flips_to_50=None flips_to_20=None rewires=50
+
+Outputs:
+- results/task12_ablation_attack_curves.png
+- results/task12_ablation_summary.csv
+- results/task12_ablation_result.pkl
+- results/task12_ablation_log.txt

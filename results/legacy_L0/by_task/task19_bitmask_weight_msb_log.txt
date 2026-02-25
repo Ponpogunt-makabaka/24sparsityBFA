@@ -1,0 +1,32 @@
+====================================================================================================
+Task 19: Bitmask Case - Weight MSB Attack (Non-Zero Weights Only)
+====================================================================================================
+Script: run_task19_bitmask_weight_msb.py
+Timestamp: 2026-02-14 16:10:03
+Seed: 123
+Device: cpu
+Dataset path: /home/lab-2010/24sparsityBFA/data
+Model checkpoint path: /home/lab-2010/24sparsityBFA/models/sparse_model.pth
+
+Config:
+- physical_flip_budget: 50
+- calib_samples: 256
+- eval_samples: 2000
+
+Attack:
+- weight MSB (sign-bit) flips on int8 storage (bit_pos=7)
+- restricted to: int8_val != 0, and (if sparse_mask exists) mask==1
+
+Results:
+- init_acc:  86.57%
+- final_acc: 9.91%
+- flips:     50
+- drop:      76.66 pts
+- wall_sec:  137.14
+
+Artifacts:
+- results/task19_bitmask_weight_msb_result.pkl
+- results/task19_bitmask_weight_msb_curve.png
+
+How to run:
+  python run_task19_bitmask_weight_msb.py --device cpu --seed 123 --max-flips 50 --calib-samples 256 --eval-samples 2000

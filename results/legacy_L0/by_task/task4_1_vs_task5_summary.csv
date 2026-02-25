@@ -1,0 +1,3 @@
+task,seed,baseline_acc,final_acc,drop,successful_flips,collision_count,noncollision_rewire_count,delete_or_drop_count,noop_count,notes
+task4_1_collision_allowed,0,86.572265625,10.83984375,75.732421875,50,21,29,21,0,"Collision allowed; applied via Task5 update rule (move+mask XOR). If target slot already active, XOR toggles both mask bits OFF => effective drop of both nonzeros (Task9 nm_linear classified as drop)."
+task5_non_collision_ncsa,0,86.572265625,9.66796875,76.904296875,50,0,50,0,0,rerun_in_task4_1_runner_due_to_stale_or_incompatible_task5_pkl

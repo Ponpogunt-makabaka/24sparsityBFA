@@ -1,0 +1,36 @@
+# Python cache
+__pycache__/
+*.py[cod]
+*.so
+
+# Virtual environments
+.venv/
+venv/
+env/
+
+# Tool caches
+.torch_cache/
+.pytest_cache/
+.mypy_cache/
+
+# Logs and temp
+*.log
+tmp/
+temp/
+
+# Large model/data artifacts
+*.tgz
+*.tar.gz
+*.bin
+*.pt
+*.pth
+*.ckpt
+
+# Local datasets
+data/imagenette_full/
+data/cifar100/
+data/cifar10/
+data/cifar-10-python.tar.gz
+
+# Sample BFA local data cache
+sample_bfa/data/

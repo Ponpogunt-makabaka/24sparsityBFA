@@ -1,0 +1,33 @@
+====================================================================================================
+Task 21: Position Encoding Compare (Metadata NCSA vs Weight MSB)
+====================================================================================================
+Script: run_task21_position_compare_ncsa_vs_weight.py
+Timestamp: 2026-02-14 16:16:21
+Seed: 123
+Device: cpu
+Dataset path: /home/lab-2010/24sparsityBFA/data
+Model checkpoint path: /home/lab-2010/24sparsityBFA/models/sparse_model.pth
+
+Config (shared):
+- max_flips: 50
+- calib_samples: 256
+- eval_samples: 2000
+- max_groups_per_layer: 2000
+
+Results:
+- metadata_ncsa: 86.57% -> 9.67%
+- weight_msb:    86.57% -> 9.91%
+
+Notes:
+- Metadata NCSA uses non-collision move space (Task5 semantics) and score=w_fp*(g_new-g_old).
+- Weight MSB flips bit7 on int8 storage; restricted to int8_val!=0 and mask==1 when sparse_mask exists.
+
+Artifacts:
+- results/task21_position_ncsa_curve.png
+- results/task21_position_weight_msb_curve.png
+- results/task21_position_compare_table.csv
+- results/task21_position_ncsa_result.pkl (optional)
+- results/task21_position_weight_msb_result.pkl (optional)
+
+How to run:
+  python run_task21_position_compare_ncsa_vs_weight.py --device cpu --seed 123 --max-flips 50 --calib-samples 256 --eval-samples 2000

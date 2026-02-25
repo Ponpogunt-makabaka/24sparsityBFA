@@ -1,0 +1,121 @@
+================================================================================
+R1_T04: Group-based 2:4 Metadata Attack (Bitmask Encoding, 50 Logical Swaps)
+================================================================================
+Script: run_R1_T04_bitmask_swaps50.py
+Timestamp: 2026-02-17 16:52:59
+Device: cpu
+Dataset: cifar10
+Model: resnet20
+Checkpoint: /home/lab-2010/24sparsityBFA/results/legacy_L0/by_task/task28_sparse_mask_fixed_finetune_int8_ckpt.pth
+
+Constraint:
+  Bitmask encoding: 4-bit mask with popcount=2 for validity
+  Cost-2 swap: flip one 1->0 and one 0->1 (maintains popcount=2)
+  Target logical swaps: 50
+  Physical flips used: 100
+
+Config:
+  seed: 0
+  max_logical_swaps: 50
+  calib_samples: 256
+  eval_samples: 2000
+
+Results:
+  baseline_acc: 92.33%
+  final_acc: 50.73%
+  acc_drop: 41.60%
+  logical_swaps_executed: 50
+  physical_flips_used: 100
+
+Validity Statistics:
+  validity_checks_passed: 16859712
+  validity_checks_failed: 0
+
+Counters:
+  total_groups: 3378200
+  valid_groups: 3372010
+  candidates_considered: 13487702
+  candidates_valid: 13487702
+  candidates_skipped_excluded: 790
+  candidates_skipped_forbidden: 338
+  validity_checks_passed: 16859712
+  validity_checks_failed: 0
+
+Timing:
+  wall_sec: 761.15
+
+Metadata hashes:
+  initial: 1c24a7ed5f32e3c5
+  final: 99df4e79a2f3e002
+
+Comparison with R1_T03:
+----------------------------------------
+R1_T03 (25 swaps, 50 flips):
+  Baseline: 92.33%
+  Final: 65.14%
+  Drop: 27.20%
+
+R1_T04 (50 swaps, 100 flips):
+  Baseline: 92.33%
+  Final: 50.73%
+  Drop: 41.60%
+
+Step-by-step details:
+--------------------------------------------------------------------------------
+Swap 0 (physical=2): layer2.0.downsample.0 g=81 12(0b1100) -> 5(0b0101) | bit3->0, bit0->1 | (2, 3) -> (0, 2) | proxy=0.0316 | acc=91.99% loss=0.2637 valid=OK
+Swap 1 (physical=4): layer2.0.downsample.0 g=72 6(0b0110) -> 3(0b0011) | bit2->0, bit0->1 | (1, 2) -> (0, 1) | proxy=0.0295 | acc=91.75% loss=0.2721 valid=OK
+Swap 2 (physical=6): layer2.0.downsample.0 g=115 10(0b1010) -> 3(0b0011) | bit3->0, bit0->1 | (1, 3) -> (0, 1) | proxy=0.0407 | acc=92.09% loss=0.2819 valid=OK
+Swap 3 (physical=8): layer1.2.conv1 g=453 3(0b0011) -> 6(0b0110) | bit0->0, bit2->1 | (0, 1) -> (1, 2) | proxy=0.0503 | acc=90.72% loss=0.3079 valid=OK
+Swap 4 (physical=10): layer1.2.conv1 g=448 12(0b1100) -> 5(0b0101) | bit3->0, bit0->1 | (2, 3) -> (0, 2) | proxy=0.0747 | acc=89.55% loss=0.3507 valid=OK
+Swap 5 (physical=12): layer2.0.downsample.0 g=32 6(0b0110) -> 3(0b0011) | bit2->0, bit0->1 | (1, 2) -> (0, 1) | proxy=0.0825 | acc=88.87% loss=0.3783 valid=OK
+Swap 6 (physical=14): layer1.2.conv1 g=340 9(0b1001) -> 3(0b0011) | bit3->0, bit1->1 | (0, 3) -> (0, 1) | proxy=0.0795 | acc=88.13% loss=0.4409 valid=OK
+Swap 7 (physical=16): layer1.1.conv1 g=125 9(0b1001) -> 10(0b1010) | bit0->0, bit1->1 | (0, 3) -> (1, 3) | proxy=0.0956 | acc=87.06% loss=0.5170 valid=OK
+Swap 8 (physical=18): layer1.2.conv1 g=445 3(0b0011) -> 6(0b0110) | bit0->0, bit2->1 | (0, 1) -> (1, 2) | proxy=0.1064 | acc=85.94% loss=0.5732 valid=OK
+Swap 9 (physical=20): layer1.0.conv2 g=130 9(0b1001) -> 10(0b1010) | bit0->0, bit1->1 | (0, 3) -> (1, 3) | proxy=0.1223 | acc=84.91% loss=0.6183 valid=OK
+Swap 10 (physical=22): layer2.0.conv1 g=1064 12(0b1100) -> 9(0b1001) | bit2->0, bit0->1 | (2, 3) -> (0, 3) | proxy=0.1489 | acc=83.69% loss=0.7019 valid=OK
+Swap 11 (physical=24): layer2.0.conv1 g=1056 5(0b0101) -> 3(0b0011) | bit2->0, bit1->1 | (0, 2) -> (0, 1) | proxy=0.1962 | acc=82.76% loss=0.7631 valid=OK
+Swap 12 (physical=26): layer1.0.conv1 g=300 10(0b1010) -> 3(0b0011) | bit3->0, bit0->1 | (1, 3) -> (0, 1) | proxy=0.2134 | acc=81.54% loss=0.8104 valid=OK
+Swap 13 (physical=28): layer2.0.conv1 g=1060 12(0b1100) -> 9(0b1001) | bit2->0, bit0->1 | (2, 3) -> (0, 3) | proxy=0.2217 | acc=79.05% loss=0.9416 valid=OK
+Swap 14 (physical=30): layer1.2.conv1 g=465 3(0b0011) -> 6(0b0110) | bit0->0, bit2->1 | (0, 1) -> (1, 2) | proxy=0.2814 | acc=77.34% loss=1.0255 valid=OK
+Swap 15 (physical=32): layer2.0.conv1 g=1072 6(0b0110) -> 3(0b0011) | bit2->0, bit0->1 | (1, 2) -> (0, 1) | proxy=0.3017 | acc=76.90% loss=1.0738 valid=OK
+Swap 16 (physical=34): layer2.0.conv1 g=1068 5(0b0101) -> 3(0b0011) | bit2->0, bit1->1 | (0, 2) -> (0, 1) | proxy=0.3124 | acc=75.00% loss=1.1565 valid=OK
+Swap 17 (physical=36): layer2.0.conv1 g=1076 6(0b0110) -> 3(0b0011) | bit2->0, bit0->1 | (1, 2) -> (0, 1) | proxy=0.3323 | acc=74.46% loss=1.2145 valid=OK
+Swap 18 (physical=38): layer1.1.conv1 g=160 10(0b1010) -> 3(0b0011) | bit3->0, bit0->1 | (1, 3) -> (0, 1) | proxy=0.3228 | acc=74.51% loss=1.2080 valid=OK
+Swap 19 (physical=40): layer1.0.conv1 g=559 6(0b0110) -> 5(0b0101) | bit1->0, bit0->1 | (1, 2) -> (0, 2) | proxy=0.2953 | acc=71.14% loss=1.4448 valid=OK
+Swap 20 (physical=42): layer1.1.conv1 g=16 10(0b1010) -> 3(0b0011) | bit3->0, bit0->1 | (1, 3) -> (0, 1) | proxy=0.3439 | acc=69.97% loss=1.5006 valid=OK
+Swap 21 (physical=44): layer1.0.conv2 g=299 12(0b1100) -> 9(0b1001) | bit2->0, bit0->1 | (2, 3) -> (0, 3) | proxy=0.3323 | acc=69.97% loss=1.5032 valid=OK
+Swap 22 (physical=46): layer1.0.conv2 g=299 9(0b1001) -> 10(0b1010) | bit0->0, bit1->1 | (0, 3) -> (1, 3) | proxy=0.3706 | acc=67.48% loss=1.7746 valid=OK
+Swap 23 (physical=48): layer1.0.conv1 g=563 3(0b0011) -> 5(0b0101) | bit1->0, bit2->1 | (0, 1) -> (0, 2) | proxy=0.3605 | acc=65.87% loss=1.9067 valid=OK
+Swap 24 (physical=50): layer2.0.downsample.0 g=115 3(0b0011) -> 5(0b0101) | bit1->0, bit2->1 | (0, 1) -> (0, 2) | proxy=0.3968 | acc=64.16% loss=2.0634 valid=OK
+Swap 25 (physical=52): layer2.0.downsample.0 g=114 6(0b0110) -> 3(0b0011) | bit2->0, bit0->1 | (1, 2) -> (0, 1) | proxy=0.4885 | acc=65.87% loss=1.8545 valid=OK
+Swap 26 (physical=54): layer2.0.conv1 g=1056 3(0b0011) -> 9(0b1001) | bit1->0, bit3->1 | (0, 1) -> (0, 3) | proxy=0.5593 | acc=62.60% loss=2.1723 valid=OK
+Swap 27 (physical=56): layer2.0.downsample.0 g=72 3(0b0011) -> 5(0b0101) | bit1->0, bit2->1 | (0, 1) -> (0, 2) | proxy=0.6650 | acc=64.45% loss=1.9922 valid=OK
+Swap 28 (physical=58): layer1.0.conv1 g=448 9(0b1001) -> 3(0b0011) | bit3->0, bit1->1 | (0, 3) -> (0, 1) | proxy=0.3896 | acc=60.99% loss=2.3419 valid=OK
+Swap 29 (physical=60): layer2.0.downsample.0 g=72 5(0b0101) -> 9(0b1001) | bit2->0, bit3->1 | (0, 2) -> (0, 3) | proxy=0.8676 | acc=55.13% loss=2.9738 valid=OK
+Swap 30 (physical=62): layer2.0.conv1 g=767 10(0b1010) -> 3(0b0011) | bit3->0, bit0->1 | (1, 3) -> (0, 1) | proxy=0.4672 | acc=52.88% loss=3.1841 valid=OK
+Swap 31 (physical=64): layer1.2.conv2 g=91 5(0b0101) -> 3(0b0011) | bit2->0, bit1->1 | (0, 2) -> (0, 1) | proxy=0.4588 | acc=51.81% loss=3.2813 valid=OK
+Swap 32 (physical=66): layer1.2.conv2 g=107 5(0b0101) -> 3(0b0011) | bit2->0, bit1->1 | (0, 2) -> (0, 1) | proxy=0.4385 | acc=51.56% loss=3.3550 valid=OK
+Swap 33 (physical=68): layer2.0.downsample.0 g=51 12(0b1100) -> 5(0b0101) | bit3->0, bit0->1 | (2, 3) -> (0, 2) | proxy=0.4327 | acc=48.97% loss=3.8147 valid=OK
+Swap 34 (physical=70): layer2.0.conv1 g=763 10(0b1010) -> 3(0b0011) | bit3->0, bit0->1 | (1, 3) -> (0, 1) | proxy=0.4675 | acc=47.51% loss=3.9434 valid=OK
+Swap 35 (physical=72): layer2.0.downsample.0 g=62 10(0b1010) -> 3(0b0011) | bit3->0, bit0->1 | (1, 3) -> (0, 1) | proxy=0.4963 | acc=48.68% loss=3.7486 valid=OK
+Swap 36 (physical=74): layer2.0.conv1 g=1068 3(0b0011) -> 9(0b1001) | bit1->0, bit3->1 | (0, 1) -> (0, 3) | proxy=0.5395 | acc=46.19% loss=4.0947 valid=OK
+Swap 37 (physical=76): layer1.2.conv1 g=521 3(0b0011) -> 6(0b0110) | bit0->0, bit2->1 | (0, 1) -> (1, 2) | proxy=0.5539 | acc=47.12% loss=3.9046 valid=OK
+Swap 38 (physical=78): layer2.0.downsample.0 g=72 9(0b1001) -> 3(0b0011) | bit3->0, bit1->1 | (0, 3) -> (0, 1) | proxy=0.5154 | acc=51.07% loss=3.4248 valid=OK
+Swap 39 (physical=80): layer1.0.conv2 g=122 3(0b0011) -> 6(0b0110) | bit0->0, bit2->1 | (0, 1) -> (1, 2) | proxy=0.4763 | acc=50.59% loss=3.4983 valid=OK
+Swap 40 (physical=82): layer1.1.conv2 g=86 9(0b1001) -> 10(0b1010) | bit0->0, bit1->1 | (0, 3) -> (1, 3) | proxy=0.4434 | acc=49.22% loss=3.6338 valid=OK
+Swap 41 (physical=84): layer2.0.downsample.0 g=115 5(0b0101) -> 9(0b1001) | bit2->0, bit3->1 | (0, 2) -> (0, 3) | proxy=0.4411 | acc=57.23% loss=2.6252 valid=OK
+Swap 42 (physical=86): layer2.0.downsample.0 g=115 9(0b1001) -> 3(0b0011) | bit3->0, bit1->1 | (0, 3) -> (0, 1) | proxy=0.8507 | acc=52.10% loss=3.3295 valid=OK
+Swap 43 (physical=88): layer1.2.conv1 g=519 6(0b0110) -> 3(0b0011) | bit2->0, bit0->1 | (1, 2) -> (0, 1) | proxy=0.4267 | acc=52.20% loss=3.3569 valid=OK
+Swap 44 (physical=90): layer1.0.conv2 g=303 12(0b1100) -> 5(0b0101) | bit3->0, bit0->1 | (2, 3) -> (0, 2) | proxy=0.4182 | acc=51.46% loss=3.4612 valid=OK
+Swap 45 (physical=92): layer2.0.downsample.0 g=74 5(0b0101) -> 3(0b0011) | bit2->0, bit1->1 | (0, 2) -> (0, 1) | proxy=0.4191 | acc=52.49% loss=3.3702 valid=OK
+Swap 46 (physical=94): layer2.0.downsample.0 g=114 3(0b0011) -> 5(0b0101) | bit1->0, bit2->1 | (0, 1) -> (0, 2) | proxy=0.8655 | acc=50.15% loss=3.6548 valid=OK
+Swap 47 (physical=96): layer2.0.downsample.0 g=114 5(0b0101) -> 9(0b1001) | bit2->0, bit3->1 | (0, 2) -> (0, 3) | proxy=0.6308 | acc=49.37% loss=3.7296 valid=OK
+Swap 48 (physical=98): layer2.0.downsample.0 g=114 9(0b1001) -> 3(0b0011) | bit3->0, bit1->1 | (0, 3) -> (0, 1) | proxy=0.5939 | acc=52.49% loss=3.3702 valid=OK
+Swap 49 (physical=100): layer1.0.conv1 g=568 9(0b1001) -> 3(0b0011) | bit3->0, bit1->1 | (0, 3) -> (0, 1) | proxy=0.4016 | acc=50.73% loss=3.5352 valid=OK
+
+================================================================================
+Reproduction command:
+  python run_R1_T04_bitmask_swaps50.py \
+    --device cpu --seed 0 --max-logical-swaps 50 \
+    --calib-samples 256 --eval-samples 2000 \
+    --ckpt results/legacy_L0/by_task/task28_sparse_mask_fixed_finetune_int8_ckpt.pth

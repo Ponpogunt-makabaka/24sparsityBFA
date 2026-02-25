@@ -1,0 +1,16 @@
+{
+  "resnet18_url": "https://download.pytorch.org/models/resnet18-f37072fd.pth",
+  "mobilenet_v2_url": "https://download.pytorch.org/models/mobilenet_v2-b0353104.pth",
+  "resnet18": {
+    "path": "/home/fuq/testarea/24sparsityBFA/data/T09_ImageNet_Scale/weights/resnet18-f37072fd.pth",
+    "num_tensors": 122,
+    "sha256": "b55eb2f9f3f559e2101e507d9acc49a5e0768f9d710eeb6a0912080e57595860",
+    "size_bytes": 46836811
+  },
+  "mobilenet_v2": {
+    "path": "/home/fuq/testarea/24sparsityBFA/data/T09_ImageNet_Scale/weights/mobilenet_v2-b0353104.pth",
+    "num_tensors": 314,
+    "sha256": "91b2db99bcf460e73e9f6fc2c6535d91384aaad56f81d4621bb4f7c12bbeaaa8",
+    "size_bytes": 14264267
+  }
+}

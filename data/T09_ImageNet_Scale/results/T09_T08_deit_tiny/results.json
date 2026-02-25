@@ -1,0 +1,818 @@
+[
+  {
+    "seed": 0,
+    "arch": "deit_tiny",
+    "initial_acc": 93.96178343949045,
+    "final_acc": 84.56050955414013,
+    "acc_drop": 9.40127388535032,
+    "num_flips": 50,
+    "attack_history": [
+      {
+        "flip": 1,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 24369,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.006257637403905392,
+        "stage_a_kept": 233672,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 2,
+        "param_name": "heads.head.weight",
+        "group": 19,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.041429825127124786,
+        "stage_a_kept": 233575,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 3,
+        "param_name": "heads.head.weight",
+        "group": 4,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.027038322761654854,
+        "stage_a_kept": 233531,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 4,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 24341,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.020425785332918167,
+        "stage_a_kept": 233460,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 5,
+        "param_name": "heads.head.weight",
+        "group": 11,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.027742113918066025,
+        "stage_a_kept": 233328,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 6,
+        "param_name": "heads.head.weight",
+        "group": 22,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.07319741696119308,
+        "stage_a_kept": 233594,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 7,
+        "param_name": "heads.head.weight",
+        "group": 1,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.0156833678483963,
+        "stage_a_kept": 233562,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 8,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 24361,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.007127602584660053,
+        "stage_a_kept": 233720,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 9,
+        "param_name": "encoder.layers.encoder_layer_4.self_attention.in_proj_weight",
+        "group": 12437,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.00664815679192543,
+        "stage_a_kept": 233621,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 10,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 24367,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.022626060992479324,
+        "stage_a_kept": 233449,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 11,
+        "param_name": "encoder.layers.encoder_layer_10.mlp.3.weight",
+        "group": 32832,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.01571454480290413,
+        "stage_a_kept": 233310,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 12,
+        "param_name": "heads.head.weight",
+        "group": 44,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.04610195383429527,
+        "stage_a_kept": 233482,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 13,
+        "param_name": "encoder.layers.encoder_layer_10.mlp.0.weight",
+        "group": 85,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.009448759257793427,
+        "stage_a_kept": 233564,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 14,
+        "param_name": "heads.head.weight",
+        "group": 8,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.08478076756000519,
+        "stage_a_kept": 233554,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 15,
+        "param_name": "heads.head.weight",
+        "group": 26,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "proxy_score": 0.05645152926445007,
+        "stage_a_kept": 233716,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 16,
+        "param_name": "heads.head.weight",
+        "group": 42,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.10738272964954376,
+        "stage_a_kept": 233405,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 17,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 36149,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.01200016774237156,
+        "stage_a_kept": 233464,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 18,
+        "param_name": "heads.head.weight",
+        "group": 20,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.03813324123620987,
+        "stage_a_kept": 233752,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 19,
+        "param_name": "heads.head.weight",
+        "group": 0,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.09810103476047516,
+        "stage_a_kept": 233469,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 20,
+        "param_name": "heads.head.weight",
+        "group": 36,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.14060062170028687,
+        "stage_a_kept": 233421,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 21,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 14326,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.00928514450788498,
+        "stage_a_kept": 233283,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 22,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 24358,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.11155828833580017,
+        "stage_a_kept": 233558,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 23,
+        "param_name": "heads.head.weight",
+        "group": 37,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.34929531812667847,
+        "stage_a_kept": 233495,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 24,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 9478,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.029052359983325005,
+        "stage_a_kept": 233595,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 25,
+        "param_name": "heads.head.weight",
+        "group": 14,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.18194079399108887,
+        "stage_a_kept": 233554,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 26,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 4822,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.03389723598957062,
+        "stage_a_kept": 233431,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 27,
+        "param_name": "heads.head.weight",
+        "group": 35,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.10090021044015884,
+        "stage_a_kept": 233661,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 28,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 9368,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.09206994622945786,
+        "stage_a_kept": 233498,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 29,
+        "param_name": "heads.head.weight",
+        "group": 9,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.33655524253845215,
+        "stage_a_kept": 233488,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 30,
+        "param_name": "heads.head.weight",
+        "group": 31,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.23359939455986023,
+        "stage_a_kept": 233622,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 31,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 24349,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.17767882347106934,
+        "stage_a_kept": 233718,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 32,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 24344,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.08849523216485977,
+        "stage_a_kept": 233750,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 33,
+        "param_name": "heads.head.weight",
+        "group": 7,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.6115016937255859,
+        "stage_a_kept": 233328,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 34,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 28438,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.051960911601781845,
+        "stage_a_kept": 233738,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 35,
+        "param_name": "encoder.layers.encoder_layer_10.self_attention.out_proj.weight",
+        "group": 8167,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.06239145249128342,
+        "stage_a_kept": 233475,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 36,
+        "param_name": "heads.head.weight",
+        "group": 29,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.20895999670028687,
+        "stage_a_kept": 233556,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 37,
+        "param_name": "heads.head.weight",
+        "group": 25,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.31166523694992065,
+        "stage_a_kept": 233480,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 38,
+        "param_name": "heads.head.weight",
+        "group": 15,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.3424440026283264,
+        "stage_a_kept": 233554,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 39,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 9385,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.13685110211372375,
+        "stage_a_kept": 233509,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 40,
+        "param_name": "heads.head.weight",
+        "group": 20,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.13098031282424927,
+        "stage_a_kept": 233637,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 41,
+        "param_name": "heads.head.weight",
+        "group": 43,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.2956802248954773,
+        "stage_a_kept": 233107,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 42,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 9360,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.1305379867553711,
+        "stage_a_kept": 233638,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 43,
+        "param_name": "heads.head.weight",
+        "group": 8,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.5912138223648071,
+        "stage_a_kept": 233743,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 44,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.3.weight",
+        "group": 18295,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.07124650478363037,
+        "stage_a_kept": 233557,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 45,
+        "param_name": "heads.head.weight",
+        "group": 46,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.4724041819572449,
+        "stage_a_kept": 233367,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 46,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 9391,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.1291322410106659,
+        "stage_a_kept": 233287,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 47,
+        "param_name": "heads.head.weight",
+        "group": 19,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.31105077266693115,
+        "stage_a_kept": 233446,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 48,
+        "param_name": "encoder.layers.encoder_layer_10.mlp.3.weight",
+        "group": 4032,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.07619552314281464,
+        "stage_a_kept": 233596,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 49,
+        "param_name": "heads.head.weight",
+        "group": 27563,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.06982012093067169,
+        "stage_a_kept": 233516,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 50,
+        "param_name": "encoder.layers.encoder_layer_5.self_attention.in_proj_weight",
+        "group": 14165,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.057375624775886536,
+        "stage_a_kept": 233805,
+        "stage_b_tested": 64
+      }
+    ],
+    "config": {
+      "physical_budget": 50,
+      "top_m_per_group": 3,
+      "top_k_verify": 64,
+      "max_groups_per_layer": 2000
+    }
+  }
+]

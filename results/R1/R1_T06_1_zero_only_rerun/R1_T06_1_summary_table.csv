@@ -1,0 +1,2 @@
+mode,mode_display,seed,topk,baseline_acc,final_acc,acc_drop,baseline_loss_eval,final_loss_eval,loss_increase,n_acc_increase_steps,n_loss_decrease_steps,acc_increase_steps,loss_decrease_steps,wall_time_sec
+zero_only,sparse-gated : zero-only (dense-view search),0,64,92.40%,89.90%,2.50%,0.269775,0.361839,0.092063,0,0,[],[],45.76

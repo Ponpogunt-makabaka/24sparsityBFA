@@ -1,0 +1,11 @@
+{
+  "output_checkpoint": "data/T09_ImageNet_Scale/weights/resnet18_2_4_sparse_imagenette.pth",
+  "metrics": {
+    "dense_val_top1": 80.9171974522293,
+    "sparse_init_val_top1": 5.146496815286624,
+    "final_val_top1": 98.47133757961784,
+    "final_val_loss": 0.05175671268420614,
+    "final_max_abs_masked": 0.0,
+    "elapsed_sec": 657.275961637497
+  }
+}

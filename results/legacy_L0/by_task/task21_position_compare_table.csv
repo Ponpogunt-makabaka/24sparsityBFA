@@ -1,0 +1,3 @@
+method,seed,baseline_acc,final_acc,drop,successful_flips,flips_to_50,flips_to_20
+position_metadata_ncsa,123,86.572265625,9.66796875,76.904296875,50,24,30
+position_weight_msb_nonzero,123,86.572265625,9.912109375,76.66015625,50,4,10

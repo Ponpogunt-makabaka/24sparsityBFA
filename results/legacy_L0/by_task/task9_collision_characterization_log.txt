@@ -1,0 +1,42 @@
+====================================================================================================
+Task 9: Collision Handling Characterization
+====================================================================================================
+Script: run_task9_collision_characterization.py
+Timestamp: 2026-02-09 15:14:16
+Seed(base): 1234
+Seed sweep: [1234, 1235, 1236, 1237, 1238]
+Device: cpu
+Dataset path: N/A (microbench)
+Model checkpoint path: N/A (microbench)
+Tolerance (exact match): 1e-06
+Unsafe 2:4 collision enabled: True
+
+Assumptions:
+- CSR decode path uses dense reconstruction followed by standard conv/linear.
+- 2:4 group 'collision' is simulated by forcing a move into an occupied slot using Task5 update rules.
+
+== Behavior Frequencies (counts) ==
+
+[csr_conv]
+- merge_add :      0 /     20
+- mask_first:      0 /     20
+- mask_last :     20 /     20
+- drop      :      0 /     20
+- other     :      0 /     20
+
+[csr_linear]
+- merge_add :      0 /     20
+- mask_first:      0 /     20
+- mask_last :     20 /     20
+- drop      :      0 /     20
+- other     :      0 /     20
+
+[nm_linear]
+- merge_add :      0 /     20
+- mask_first:      0 /     20
+- mask_last :      0 /     20
+- drop      :     20 /     20
+- other     :      0 /     20
+
+How to run:
+  python run_task9_collision_characterization.py --unsafe-collision

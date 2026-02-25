@@ -1,0 +1,23 @@
+
+
+
+
+
+
+================================================================================================
+Jan 28 2026
+
+
+
+============
+Finished:
+1. Dense FP32 Model Attack: Successful
+2. Dense INT8 Model Attack: Successful
+============
+To Do Tasks:
+1. Sparse INT8 Model (Dense Foramt) Attack both "zero" (-128) and "non-zero" (pos: -128+x, neg: +128+x) weights:
+2. Sparse INT8 Model (Dense Foramt) Attack only "zero" (-128) weights:
+3. Sparse INT8 Model (Dense Foramt) Attack only "non-zero" (pos: -128+x, neg: +128+x) weights (eq. CSR):
+4. Sparse INT8 Model (CSR   Foramt) Attack on position index:
+============
+

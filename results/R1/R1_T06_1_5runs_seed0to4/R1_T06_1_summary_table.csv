@@ -1,0 +1,16 @@
+mode,mode_display,seed,topk,baseline_acc,final_acc,acc_drop,baseline_loss_eval,final_loss_eval,loss_increase,n_acc_increase_steps,n_loss_decrease_steps,acc_increase_steps,loss_decrease_steps,wall_time_sec
+global,sparse-gated : global weight-bit flip (dense-view search),0,64,92.40%,10.20%,82.20%,0.269775,17.575377,17.305602,0,0,[],[],77.92
+zero_only,sparse-gated : zero-only (dense-view search),0,64,92.40%,89.90%,2.50%,0.269775,0.361839,0.092063,0,0,[],[],46.44
+nonzero_only,sparse-gated : non-zero only (dense-view search),0,64,92.40%,10.15%,82.25%,0.269775,14.784735,14.514960,0,0,[],[],59.20
+global,sparse-gated : global weight-bit flip (dense-view search),1,64,92.25%,10.65%,81.60%,0.268054,18.122452,17.854397,0,0,[],[],117.91
+zero_only,sparse-gated : zero-only (dense-view search),1,64,92.25%,86.10%,6.15%,0.268054,0.512892,0.244837,0,0,[],[],71.62
+nonzero_only,sparse-gated : non-zero only (dense-view search),1,64,92.25%,11.45%,80.80%,0.268054,16.442428,16.174373,0,0,[],[],96.63
+global,sparse-gated : global weight-bit flip (dense-view search),2,64,92.80%,9.15%,83.65%,0.254427,16.305872,16.051445,0,0,[],[],66.88
+zero_only,sparse-gated : zero-only (dense-view search),2,64,92.80%,91.80%,1.00%,0.254427,0.278447,0.024020,0,0,[],[],22.65
+nonzero_only,sparse-gated : non-zero only (dense-view search),2,64,92.80%,9.15%,83.65%,0.254427,16.305872,16.051445,0,0,[],[],59.88
+global,sparse-gated : global weight-bit flip (dense-view search),3,64,92.10%,11.95%,80.15%,0.282221,18.330305,18.048084,0,0,[],[],92.13
+zero_only,sparse-gated : zero-only (dense-view search),3,64,92.10%,91.30%,0.80%,0.282221,0.312461,0.030240,0,0,[],[],34.61
+nonzero_only,sparse-gated : non-zero only (dense-view search),3,64,92.10%,11.90%,80.20%,0.282221,30.095014,29.812793,0,0,[],[],120.91
+global,sparse-gated : global weight-bit flip (dense-view search),4,64,92.15%,11.80%,80.35%,0.250502,17.961094,17.710593,0,0,[],[],184.97
+zero_only,sparse-gated : zero-only (dense-view search),4,64,92.15%,82.65%,9.50%,0.250502,0.574317,0.323816,0,0,[],[],45.64
+nonzero_only,sparse-gated : non-zero only (dense-view search),4,64,92.15%,11.80%,80.35%,0.250502,17.961094,17.710593,0,0,[],[],168.68
