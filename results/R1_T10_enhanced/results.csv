@@ -1,0 +1,2 @@
+seed,coarse_groups,topk,initial_acc,final_acc,acc_drop,num_flips,avg_search_time
+0,1000,64,92.21,12.43,79.78,50,4.0689

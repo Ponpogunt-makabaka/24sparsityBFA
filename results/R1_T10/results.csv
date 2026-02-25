@@ -1,0 +1,2 @@
+seed,topk,initial_acc,final_acc,acc_drop,num_flips,avg_search_time
+0,64,92.21,41.62,50.59,50,9.2125

@@ -1,0 +1,2 @@
+baseline_acc,final_acc,drop,physical_budget,physical_flips_used,logical_steps,action_weight_bit,action_index_1bit,action_bitmask_swap,top_k,runtime_sec
+92.33,9.96,82.37,50,50,50,49,1,0,64,4992.77

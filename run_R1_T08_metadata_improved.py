@@ -694,6 +694,27 @@ def evaluate_top1(model: nn.Module, loader: DataLoader, device: str) -> float:
     return 100.0 * correct / total if total else 0.0
 
 
+def evaluate_top1_with_loss(model: nn.Module, loader: DataLoader, device: str) -> Tuple[float, float]:
+    """Evaluate Top-1 accuracy and average cross-entropy loss."""
+    model = model.to(device).eval()
+    criterion = nn.CrossEntropyLoss()
+    correct = total = 0
+    total_loss = 0.0
+    n_batches = 0
+    with torch.no_grad():
+        for images, targets in loader:
+            images, targets = images.to(device), targets.to(device)
+            outputs = model(images)
+            preds = outputs.argmax(1)
+            correct += preds.eq(targets).sum().item()
+            total += targets.size(0)
+            total_loss += criterion(outputs, targets).item()
+            n_batches += 1
+    acc = 100.0 * correct / total if total else 0.0
+    avg_loss = total_loss / n_batches if n_batches else 0.0
+    return acc, avg_loss
+
+
 # =============================================================================
 # Main Attack Loop
 # =============================================================================
@@ -799,8 +820,8 @@ def main() -> None:
         model = reload_model_for_mode(is_int8_ckpt, state_dict_to_load, args.ckpt, device)
 
         # Initial evaluation
-        init_acc = evaluate_top1(model, test_loader, device)
-        print(f"[{now_ts()}] Initial Top-1: {init_acc:.2f}%")
+        init_acc, init_loss = evaluate_top1_with_loss(model, test_loader, device)
+        print(f"[{now_ts()}] Initial Top-1: {init_acc:.2f}%, Loss: {init_loss:.6f}")
 
         # Attack state
         # Keep a short cooldown window for recently touched groups.
@@ -813,8 +834,10 @@ def main() -> None:
         forbidden_transitions_queue: deque[Tuple[str, int, int, int]] = deque(maxlen=1000)
 
         attack_history = []
+        total_attack_start = time.time()
 
         for flip_idx in range(args.physical_budget):
+            step_start = time.time()
             print(f"\n--- Flip {flip_idx + 1}/{args.physical_budget} ---")
 
             # Compute gradients
@@ -908,12 +931,14 @@ def main() -> None:
                 forbidden_transitions_set.add(t_key)
 
             # Evaluate after flip
-            acc_after = evaluate_top1(model, test_loader, device)
+            acc_after, loss_after = evaluate_top1_with_loss(model, test_loader, device)
+            step_time = time.time() - step_start
 
             print(f"[Flip] layer={best_candidate.layer_name} "
                   f"group={best_candidate.group_idx} "
                   f"pattern={best_candidate.old_pattern}->{best_candidate.new_pattern}")
-            print(f"[Result] Acc: {acc_before:.2f}% -> {acc_after:.2f}% (drop: {acc_before - acc_after:.2f}%)")
+            print(f"[Result] Acc: {acc_before:.2f}% -> {acc_after:.2f}% (drop: {acc_before - acc_after:.2f}%) "
+                  f"Loss: {loss_after:.6f} t={step_time:.2f}s")
 
             attack_history.append({
                 "flip": flip_idx + 1,
@@ -924,17 +949,29 @@ def main() -> None:
                 "acc_before": acc_before,
                 "acc_after": acc_after,
                 "acc_drop": acc_before - acc_after,
+                "loss_after": loss_after,
+                "search_time": step_time,
             })
 
         # Final evaluation
-        final_acc = evaluate_top1(model, test_loader, device)
-        print(f"\n[{now_ts()}] Seed {seed} finished. Final Top-1: {final_acc:.2f}%")
+        final_acc, final_loss = evaluate_top1_with_loss(model, test_loader, device)
+        total_attack_time = time.time() - total_attack_start
+        num_flips = len(attack_history)
+        avg_step_time = total_attack_time / num_flips if num_flips > 0 else 0.0
+        print(f"\n[{now_ts()}] Seed {seed} finished. Final Top-1: {final_acc:.2f}%, Loss: {final_loss:.6f}")
+        print(f"[Timing] Total: {total_attack_time:.2f}s, Avg per step: {avg_step_time:.2f}s")
 
         all_results.append({
             "seed": seed,
             "initial_acc": init_acc,
+            "initial_loss": init_loss,
             "final_acc": final_acc,
-            "num_flips": len(attack_history),
+            "final_loss": final_loss,
+            "acc_drop": init_acc - final_acc,
+            "loss_increase": final_loss - init_loss,
+            "num_flips": num_flips,
+            "total_search_time": total_attack_time,
+            "avg_search_time_per_step": avg_step_time,
             "attack_history": attack_history,
         })
 

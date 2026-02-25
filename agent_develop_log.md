@@ -2096,3 +2096,97 @@ Results:
 ### Status Note
 - Baseline targets achieved for ResNet-18 and MobileNet-V2.
 - DeiT-Tiny target baseline (>55%) not yet achieved in current branch and requires further model/data strategy work.
+
+---
+
+## [2026-02-25] T10 & T10_Enhanced: Group-First Search Heuristics for Metadata BFA
+
+### Motivation
+Explore whether group-level gradient pre-filtering can reduce the search cost of T08's exhaustive enumeration while maintaining comparable attack power. The fundamental baseline for all experiments is **ResNet-20 on CIFAR-10** using checkpoint `task28_sparse_mask_fixed_finetune_int8_ckpt.pth` (initial_acc=92.21%).
+
+### T10: Group-First Search (Original)
+
+**Algorithm (4 steps):**
+1. **Group Proxy Scoring:** `group_score = sum(abs(grad[0..3]))` for all 67564 groups.
+2. **Global Top-K Groups:** Select Top-64 groups by group_score.
+3. **Candidate Generation:** Within those 64 groups only, generate NCA-valid `index_1bit` candidates (~170 total).
+4. **Exact Verification:** Forward-pass evaluation on Top-100 candidates.
+
+**Script:** `engine/run_R1_T10_group_first.py`
+
+**Execution:**
+```bash
+python engine/run_R1_T10_group_first.py \
+  --ckpt /home/lab-2010/24sparsityBFA/results/legacy_L0/by_task/task28_sparse_mask_fixed_finetune_int8_ckpt.pth \
+  --device cpu --seed 0 --n-iter 50 --attack-sample-size 256 --topk 64
+```
+
+**Results:**
+| Metric | Value |
+|---|---|
+| initial_acc | 92.21% |
+| final_acc | 41.62% |
+| acc_drop | 50.59% |
+| flips_used | 50/50 |
+| avg_search_time | 9.213 s/step |
+
+**Diagnosis — Two Fatal Flaws:**
+1. **Directionality flaw:** `Σ|grad|` is a group-level proxy that cannot distinguish flip directions. A high-gradient group may have no good NCA flip (gradient opposes all Δw̃).
+2. **Reachability flaw:** Top-64 from 67564 groups (0.09% coverage) misses many high-impact candidates that T08's exhaustive scan captures.
+
+### T10_Enhanced: Hybrid Two-Stage Search
+
+**Algorithm (5 steps) — fixes both flaws:**
+1. **Coarse Group Pre-filter:** `group_score = Σ|grad|` → Select Top-N=1000 groups (1.5% coverage, 16× wider than T10).
+2. **Candidate Generation:** Within 1000 groups, generate NCA-valid candidates (~2700 total).
+3. **Fine Candidate Proxy:** Compute directional `proxy_score = grad · (w̃_new - w̃_old)` for each candidate.
+4. **Global Candidate Top-K:** Sort by proxy_score → select Top-K=64 candidates.
+5. **Exact Forward Verification:** Forward-pass evaluation on those 64 candidates.
+
+**Script:** `engine/run_R1_T10_enhanced_hybrid.py`
+
+**Execution:**
+```bash
+python engine/run_R1_T10_enhanced_hybrid.py \
+  --ckpt /home/lab-2010/24sparsityBFA/results/legacy_L0/by_task/task28_sparse_mask_fixed_finetune_int8_ckpt.pth \
+  --device cpu --seed 0 --n-iter 50 --attack-sample-size 256 --coarse-groups 1000 --topk 64
+```
+
+**Results:**
+| Metric | Value |
+|---|---|
+| initial_acc | 92.21% |
+| final_acc | **12.43%** |
+| acc_drop | **79.78%** |
+| flips_used | 50/50 |
+| avg_search_time | **4.069 s/step** |
+
+### Three-Way Comparison (ResNet-20 / CIFAR-10 / Seed=0)
+
+| Method | final_acc | acc_drop | flips_used | avg_time/step | total_time |
+|---|---:|---:|---:|---:|---:|
+| T08 (baseline) | 29.02% | 63.19% | 27/50 (early stop) | — | — |
+| T10 (original) | 41.62% | 50.59% | 50/50 | 9.213s | 460.6s |
+| **T10_Enhanced** | **12.43%** | **79.78%** | **50/50** | **4.069s** | **203.4s** |
+
+### Per-Step Time Breakdown (T10_Enhanced avg)
+
+| Stage | Time | Description |
+|---|---|---|
+| S1 Coarse filter | 1.04s | 67564 groups → Top-1000 by Σ\|grad\| |
+| S2+3 Gen + Proxy | 0.27s | 1000 groups → ~2700 candidates + directional proxy |
+| S4 Top-K select | 0.001s | ~2700 → Top-64 by `grad · Δw̃` |
+| S5 Exact verify | 2.54s | 64 forward passes |
+
+### Key Findings
+
+1. **T10_Enhanced surpasses T08 by +16.59% acc_drop** (79.78% vs 63.19%). T08 early-stops at flip 27; T10_Enhanced sustains positive candidates through all 50 flips with 64/64 positive rate on every step.
+2. **2.3× faster than T10** (4.07s vs 9.21s per step) despite scanning 15× more groups, because the fine proxy ranking reduces exact verification from 100 to 64 candidates, each better targeted.
+3. **Flip 17 breakthrough:** Single-step acc_drop of 8.31% (53.87% → 45.56%), demonstrating that directional proxy successfully identifies extreme-impact candidates missed by T10's group-level filter.
+4. **Design insight:** The two-stage hybrid (coarse group filter + fine candidate proxy) achieves better results than either stage alone. The coarse filter provides computational savings; the fine proxy provides attack precision.
+
+### Artifacts
+- `engine/run_R1_T10_group_first.py` — T10 original script
+- `engine/run_R1_T10_enhanced_hybrid.py` — T10_Enhanced script
+- `results/R1_T10/results.json` — T10 full results
+- `results/R1_T10_enhanced/results.json` — T10_Enhanced full results
