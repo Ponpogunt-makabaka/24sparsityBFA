@@ -1,0 +1,83 @@
+
+第一步：
+在 zhwf_01_load_quant.py 中实现
+    
+    (1.0) 定义一个函数 load_and_quantize_ckpt()，该函数针对CIFAR10 dataset, resnet20_nm模型的inference。CIFAR10 dataset已经下载， 位于~/data/cifar10/， resnet20_nm模型参考resnet20_nm.py.
+    (1.1) load 1_sparse_finetune.pth文件, 使用cuda 跑一次前向inference. 记录top-1 accuracy.
+    
+    (1.2) 将浮点数格式的模型做一个INT8量化， 再使用cuda 跑一次前向inference，记录top-1 accuracy.
+    
+    (1.3) 记录哪些层跑了量化，每层的量化步长（quantization step size）和量化后的权重值。
+
+
+
+
+第二步：
+渐进式比特搜索 (progressive_bit_search)： PBS()
+
+    (2.0) 实现前向传播与梯度计算: 我们也使用 --attack_sample_size, --attack_batch_size 来控制PBS攻击中前向传播和梯度计算的样本数量和批量大小。实现一个函数 forward_and_compute_gradients()，来执行前向传播并计算损失（CrossEntropy）和梯度，以便在PBS攻击中使用。 
+    注意事项：这部分功能，参考BFA.py中的相关代码实现，包括 data_loader 载入 attack_sample_size 的样本，接受量化的模型，前向传播计算损失，以及反向传播计算weights的梯度。
+
+
+    (2.1) 我们实现一个更简单的 simple_bit_flip() 的功能。针对top 20的权重梯度，把对应的INT8 quantized权重的MSB反转。这个操作，如果对应的权重是正数或者0，那就减128,如果是负数，就加128。这个本质上就是flip MSB sign bit， 针对2‘s complement。
+    对candidate 权重梯度对应的权重进行MSB翻转，得到一个被翻位的候选权重张量。将这个候选权重临时写入模型，重新前向传播计算损失，并记录这个损失值，也在最后的top-20的打印里。最后恢复原始权重。
+
+
+    (2.2) 当每一层的最优 bit flip找到后，我们真正把这个bit flip应用到模型上，并完整跑一次inference，来确定top-1 accuracy loss。
+    
+
+
+
+第三步：
+2:4 Sparsity: 攻击 Position Metadata
+
+    （1）首先，我们需要把模型的weight打印出来，我需要你理解到底怎么选择2：4 sparsity的group。
+
+
+        Grouping
+
+        目标：对 out[0] 的 16 个输入通道按每 4 个一组划分（4 组）。
+        细节：每个输入通道是一个 3×3 kernel → 扁平为 9 个位置；因此每组包含 4 个通道 × 9 位置 → 总共 4(groups) × 9(positions) = 36 行。
+        顺序：组顺序为 rows [0..3], [4..7], [8..11], [12..15]；每组内部按输入通道索引 0..3；每组按 kernel 位置 0..8（kH then kW 的扁平顺序）。
+        Mask（掩码）
+
+        定义：对一个 group 的某一位置（4 个值）构成掩码，规则：若 weight != 0 则 mask = 1，否则 mask = 0。
+        表示：把 4 个 mask 串成 m1 m2 m3 m4（脚本中用无分隔或用制表符输出），方便硬件/软件解析。
+        建议：若浮点残差问题担心，可用阈值判断：abs(w) > eps 视为非零（默认脚本用 != 0）。
+        Position Encoding（4-bit 元数据）
+
+        目的：用 4-bit（两段各 2-bit）编码 group 内两个非零的位置，便于紧凑存储。
+        格式：aabb（4 位字符串），其中 aa 是第一个非零通道的 2-bit 索引（00,01,10,11 -> 0..3），bb 是第二个非零通道的 2-bit 索引。
+        规则：对 group 内非零索引按升序取前两项：
+        若恰有 2 个非零：按其索引编码（例如索引 1 和 3 → 01 11 → 0111）。
+        若只有 1 个非零：设二者为 (idx, 0)。
+        若无非零：设 (0,0) → 0000。
+        兼容性：该编码能表示 2:4 模式（两个非零）并且在硬件上只需 4-bit/组。
+        每行输出格式（脚本约定）
+
+        每一组-位置输出一行（共 36 行），字段用制表符分隔：
+        [w1\tw2\tw3\tw4] \t [m1\tm2\tm3\tm4] \t [aabb]
+        可选：根据 CLI flags 只打印权重（--groups）、加掩码（--mask）、加位置编码（--pos）。
+        实现细节 & 注意事项
+
+        kernel 扁平顺序：脚本用 reshape(in_channels, -1) → 每列对应一个 kernel 位置，顺序是 kH then kW。
+        非零检测：当前实现用 v != 0；如需鲁棒可改为 abs(v) > 1e-12。
+        对 N:M（2:4）验证：检查每组每位置非零数是否为 2；若有例外需记录/报警。
+        存储：可把 36 行重定向到文件（> out0_groups_pos.txt）或保存为 npy/CSV 供后续处理。
+
+
+
+
+
+    （2）然后，我们来理清 Position Encoding Metadata的攻击方案。
+        （a）我们首先需要先define什么是NCA。
+        （b）我们应该还是从topk的权重梯度入手，来选择candidate flips。 首先选中candidate，找到他所在的group，然后我们需要判断这个group是否满足NCA条件。当NCA条件triggered, 那我们不能attack。
+        （c）就算没有Trigger NCA，这个flip也未必会让loss Delta > 0，所以我们还需要计算这个flip的loss delta, 来判断是否真正的candidate flip。
+
+
+
+
+
+
+
+
