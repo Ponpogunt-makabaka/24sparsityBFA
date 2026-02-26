@@ -110,8 +110,8 @@ def apply_flip(model: nn.Module, layer_name: str, group_idx: int,
             w_group[dst_pos] = old_values[rank]
             m_group[dst_pos] = 1.0
         # Restore to original tensor shape
-        module.sparse_mask.copy_(restore_groups(m_flat, mask))
-        module.int8_weights.copy_(restore_groups(w_flat, int8_w))
+        module.sparse_mask.copy_(restore_groups(m_flat, mask).clone())
+        module.int8_weights.copy_(restore_groups(w_flat, int8_w).clone())
 
     return True
 
