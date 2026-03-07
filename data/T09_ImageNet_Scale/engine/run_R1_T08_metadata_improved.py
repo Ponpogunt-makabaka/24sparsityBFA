@@ -142,22 +142,100 @@ def build_imagenette_target_transform(classes) -> callable:
     return _map_target
 
 
+def build_balanced_subset_indices(targets: List[int], num_samples: int, seed: int = 0) -> List[int]:
+    rng = random.Random(seed)
+    class_to_indices: Dict[int, List[int]] = {}
+    for idx, target in enumerate(targets):
+        class_to_indices.setdefault(int(target), []).append(idx)
+
+    classes = sorted(class_to_indices.keys())
+    for cls in classes:
+        rng.shuffle(class_to_indices[cls])
+
+    selected: List[int] = []
+    while len(selected) < num_samples:
+        made_progress = False
+        for cls in classes:
+            if class_to_indices[cls]:
+                selected.append(class_to_indices[cls].pop())
+                made_progress = True
+                if len(selected) >= num_samples:
+                    break
+        if not made_progress:
+            break
+
+    rng.shuffle(selected)
+    return selected
+
+
+def materialize_calibration_batches(
+    loader: DataLoader,
+    device: str,
+    max_samples: int,
+) -> Tuple[List[Tuple[torch.Tensor, torch.Tensor]], int]:
+    batches: List[Tuple[torch.Tensor, torch.Tensor]] = []
+    total = 0
+    for images, targets in loader:
+        if total >= max_samples:
+            break
+        remaining = max_samples - total
+        if images.size(0) > remaining:
+            images = images[:remaining]
+            targets = targets[:remaining]
+        batches.append((images.to(device), targets.to(device)))
+        total += int(targets.size(0))
+    if total == 0:
+        raise RuntimeError("Calibration loader produced zero samples.")
+    return batches, total
+
+
+def evaluate_loss_on_batches(
+    model: nn.Module,
+    calib_batches: List[Tuple[torch.Tensor, torch.Tensor]],
+    criterion: nn.Module,
+) -> float:
+    model.eval()
+    total = 0
+    total_loss = 0.0
+    with torch.no_grad():
+        for images, targets in calib_batches:
+            outputs = model(images)
+            loss = criterion(outputs, targets)
+            total_loss += float(loss.item()) * int(targets.size(0))
+            total += int(targets.size(0))
+    return total_loss / max(total, 1)
+
+
+def compute_loss_and_gradients(
+    model: nn.Module,
+    calib_batches: List[Tuple[torch.Tensor, torch.Tensor]],
+    criterion: nn.Module,
+) -> float:
+    model.eval()
+    model.zero_grad(set_to_none=True)
+    total = sum(int(targets.size(0)) for _, targets in calib_batches)
+    total_loss = 0.0
+
+    for images, targets in calib_batches:
+        outputs = model(images)
+        loss = criterion(outputs, targets)
+        total_loss += float(loss.item()) * int(targets.size(0))
+        scaled_loss = loss * (float(targets.size(0)) / float(max(total, 1)))
+        scaled_loss.backward()
+
+    return total_loss / max(total, 1)
+
+
 def build_imagenette_loaders(
     dataset_root: Path,
     batch_size: int,
     calib_samples: int,
-) -> Tuple[DataLoader, DataLoader, DataLoader]:
+) -> Tuple[DataLoader, DataLoader]:
     train_dir = dataset_root / "train"
     val_dir = dataset_root / "val"
     if not train_dir.is_dir() or not val_dir.is_dir():
         raise FileNotFoundError(f"Imagenette dataset root missing train/val: {dataset_root}")
 
-    train_transform = transforms.Compose([
-        transforms.RandomResizedCrop(224),
-        transforms.RandomHorizontalFlip(),
-        transforms.ToTensor(),
-        transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
-    ])
     val_transform = transforms.Compose([
         transforms.Resize(256),
         transforms.CenterCrop(224),
@@ -165,44 +243,38 @@ def build_imagenette_loaders(
         transforms.Normalize(mean=[0.485, 0.456, 0.406], std=[0.229, 0.224, 0.225]),
     ])
 
-    train_set = datasets.ImageFolder(str(train_dir), transform=train_transform)
     val_set = datasets.ImageFolder(str(val_dir), transform=val_transform)
-    train_set.target_transform = build_imagenette_target_transform(train_set.classes)
     val_set.target_transform = build_imagenette_target_transform(val_set.classes)
 
     test_loader = DataLoader(val_set, batch_size=batch_size, shuffle=False, num_workers=0)
-    calib_subset = Subset(train_set, list(range(min(calib_samples, len(train_set)))))
+    raw_targets = [target for _, target in val_set.samples]
+    calib_indices = build_balanced_subset_indices(raw_targets, min(calib_samples, len(val_set)), seed=0)
+    calib_subset = Subset(val_set, calib_indices)
     calib_loader = DataLoader(calib_subset, batch_size=batch_size, shuffle=False, num_workers=0)
-    return test_loader, calib_loader, DataLoader(val_set, batch_size=batch_size, shuffle=False, num_workers=0)
+    return test_loader, calib_loader
 
 
 def build_cifar100_loaders(
     dataset_root: Path,
     batch_size: int,
     calib_samples: int,
-) -> Tuple[DataLoader, DataLoader, DataLoader]:
+    arch: str = "",
+) -> Tuple[DataLoader, DataLoader]:
     dataset_root.mkdir(parents=True, exist_ok=True)
     mean = (0.5071, 0.4867, 0.4408)
     std = (0.2675, 0.2565, 0.2761)
 
-    train_transform = transforms.Compose([
-        transforms.RandomCrop(32, padding=4),
-        transforms.RandomHorizontalFlip(),
-        transforms.ToTensor(),
-        transforms.Normalize(mean, std),
-    ])
-    # Requirement: evaluation uses strict CIFAR-100 test transform (32x32, no random crop).
-    test_transform = transforms.Compose([
-        transforms.ToTensor(),
-        transforms.Normalize(mean, std),
-    ])
+    resize_224 = arch == "deit_tiny"
 
-    train_set = datasets.CIFAR100(
-        root=str(dataset_root),
-        train=True,
-        download=True,
-        transform=train_transform,
-    )
+    test_transforms_list = []
+    if resize_224:
+        test_transforms_list.append(transforms.Resize(224))
+    test_transforms_list.extend([
+        transforms.ToTensor(),
+        transforms.Normalize(mean, std),
+    ])
+    test_transform = transforms.Compose(test_transforms_list)
+
     test_set = datasets.CIFAR100(
         root=str(dataset_root),
         train=False,
@@ -211,10 +283,10 @@ def build_cifar100_loaders(
     )
 
     test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=False, num_workers=0)
-    attack_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True, num_workers=0)
-    verify_subset = Subset(test_set, list(range(min(calib_samples, len(test_set)))))
-    verify_loader = DataLoader(verify_subset, batch_size=batch_size, shuffle=False, num_workers=0)
-    return test_loader, attack_loader, verify_loader
+    calib_indices = build_balanced_subset_indices(list(test_set.targets), min(calib_samples, len(test_set)), seed=0)
+    calib_subset = Subset(test_set, calib_indices)
+    calib_loader = DataLoader(calib_subset, batch_size=batch_size, shuffle=False, num_workers=0)
+    return test_loader, calib_loader
 
 
 def _extract_state_dict(checkpoint):
@@ -240,8 +312,9 @@ def create_model(arch: str, dataset: str, device: str) -> nn.Module:
         deit_patch_size = 16
     elif dataset == "cifar100":
         num_classes = 100
-        image_size = 32
-        deit_patch_size = 4
+        # Route A: DeiT uses patch16+224 even for CIFAR-100 (images resized in loader)
+        image_size = 224 if arch == "deit_tiny" else 32
+        deit_patch_size = 16 if arch == "deit_tiny" else 4
     else:
         raise ValueError(f"Unsupported dataset: {dataset}")
 
@@ -341,53 +414,88 @@ class GroupCandidate:
     delta_w_tilde: torch.Tensor
 
 
-def _sample_group_indices(
-    num_groups: int,
-    max_groups_per_layer: int,
-    rng: random.Random,
-    grad_scores: Optional[torch.Tensor],
-    strategy: str,
-) -> List[int]:
-    if max_groups_per_layer <= 0 or num_groups <= max_groups_per_layer:
-        return list(range(num_groups))
-    if strategy == "random":
-        return rng.sample(range(num_groups), k=max_groups_per_layer)
-    if strategy == "top_grad":
-        if grad_scores is None or grad_scores.numel() != num_groups:
-            return rng.sample(range(num_groups), k=max_groups_per_layer)
-        top_idx = torch.topk(grad_scores, k=max_groups_per_layer, largest=True).indices
-        return [int(i) for i in top_idx.tolist()]
-    raise ValueError(f"Unknown group sampling strategy: {strategy}")
+def default_coarse_groups_for_arch(arch: str) -> int:
+    if arch == "deit_tiny":
+        return 3000
+    return 1000
 
 
-def enumerate_group_candidates(
+def select_top_groups_by_grad(
     model: nn.Module,
     params: List[Tuple[str, nn.Parameter]],
     exclude_groups: Set[Tuple[str, int]],
-    forbidden_transitions: Set[Tuple[str, int, int, int]],
-    top_m_per_group: int,
-    max_groups_per_layer: int,
-    group_sampling: str,
-    rng: random.Random,
-) -> Tuple[List[GroupCandidate], Dict[str, int]]:
+    coarse_groups: int,
+) -> Tuple[List[Tuple[str, int]], Dict[str, int]]:
     counters = {
         "total_groups": 0,
-        "sampled_groups": 0,
+        "eligible_groups": 0,
+        "selected_groups": 0,
+        "excluded_groups": 0,
+        "candidates_no_gradient": 0,
+    }
+    selected_with_scores: List[Tuple[float, str, int]] = []
+
+    for param_name, p in params:
+        if p.grad is None:
+            counters["candidates_no_gradient"] += 1
+            continue
+
+        g_flat, _ = flatten_groups(p.grad.data)
+        w_flat, _ = flatten_groups(p.data)
+        m_flat, _ = flatten_groups((p.data != 0).to(torch.float32))
+        if g_flat is None or w_flat is None or m_flat is None:
+            continue
+
+        num_groups = int(g_flat.shape[0])
+        counters["total_groups"] += num_groups
+        grad_scores = g_flat.float().abs().sum(dim=1)
+        valid_mask = m_flat.sum(dim=1).eq(2)
+        exclude_mask = torch.zeros(num_groups, dtype=torch.bool, device=grad_scores.device)
+        for group_name, group_idx in exclude_groups:
+            if group_name == param_name and 0 <= group_idx < num_groups:
+                exclude_mask[group_idx] = True
+
+        counters["excluded_groups"] += int(exclude_mask.sum().item())
+        eligible_mask = valid_mask & (~exclude_mask)
+        valid_count = int(eligible_mask.sum().item())
+        counters["eligible_groups"] += valid_count
+        if valid_count == 0:
+            continue
+
+        local_keep = min(max(int(coarse_groups), 1), valid_count)
+        local_scores = grad_scores.masked_fill(~eligible_mask, float("-inf"))
+        top_idx = torch.topk(local_scores, k=local_keep, largest=True).indices.tolist()
+        for g_idx in top_idx:
+            selected_with_scores.append((float(grad_scores[g_idx].item()), param_name, int(g_idx)))
+
+    selected_with_scores.sort(key=lambda x: (-x[0], x[1], x[2]))
+    top_selected = selected_with_scores[:max(int(coarse_groups), 1)]
+    counters["selected_groups"] = len(top_selected)
+    return [(param_name, group_idx) for _, param_name, group_idx in top_selected], counters
+
+
+def generate_candidates_for_selected_groups(
+    model: nn.Module,
+    params: List[Tuple[str, nn.Parameter]],
+    selected_groups: List[Tuple[str, int]],
+    forbidden_transitions: Set[Tuple[str, int, int, int]],
+) -> Tuple[List[GroupCandidate], Dict[str, int]]:
+    counters = {
         "valid_groups": 0,
         "candidates_considered": 0,
         "candidates_valid": 0,
         "candidates_rejected_collision": 0,
         "candidates_rejected_no_change": 0,
-        "candidates_skipped_excluded": 0,
         "candidates_skipped_forbidden": 0,
-        "candidates_no_gradient": 0,
-        "candidates_kept_topm": 0,
     }
     pooled: List[GroupCandidate] = []
+    selected_map: Dict[str, Set[int]] = {}
+    for param_name, group_idx in selected_groups:
+        selected_map.setdefault(param_name, set()).add(group_idx)
 
     for param_name, p in params:
-        if p.grad is None:
-            counters["candidates_no_gradient"] += 1
+        group_indices = selected_map.get(param_name)
+        if not group_indices or p.grad is None:
             continue
 
         grad = p.grad.data
@@ -400,24 +508,7 @@ def enumerate_group_candidates(
         if g_flat is None or w_flat is None or m_flat is None:
             continue
 
-        num_groups = int(w_flat.shape[0])
-        counters["total_groups"] += num_groups
-        grad_scores = g_flat.float().abs().sum(dim=1)
-        sampled_indices = _sample_group_indices(
-            num_groups=num_groups,
-            max_groups_per_layer=max_groups_per_layer,
-            rng=rng,
-            grad_scores=grad_scores,
-            strategy=group_sampling,
-        )
-        counters["sampled_groups"] += len(sampled_indices)
-
-        for g_idx in sampled_indices:
-            g_idx = int(g_idx)
-            if (param_name, g_idx) in exclude_groups:
-                counters["candidates_skipped_excluded"] += 1
-                continue
-
+        for g_idx in sorted(group_indices):
             m_group = m_flat[g_idx]
             current_pattern = get_current_pattern_from_mask(m_group)
             if current_pattern is None:
@@ -429,13 +520,10 @@ def enumerate_group_candidates(
             w_group = w_flat[g_idx]
             old_mask = (m_group > 0.5).to(torch.float32)
             w_tilde_current = w_group.float() * old_mask
-
             old_active = (old_mask > 0.5).nonzero(as_tuple=False).flatten()
             if old_active.numel() != 2:
                 continue
             old_values = w_group[old_active].clone()
-
-            group_candidates: List[GroupCandidate] = []
 
             for bit_pos in range(4):
                 candidate_code = current_code ^ (1 << bit_pos)
@@ -458,9 +546,8 @@ def enumerate_group_candidates(
                     w_new_group[dst] = old_values[rank]
                 delta = w_new_group.float() - w_tilde_current
                 proxy = float(torch.dot(grad_group, delta).item())
-
                 counters["candidates_valid"] += 1
-                group_candidates.append(
+                pooled.append(
                     GroupCandidate(
                         proxy_score=proxy,
                         param_name=param_name,
@@ -473,11 +560,6 @@ def enumerate_group_candidates(
                         delta_w_tilde=delta.detach().cpu(),
                     )
                 )
-
-            group_candidates.sort(key=lambda c: (-c.proxy_score, c.new_code, c.flipped_bit))
-            keep_n = min(top_m_per_group, len(group_candidates))
-            pooled.extend(group_candidates[:keep_n])
-            counters["candidates_kept_topm"] += keep_n
 
     pooled.sort(key=lambda c: (-c.proxy_score, c.param_name, c.group_idx, c.new_code, c.flipped_bit))
     return pooled, counters
@@ -505,8 +587,7 @@ def exact_verification_topk(
     model: nn.Module,
     param_map: Dict[str, nn.Parameter],
     candidates: List[GroupCandidate],
-    verify_imgs: torch.Tensor,
-    verify_tgts: torch.Tensor,
+    verify_batches: List[Tuple[torch.Tensor, torch.Tensor]],
     criterion: nn.Module,
     baseline_loss: float,
     top_k: int,
@@ -520,7 +601,6 @@ def exact_verification_topk(
 
     best = None
     best_delta = 0.0
-    hash_before = compute_model_hash(model)
 
     for cand in candidates[:top_k]:
         counters["candidates_tested"] += 1
@@ -535,18 +615,11 @@ def exact_verification_topk(
             p.data.copy_(p_backup)
             continue
 
-        with torch.no_grad():
-            out = model(verify_imgs)
-            new_loss = criterion(out, verify_tgts).item()
+        new_loss = evaluate_loss_on_batches(model, verify_batches, criterion)
         delta = new_loss - baseline_loss
 
         with torch.no_grad():
             p.data.copy_(p_backup)
-
-        hash_after = compute_model_hash(model)
-        if hash_before != hash_after:
-            counters["hash_mismatches"] += 1
-            continue
 
         if delta > 0:
             counters["candidates_positive_delta"] += 1
@@ -584,6 +657,12 @@ def main() -> None:
     parser.add_argument("--physical-budget", type=int, default=50)
     parser.add_argument("--calib-samples", type=int, default=256)
     parser.add_argument("--attack-batch-size", type=int, default=64)
+    parser.add_argument(
+        "--coarse-groups",
+        type=int,
+        default=0,
+        help="Global top-N groups kept by Stage-A coarse filtering. 0 means arch-specific default.",
+    )
     parser.add_argument("--top-m-per-group", type=int, default=3)
     parser.add_argument("--top-k-verify", type=int, default=64)
     parser.add_argument("--topk", type=int, default=None, help="Alias of --top-k-verify")
@@ -629,20 +708,30 @@ def main() -> None:
     print(f"[{now_ts()}] dataset={args.dataset} dataset_root={dataset_root}")
 
     if args.dataset == "imagenette":
-        test_loader, attack_loader, verify_loader = build_imagenette_loaders(
+        test_loader, calib_loader = build_imagenette_loaders(
             dataset_root=dataset_root,
             batch_size=args.attack_batch_size,
             calib_samples=args.calib_samples,
         )
     else:
-        test_loader, attack_loader, verify_loader = build_cifar100_loaders(
+        test_loader, calib_loader = build_cifar100_loaders(
             dataset_root=dataset_root,
             batch_size=args.attack_batch_size,
             calib_samples=args.calib_samples,
+            arch=args.arch,
         )
-    verify_imgs, verify_tgts = next(iter(verify_loader))
-    verify_imgs, verify_tgts = verify_imgs.to(device), verify_tgts.to(device)
+    calib_batches, calib_count = materialize_calibration_batches(
+        calib_loader,
+        device=device,
+        max_samples=args.calib_samples,
+    )
     criterion = nn.CrossEntropyLoss()
+    coarse_groups = args.coarse_groups if args.coarse_groups > 0 else default_coarse_groups_for_arch(args.arch)
+    print(
+        f"[{now_ts()}] Calibration batches ready: samples={calib_count} "
+        f"batch_size={args.attack_batch_size} coarse_groups={coarse_groups} "
+        f"top_k_verify={args.top_k_verify}"
+    )
 
     seeds = args.seed if isinstance(args.seed, list) else [args.seed]
     all_results = []
@@ -666,55 +755,43 @@ def main() -> None:
         attack_history = []
 
         for flip_idx in range(args.physical_budget):
-            model.eval()
-            model.zero_grad()
-            images, targets = next(iter(attack_loader))
-            images, targets = images.to(device), targets.to(device)
-            outputs = model(images)
-            loss = criterion(outputs, targets)
-            loss.backward()
+            baseline_loss = compute_loss_and_gradients(model, calib_batches, criterion)
 
-            candidates, stage_a = enumerate_group_candidates(
+            selected_groups, stage_a = select_top_groups_by_grad(
                 model=model,
                 params=params,
                 exclude_groups=exclude_groups_set,
-                forbidden_transitions=forbidden_transitions_set,
-                top_m_per_group=args.top_m_per_group,
-                max_groups_per_layer=args.max_groups_per_layer,
-                group_sampling=args.group_sampling,
-                rng=rng,
+                coarse_groups=coarse_groups,
             )
-            sampled_ratio = (
-                float(stage_a["sampled_groups"]) / float(stage_a["total_groups"])
-                if stage_a["total_groups"] > 0 else 0.0
-            )
-            if sampled_ratio < args.min_sampled_group_ratio:
-                raise RuntimeError(
-                    f"Search-space coverage too low: sampled={stage_a['sampled_groups']} "
-                    f"total={stage_a['total_groups']} ratio={sampled_ratio:.4%} "
-                    f"< min={args.min_sampled_group_ratio:.4%}. "
-                    "Increase --max-groups-per-layer or lower --min-sampled-group-ratio."
-                )
             if flip_idx == 0:
-                print(
-                    f"[{now_ts()}] Stage-A coverage: sampled_groups={stage_a['sampled_groups']} "
-                    f"total_groups={stage_a['total_groups']} ratio={sampled_ratio:.4%} "
-                    f"sampling={args.group_sampling} max_groups_per_layer={args.max_groups_per_layer}"
+                selected_ratio = (
+                    float(stage_a["selected_groups"]) / float(stage_a["eligible_groups"])
+                    if stage_a["eligible_groups"] > 0 else 0.0
                 )
+                print(
+                    f"[{now_ts()}] Stage-A coarse filter: selected_groups={stage_a['selected_groups']} "
+                    f"eligible_groups={stage_a['eligible_groups']} total_groups={stage_a['total_groups']} "
+                    f"ratio={selected_ratio:.4%}"
+                )
+            if not selected_groups:
+                print(f"[Flip {flip_idx+1}] 无 coarse groups，提前停止。")
+                break
+
+            candidates, stage_a_candidates = generate_candidates_for_selected_groups(
+                model=model,
+                params=params,
+                selected_groups=selected_groups,
+                forbidden_transitions=forbidden_transitions_set,
+            )
             if not candidates:
                 print(f"[Flip {flip_idx+1}] 无候选，提前停止。")
                 break
-
-            with torch.no_grad():
-                baseline_output = model(verify_imgs)
-                baseline_loss = criterion(baseline_output, verify_tgts).item()
 
             best, stage_b = exact_verification_topk(
                 model=model,
                 param_map=param_map,
                 candidates=candidates,
-                verify_imgs=verify_imgs,
-                verify_tgts=verify_tgts,
+                verify_batches=calib_batches,
                 criterion=criterion,
                 baseline_loss=baseline_loss,
                 top_k=args.top_k_verify,
@@ -755,7 +832,8 @@ def main() -> None:
                     "old_pattern": best.old_pattern,
                     "new_pattern": best.new_pattern,
                     "proxy_score": best.proxy_score,
-                    "stage_a_kept": stage_a["candidates_kept_topm"],
+                    "stage_a_selected": stage_a["selected_groups"],
+                    "stage_a_candidates": stage_a_candidates["candidates_valid"],
                     "stage_b_tested": stage_b["candidates_tested"],
                 }
             )
@@ -779,6 +857,8 @@ def main() -> None:
                     "dataset": args.dataset,
                     "dataset_root": str(dataset_root),
                     "physical_budget": args.physical_budget,
+                    "coarse_groups": coarse_groups,
+                    "calib_count": calib_count,
                     "top_m_per_group": args.top_m_per_group,
                     "top_k_verify": args.top_k_verify,
                     "max_groups_per_layer": args.max_groups_per_layer,
