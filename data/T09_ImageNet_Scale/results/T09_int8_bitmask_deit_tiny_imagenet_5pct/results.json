@@ -1,0 +1,279 @@
+[
+  {
+    "seed": 0,
+    "arch": "deit_tiny",
+    "initial_acc": 54.23,
+    "final_acc": 4.31,
+    "acc_drop": 49.919999999999995,
+    "num_iterations": 12,
+    "physical_flips_used": 24,
+    "attack_mode": "bitmask",
+    "cost_per_step": 2,
+    "total_attack_time_sec": 981.6,
+    "avg_flip_time_sec": 81.8,
+    "attack_history": [
+      {
+        "iter": 1,
+        "physical_flips": 2,
+        "acc_after": 52.93,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 23868,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.01299371849745512,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 5348,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.6675
+      },
+      {
+        "iter": 2,
+        "physical_flips": 4,
+        "acc_after": 32.53,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 2448,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.13227272033691406,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 5348,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.3413
+      },
+      {
+        "iter": 3,
+        "physical_flips": 6,
+        "acc_after": 24.18,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 23004,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.4715450406074524,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 5348,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.9675
+      },
+      {
+        "iter": 4,
+        "physical_flips": 8,
+        "acc_after": 19.14,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 23340,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.30449989438056946,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 5348,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.8672
+      },
+      {
+        "iter": 5,
+        "physical_flips": 10,
+        "acc_after": 15.95,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 23532,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.21674296259880066,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 5348,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.6258
+      },
+      {
+        "iter": 6,
+        "physical_flips": 12,
+        "acc_after": 13.12,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 2455,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.13192982971668243,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 5348,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.0215
+      },
+      {
+        "iter": 7,
+        "physical_flips": 14,
+        "acc_after": 11.24,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 9072,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.25048232078552246,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 5348,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.504
+      },
+      {
+        "iter": 8,
+        "physical_flips": 16,
+        "acc_after": 9.56,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 21263,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.09988584369421005,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 5348,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.108
+      },
+      {
+        "iter": 9,
+        "physical_flips": 18,
+        "acc_after": 6.76,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 35093,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.3104795813560486,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 5348,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.555
+      },
+      {
+        "iter": 10,
+        "physical_flips": 20,
+        "acc_after": 6.0,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 20460,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.08183013647794724,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 5348,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.2125
+      },
+      {
+        "iter": 11,
+        "physical_flips": 22,
+        "acc_after": 5.26,
+        "param_name": "encoder.layers.encoder_layer_7.self_attention.in_proj_weight",
+        "group": 24053,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.10766827315092087,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 5348,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.8799
+      },
+      {
+        "iter": 12,
+        "physical_flips": 24,
+        "acc_after": 4.31,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 19487,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.09385962039232254,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 5348,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.8501
+      }
+    ],
+    "config": {
+      "dataset": "tiny_imagenet",
+      "dataset_root": "data/tiny-imagenet-200",
+      "attack_mode": "bitmask",
+      "physical_budget": 50,
+      "eligible_groups": 1336704,
+      "flip_ratio": 3.740543905008139e-05,
+      "coarse_groups": 1337,
+      "requested_coarse_groups": 0,
+      "requested_coarse_ratio": 0.001,
+      "effective_coarse_ratio": 0.0010002214401991765,
+      "calib_count": 1600,
+      "calib_samples": 1600,
+      "calib_per_class": 8,
+      "semantic_num_classes": 200,
+      "top_m_per_group": 3,
+      "top_k_verify": 64,
+      "max_groups_per_layer": 0,
+      "group_sampling": "top_grad",
+      "min_sampled_group_ratio": 0.05,
+      "exclude_head": false
+    }
+  }
+]

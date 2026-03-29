@@ -1,0 +1,18 @@
+{
+  "output_checkpoint": "data/T09_ImageNet_Scale/weights/resnet18_sparse_ft_cifar100.pth",
+  "metrics": {
+    "arch": "resnet18",
+    "dense_val_top1": 79.26,
+    "sparse_init_val_top1": 74.61,
+    "final_val_top1": 78.89,
+    "final_val_loss": 1.1064775358200074,
+    "final_max_abs_masked": 0.0,
+    "elapsed_sec": 1094.4559698104858,
+    "epochs": 40,
+    "batch_size": 256,
+    "lr": 0.05,
+    "weight_decay": 0.0001,
+    "warmup_epochs": 0,
+    "best_val_top1": 78.89
+  }
+}

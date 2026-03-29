@@ -1,6 +1,6 @@
 {
   "url": "https://dl.fbaipublicfiles.com/deit/deit_tiny_patch16_224-a1311bcf.pth",
-  "output_path": "/home/fuq/testarea/24sparsityBFA/data/T09_ImageNet_Scale/weights/deit_tiny_patch16_224-a1311bcf.pth",
+  "output_path": "/home/lab-2010/24sparsityBFA-main/data/T09_ImageNet_Scale/weights/deit_tiny_patch16_224-a1311bcf.pth",
   "size_bytes": 22917895,
   "sha256": "a1311bcf4f24e3c95adaa75535db67bc4412d95535b98f7c1dfd1164dda41c97",
   "num_tensors": 152,

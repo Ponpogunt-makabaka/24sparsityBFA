@@ -1,0 +1,18 @@
+{
+  "output_checkpoint": "data/T09_ImageNet_Scale/weights/vgg16_bn_2_4_sparse_cifar100.pth",
+  "metrics": {
+    "arch": "vgg16_bn",
+    "dense_val_top1": 74.0,
+    "sparse_init_val_top1": 60.22,
+    "final_val_top1": 74.01,
+    "final_val_loss": 1.243379132270813,
+    "final_max_abs_masked": 0.0,
+    "elapsed_sec": 837.9355778694153,
+    "epochs": 40,
+    "batch_size": 256,
+    "lr": 0.05,
+    "weight_decay": 0.0001,
+    "warmup_epochs": 0,
+    "best_val_top1": 74.01
+  }
+}

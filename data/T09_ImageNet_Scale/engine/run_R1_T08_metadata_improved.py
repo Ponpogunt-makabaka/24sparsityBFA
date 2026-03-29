@@ -45,6 +45,70 @@ from torchvision.models.vision_transformer import VisionTransformer
 # Ensure repo root is importable when script is launched from arbitrary cwd.
 REPO_ROOT = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO_ROOT))
+from models.resnet20 import resnet20 as _resnet20_fn
+from models.factory import (
+    _replace_with_int8_sparse,
+    _calibrate_int8_modules,
+    _compute_2_4_mask_conv,
+    _compute_2_4_mask_linear,
+    _is_depthwise_conv,
+)
+from train.ptq_convert import Int8QuantizedConv2d, Int8QuantizedLinear
+
+
+def _convert_model_to_int8(model: nn.Module, arch: str) -> nn.Module:
+    """Convert FP32 sparse model to INT8 quantized model in-place."""
+    # Move to CPU first to avoid device mismatch during layer replacement
+    model = model.cpu()
+
+    def _conv_filter(mod: nn.Conv2d, name: str) -> bool:
+        if mod.in_channels == 3:
+            return False
+        if hasattr(mod, 'groups') and mod.groups > 1 and mod.groups == mod.in_channels:
+            return False
+        K = mod.in_channels * mod.kernel_size[0] * mod.kernel_size[1]
+        return K % 4 == 0
+
+    def _linear_filter(mod: nn.Linear, name: str) -> bool:
+        return mod.in_features % 4 == 0
+
+    _replace_with_int8_sparse(
+        model,
+        conv_filter=_conv_filter,
+        linear_filter=_linear_filter,
+        apply_conv_mask=True,
+        apply_linear_mask=True,
+    )
+    _calibrate_int8_modules(model)
+    return model
+
+
+def _sync_int8_after_pattern_change(model: nn.Module, param_name: str) -> None:
+    """After changing FP32 weight pattern, re-sync INT8 state for that layer."""
+    parts = param_name.replace(".weight", "").split(".")
+    mod = model
+    for p in parts:
+        mod = getattr(mod, p, None)
+        if mod is None:
+            return
+    if isinstance(mod, (Int8QuantizedConv2d, Int8QuantizedLinear)):
+        # Update sparse_mask from current weight pattern
+        with torch.no_grad():
+            new_mask = (mod.weight.data != 0).to(torch.float32)
+            if mod.sparse_mask is not None:
+                mod.sparse_mask.copy_(new_mask)
+            else:
+                mod.register_buffer("sparse_mask", new_mask)
+            # Re-quantize this layer
+            mod.calibrate_quantization()
+
+
+def _load_chenyaofo_model(hub_name: str) -> nn.Module:
+    import torch.hub
+    return torch.hub.load(
+        'chenyaofo/pytorch-cifar-models', hub_name,
+        pretrained=False, trust_repo=True,
+    )
 
 
 IMAGENETTE_WNID_TO_IMAGENET_INDEX = {
@@ -168,6 +232,26 @@ def build_balanced_subset_indices(targets: List[int], num_samples: int, seed: in
     return selected
 
 
+def dataset_semantic_num_classes(dataset: str) -> int:
+    if dataset == "imagenette":
+        return 10
+    if dataset == "cifar10":
+        return 10
+    if dataset == "cifar100":
+        return 100
+    if dataset == "tiny_imagenet":
+        return 200
+    raise ValueError(f"Unsupported dataset: {dataset}")
+
+
+def is_classification_head_param(name: str) -> bool:
+    return (
+        name.startswith("fc.")
+        or name.startswith("classifier.")
+        or name.startswith("heads.head.")
+    )
+
+
 def materialize_calibration_batches(
     loader: DataLoader,
     device: str,
@@ -254,6 +338,66 @@ def build_imagenette_loaders(
     return test_loader, calib_loader
 
 
+def build_cifar10_loaders(
+    dataset_root: Path,
+    batch_size: int,
+    calib_samples: int,
+) -> Tuple[DataLoader, DataLoader]:
+    """Load CIFAR-10 test set for attack evaluation and calibration."""
+    dataset_root.mkdir(parents=True, exist_ok=True)
+    mean = (0.4914, 0.4822, 0.4465)
+    std = (0.2471, 0.2435, 0.2616)
+    test_transform = transforms.Compose([
+        transforms.ToTensor(),
+        transforms.Normalize(mean, std),
+    ])
+    test_set = datasets.CIFAR10(root=str(dataset_root), train=False, download=True, transform=test_transform)
+    test_loader = DataLoader(test_set, batch_size=batch_size, shuffle=False, num_workers=0)
+    calib_indices = build_balanced_subset_indices(
+        list(test_set.targets), min(calib_samples, len(test_set)), seed=0
+    )
+    calib_subset = Subset(test_set, calib_indices)
+    calib_loader = DataLoader(calib_subset, batch_size=batch_size, shuffle=False, num_workers=0)
+    return test_loader, calib_loader
+
+
+def build_tiny_imagenet_loaders(
+    dataset_root: Path,
+    batch_size: int,
+    calib_samples: int,
+    image_size: int = 64,
+) -> Tuple[DataLoader, DataLoader]:
+    """Load Tiny ImageNet-200 val set for attack evaluation and calibration."""
+    val_dir = dataset_root / "val" / "images"
+    if not val_dir.is_dir():
+        raise FileNotFoundError(f"Tiny ImageNet val dir not found: {val_dir}")
+
+    if image_size > 64:
+        val_transform = transforms.Compose([
+            transforms.Resize(image_size),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225]),
+        ])
+    else:
+        val_transform = transforms.Compose([
+            transforms.CenterCrop(64),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225]),
+        ])
+
+    val_set = datasets.ImageFolder(str(val_dir), transform=val_transform)
+    test_loader = DataLoader(val_set, batch_size=batch_size, shuffle=False, num_workers=0)
+    raw_targets = [target for _, target in val_set.samples]
+    calib_indices = build_balanced_subset_indices(
+        raw_targets, min(calib_samples, len(val_set)), seed=0
+    )
+    calib_subset = Subset(val_set, calib_indices)
+    calib_loader = DataLoader(calib_subset, batch_size=batch_size, shuffle=False, num_workers=0)
+    return test_loader, calib_loader
+
+
 def build_cifar100_loaders(
     dataset_root: Path,
     batch_size: int,
@@ -306,15 +450,34 @@ def _strip_module_prefix(state_dict: dict) -> dict:
 
 
 def create_model(arch: str, dataset: str, device: str) -> nn.Module:
+    if arch == "resnet20":
+        model = _resnet20_fn(sparsity_type=None)
+        return model.to(device)
+    if arch in ("vgg11_bn", "vgg16_bn", "resnet32"):
+        hub_map = {"vgg11_bn": "cifar100_vgg11_bn", "vgg16_bn": "cifar100_vgg16_bn", "resnet32": "cifar100_resnet32"}
+        model = _load_chenyaofo_model(hub_map[arch])
+        return model.to(device)
+
     if dataset == "imagenette":
         num_classes = 1000
         image_size = 224
         deit_patch_size = 16
+    elif dataset == "cifar10":
+        num_classes = 10
+        image_size = 32
+        deit_patch_size = 4
     elif dataset == "cifar100":
         num_classes = 100
         # Route A: DeiT uses patch16+224 even for CIFAR-100 (images resized in loader)
         image_size = 224 if arch == "deit_tiny" else 32
         deit_patch_size = 16 if arch == "deit_tiny" else 4
+    elif dataset == "tiny_imagenet":
+        num_classes = 200
+        image_size = 64
+        deit_patch_size = 4
+        if arch == "deit_tiny":
+            image_size = 224  # Route A: resize to 224 for pretrained patch_size=16
+            deit_patch_size = 16
     else:
         raise ValueError(f"Unsupported dataset: {dataset}")
 
@@ -376,15 +539,48 @@ def evaluate_top1(model: nn.Module, loader: DataLoader, device: str) -> float:
     return 100.0 * correct / max(total, 1)
 
 
-def get_attack_params(model: nn.Module) -> List[Tuple[str, nn.Parameter]]:
+def get_attack_params(model: nn.Module, exclude_head: bool = False) -> List[Tuple[str, nn.Parameter]]:
     params = []
     for name, p in model.named_parameters():
         if p.dim() not in (2, 4):
             continue
         if p.numel() % 4 != 0:
             continue
+        if exclude_head and is_classification_head_param(name):
+            continue
         params.append((name, p))
     return params
+
+
+def count_eligible_groups(params: List[Tuple[str, nn.Parameter]]) -> int:
+    total = 0
+    for _, p in params:
+        m_flat, _ = flatten_groups((p.data != 0).to(torch.float32))
+        if m_flat is None:
+            continue
+        total += int(m_flat.sum(dim=1).eq(2).sum().item())
+    return total
+
+
+def resolve_calibration_samples(dataset: str, calib_samples: int, calib_per_class: int) -> int:
+    if calib_per_class > 0:
+        return dataset_semantic_num_classes(dataset) * calib_per_class
+    return calib_samples
+
+
+def resolve_coarse_groups(
+    arch: str,
+    eligible_groups: int,
+    coarse_groups: int,
+    coarse_ratio: float,
+) -> int:
+    if eligible_groups <= 0:
+        return 0
+    if coarse_ratio > 0:
+        return max(1, min(eligible_groups, int(round(float(eligible_groups) * coarse_ratio))))
+    if coarse_groups > 0:
+        return max(1, min(eligible_groups, int(coarse_groups)))
+    return max(1, min(eligible_groups, default_coarse_groups_for_arch(arch)))
 
 
 def get_current_pattern_from_mask(mask_group: torch.Tensor) -> Optional[Tuple[int, int]]:
@@ -565,6 +761,125 @@ def generate_candidates_for_selected_groups(
     return pooled, counters
 
 
+# =============================================================================
+# Bitmask Cost-2 Swap Candidate Generation
+# =============================================================================
+
+def _pattern_to_bitmask(pattern: Tuple[int, int]) -> int:
+    """Convert (i, j) pattern to 4-bit bitmask with bits i and j set."""
+    return (1 << pattern[0]) | (1 << pattern[1])
+
+
+def _bitmask_to_pattern(mask: int) -> Optional[Tuple[int, int]]:
+    """Convert 4-bit bitmask to (i, j) pattern. Returns None if popcount != 2."""
+    positions = [i for i in range(4) if (mask >> i) & 1]
+    if len(positions) != 2:
+        return None
+    return (positions[0], positions[1])
+
+
+def generate_bitmask_candidates_for_selected_groups(
+    model: nn.Module,
+    params: List[Tuple[str, nn.Parameter]],
+    selected_groups: List[Tuple[str, int]],
+    forbidden_swaps: Set[Tuple[str, int, int]],
+) -> Tuple[List[GroupCandidate], Dict[str, int]]:
+    """
+    Generate cost-2 bitmask swap candidates for selected groups.
+
+    Each swap flips exactly 2 bits in the 4-bit bitmask (one 1->0, one 0->1),
+    maintaining popcount=2. Each group produces up to 4 candidates.
+    """
+    counters = {
+        "valid_groups": 0,
+        "candidates_considered": 0,
+        "candidates_valid": 0,
+        "candidates_rejected_collision": 0,
+        "candidates_rejected_no_change": 0,
+        "candidates_skipped_forbidden": 0,
+    }
+    pooled: List[GroupCandidate] = []
+    selected_map: Dict[str, Set[int]] = {}
+    for param_name, group_idx in selected_groups:
+        selected_map.setdefault(param_name, set()).add(group_idx)
+
+    for param_name, p in params:
+        group_indices = selected_map.get(param_name)
+        if not group_indices or p.grad is None:
+            continue
+
+        grad = p.grad.data
+        weight = p.data
+        mask = (weight != 0).to(torch.float32)
+
+        g_flat, _ = flatten_groups(grad)
+        w_flat, _ = flatten_groups(weight)
+        m_flat, _ = flatten_groups(mask)
+        if g_flat is None or w_flat is None or m_flat is None:
+            continue
+
+        for g_idx in sorted(group_indices):
+            m_group = m_flat[g_idx]
+            current_pattern = get_current_pattern_from_mask(m_group)
+            if current_pattern is None:
+                continue
+            counters["valid_groups"] += 1
+
+            current_bitmask = _pattern_to_bitmask(current_pattern)
+            grad_group = g_flat[g_idx].float()
+            w_group = w_flat[g_idx]
+            old_mask_f = (m_group > 0.5).to(torch.float32)
+            w_tilde_current = w_group.float() * old_mask_f
+            old_active = (old_mask_f > 0.5).nonzero(as_tuple=False).flatten()
+            if old_active.numel() != 2:
+                continue
+            old_values = w_group[old_active].clone()
+
+            # Enumerate cost-2 swaps: for each active bit, swap with each inactive bit
+            active_positions = list(current_pattern)
+            inactive_positions = [i for i in range(4) if i not in active_positions]
+
+            for active_pos in active_positions:
+                for inactive_pos in inactive_positions:
+                    swap_code = (active_pos << 8) | inactive_pos
+                    swap_key = (param_name, g_idx, swap_code)
+                    if swap_key in forbidden_swaps:
+                        counters["candidates_skipped_forbidden"] += 1
+                        continue
+
+                    counters["candidates_considered"] += 1
+                    new_bitmask = current_bitmask ^ ((1 << active_pos) | (1 << inactive_pos))
+                    new_pattern = _bitmask_to_pattern(new_bitmask)
+                    if new_pattern is None:
+                        counters["candidates_rejected_collision"] += 1
+                        continue
+
+                    # Reconstruct: place old values at new active positions
+                    w_new_group = torch.zeros_like(w_group)
+                    for rank, dst in enumerate(new_pattern):
+                        w_new_group[dst] = old_values[rank]
+                    delta = w_new_group.float() - w_tilde_current
+                    proxy = float(torch.dot(grad_group, delta).item())
+                    counters["candidates_valid"] += 1
+
+                    pooled.append(
+                        GroupCandidate(
+                            proxy_score=proxy,
+                            param_name=param_name,
+                            group_idx=g_idx,
+                            old_code=current_bitmask,
+                            new_code=new_bitmask,
+                            flipped_bit=swap_code,  # encode swap_code here
+                            old_pattern=current_pattern,
+                            new_pattern=new_pattern,
+                            delta_w_tilde=delta.detach().cpu(),
+                        )
+                    )
+
+    pooled.sort(key=lambda c: (-c.proxy_score, c.param_name, c.group_idx, c.new_code))
+    return pooled, counters
+
+
 def _apply_group_pattern_to_param(param: torch.Tensor, group_idx: int, new_pattern: Tuple[int, int]) -> bool:
     w_flat, w_meta = flatten_groups(param.data)
     if w_flat is None or w_meta is None:
@@ -591,6 +906,7 @@ def exact_verification_topk(
     criterion: nn.Module,
     baseline_loss: float,
     top_k: int,
+    is_int8: bool = False,
 ) -> Tuple[Optional[GroupCandidate], Dict[str, int]]:
     counters = {
         "candidates_tested": 0,
@@ -615,11 +931,19 @@ def exact_verification_topk(
             p.data.copy_(p_backup)
             continue
 
+        # For INT8: sync quantized state so forward pass sees the change
+        if is_int8:
+            _pname = cand.param_name if cand.param_name.endswith(".weight") else cand.param_name + ".weight"
+            _sync_int8_after_pattern_change(model, _pname)
+
         new_loss = evaluate_loss_on_batches(model, verify_batches, criterion)
         delta = new_loss - baseline_loss
 
+        # Restore
         with torch.no_grad():
             p.data.copy_(p_backup)
+        if is_int8:
+            _sync_int8_after_pattern_change(model, _pname)
 
         if delta > 0:
             counters["candidates_positive_delta"] += 1
@@ -648,14 +972,20 @@ def reload_model_for_seed(arch: str, ckpt_path: str, dataset: str, device: str) 
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="R1_T08 NCSA attack for T09 sparse large models")
-    parser.add_argument("--arch", type=str, required=True, choices=["resnet18", "mobilenet_v2", "deit_tiny"])
+    parser.add_argument("--arch", type=str, required=True, choices=["resnet18", "resnet20", "resnet32", "mobilenet_v2", "vgg11_bn", "vgg16_bn", "deit_tiny"])
     parser.add_argument("--ckpt", type=str, required=True)
-    parser.add_argument("--dataset", type=str, choices=["imagenette", "cifar100"], default="imagenette")
+    parser.add_argument("--dataset", type=str, choices=["imagenette", "cifar10", "cifar100", "tiny_imagenet"], default="imagenette")
     parser.add_argument("--dataset-root", type=str, default=None)
     parser.add_argument("--device", type=str, default="cpu", choices=["cpu", "cuda"])
     parser.add_argument("--seed", type=int, nargs="+", default=[0])
     parser.add_argument("--physical-budget", type=int, default=50)
     parser.add_argument("--calib-samples", type=int, default=256)
+    parser.add_argument(
+        "--calib-per-class",
+        type=int,
+        default=0,
+        help="If >0, override calib_samples with per-class calibration budget.",
+    )
     parser.add_argument("--attack-batch-size", type=int, default=64)
     parser.add_argument(
         "--coarse-groups",
@@ -663,9 +993,20 @@ def main() -> None:
         default=0,
         help="Global top-N groups kept by Stage-A coarse filtering. 0 means arch-specific default.",
     )
+    parser.add_argument(
+        "--coarse-ratio",
+        type=float,
+        default=0.0,
+        help="If >0, override coarse_groups with a ratio of eligible attack groups.",
+    )
     parser.add_argument("--top-m-per-group", type=int, default=3)
     parser.add_argument("--top-k-verify", type=int, default=64)
     parser.add_argument("--topk", type=int, default=None, help="Alias of --top-k-verify")
+    parser.add_argument(
+        "--exclude-head",
+        action="store_true",
+        help="Exclude classification head parameters (fc/classifier/heads.head) from attack surface.",
+    )
     parser.add_argument(
         "--max-groups-per-layer",
         type=int,
@@ -686,6 +1027,26 @@ def main() -> None:
         help="Fail if sampled_groups / total_groups falls below this threshold.",
     )
     parser.add_argument("--output-dir", type=str, required=True)
+    parser.add_argument(
+        "--attack-mode",
+        type=str,
+        choices=["index", "bitmask"],
+        default="index",
+        help="Attack encoding: 'index' (1-bit index flip, cost=1) or 'bitmask' (cost-2 swap, cost=2).",
+    )
+    parser.add_argument(
+        "--quantize",
+        type=str,
+        choices=["none", "int8"],
+        default="none",
+        help="Quantize model before attack: 'none' (FP32) or 'int8'.",
+    )
+    parser.add_argument(
+        "--early-stop-acc",
+        type=float,
+        default=0.0,
+        help="Stop attack early when accuracy drops below this threshold (e.g., 10.0 for 10%%). 0=disabled.",
+    )
     args = parser.parse_args()
 
     if args.topk is not None:
@@ -697,40 +1058,75 @@ def main() -> None:
         device = "cpu"
 
     os.makedirs(args.output_dir, exist_ok=True)
-    dataset_root = Path(args.dataset_root) if args.dataset_root else (
-        Path("data/imagenette_full") if args.dataset == "imagenette" else Path("data/cifar100")
-    )
+    if args.dataset_root:
+        dataset_root = Path(args.dataset_root)
+    elif args.dataset == "imagenette":
+        dataset_root = Path("data/imagenette_full")
+    elif args.dataset == "tiny_imagenet":
+        dataset_root = Path("data/tiny-imagenet-200")
+    elif args.dataset == "cifar10":
+        dataset_root = Path("data/cifar10")
+    else:
+        dataset_root = Path("data/cifar100")
 
     print(f"\n[{now_ts()}] 加载模型: arch={args.arch} ckpt={args.ckpt}")
     model, _ = load_sparse_model(args.arch, args.ckpt, args.dataset, device)
-    params = get_attack_params(model)
+    params = get_attack_params(model, exclude_head=args.exclude_head)
+    eligible_groups = count_eligible_groups(params)
+    calib_samples = resolve_calibration_samples(args.dataset, args.calib_samples, args.calib_per_class)
+    coarse_groups = resolve_coarse_groups(
+        arch=args.arch,
+        eligible_groups=eligible_groups,
+        coarse_groups=args.coarse_groups,
+        coarse_ratio=args.coarse_ratio,
+    )
+    effective_coarse_ratio = (float(coarse_groups) / float(eligible_groups)) if eligible_groups > 0 else 0.0
+    flip_ratio = (float(args.physical_budget) / float(eligible_groups)) if eligible_groups > 0 else 0.0
     print(f"[{now_ts()}] 可攻击参数张量数: {len(params)}")
     print(f"[{now_ts()}] dataset={args.dataset} dataset_root={dataset_root}")
+    print(
+        f"[{now_ts()}] attack_surface: eligible_groups={eligible_groups} "
+        f"flip_ratio={flip_ratio:.8f} coarse_groups={coarse_groups} "
+        f"coarse_ratio={effective_coarse_ratio:.8f} exclude_head={args.exclude_head}"
+    )
 
     if args.dataset == "imagenette":
         test_loader, calib_loader = build_imagenette_loaders(
             dataset_root=dataset_root,
             batch_size=args.attack_batch_size,
-            calib_samples=args.calib_samples,
+            calib_samples=calib_samples,
+        )
+    elif args.dataset == "cifar10":
+        test_loader, calib_loader = build_cifar10_loaders(
+            dataset_root=dataset_root,
+            batch_size=args.attack_batch_size,
+            calib_samples=calib_samples,
+        )
+    elif args.dataset == "tiny_imagenet":
+        _ti_img_size = 224 if args.arch == "deit_tiny" else 64
+        test_loader, calib_loader = build_tiny_imagenet_loaders(
+            dataset_root=dataset_root,
+            batch_size=args.attack_batch_size,
+            calib_samples=calib_samples,
+            image_size=_ti_img_size,
         )
     else:
         test_loader, calib_loader = build_cifar100_loaders(
             dataset_root=dataset_root,
             batch_size=args.attack_batch_size,
-            calib_samples=args.calib_samples,
+            calib_samples=calib_samples,
             arch=args.arch,
         )
     calib_batches, calib_count = materialize_calibration_batches(
         calib_loader,
         device=device,
-        max_samples=args.calib_samples,
+        max_samples=calib_samples,
     )
     criterion = nn.CrossEntropyLoss()
-    coarse_groups = args.coarse_groups if args.coarse_groups > 0 else default_coarse_groups_for_arch(args.arch)
     print(
         f"[{now_ts()}] Calibration batches ready: samples={calib_count} "
         f"batch_size={args.attack_batch_size} coarse_groups={coarse_groups} "
-        f"top_k_verify={args.top_k_verify}"
+        f"top_k_verify={args.top_k_verify} calib_per_class={args.calib_per_class}"
     )
 
     seeds = args.seed if isinstance(args.seed, list) else [args.seed]
@@ -739,22 +1135,36 @@ def main() -> None:
     for seed in seeds:
         print(f"\n{'='*72}\n[{now_ts()}] Seed={seed} 开始攻击\n{'='*72}")
         set_all_seeds(seed)
-        rng = random.Random(seed)
 
         model = reload_model_for_seed(args.arch, args.ckpt, args.dataset, device)
-        params = get_attack_params(model)
+        if args.quantize == "int8":
+            print(f"[{now_ts()}] 转换为 INT8 量化模型...")
+            model = _convert_model_to_int8(model, args.arch)
+            model.to(device).eval()
+            print(f"[{now_ts()}] INT8 量化完成")
+        params = get_attack_params(model, exclude_head=args.exclude_head)
         param_map = dict(model.named_parameters())
         init_acc = evaluate_top1(model, test_loader, device)
         print(f"[{now_ts()}] 初始 Top-1: {init_acc:.2f}%")
+
+        is_bitmask = args.attack_mode == "bitmask"
+        max_iterations = args.physical_budget // 2 if is_bitmask else args.physical_budget
+        cost_per_step = 2 if is_bitmask else 1
+        print(f"[{now_ts()}] 攻击模式: {args.attack_mode} (cost={cost_per_step}/step, max_iterations={max_iterations})")
 
         exclude_groups_set: Set[Tuple[str, int]] = set()
         exclude_groups_queue: deque[Tuple[str, int]] = deque(maxlen=20)
         forbidden_transitions_set: Set[Tuple[str, int, int, int]] = set()
         forbidden_transitions_queue: deque[Tuple[str, int, int, int]] = deque(maxlen=1000)
+        forbidden_swaps_set: Set[Tuple[str, int, int]] = set()
 
         attack_history = []
+        import time as _time
+        _attack_start = _time.time()
+        _flip_times = []
 
-        for flip_idx in range(args.physical_budget):
+        for flip_idx in range(max_iterations):
+            _flip_start = _time.time()
             baseline_loss = compute_loss_and_gradients(model, calib_batches, criterion)
 
             selected_groups, stage_a = select_top_groups_by_grad(
@@ -774,15 +1184,23 @@ def main() -> None:
                     f"ratio={selected_ratio:.4%}"
                 )
             if not selected_groups:
-                print(f"[Flip {flip_idx+1}] 无 coarse groups，提前停止。")
+                print(f"[Iter {flip_idx+1}] 无 coarse groups，提前停止。")
                 break
 
-            candidates, stage_a_candidates = generate_candidates_for_selected_groups(
-                model=model,
-                params=params,
-                selected_groups=selected_groups,
-                forbidden_transitions=forbidden_transitions_set,
-            )
+            if is_bitmask:
+                candidates, stage_a_candidates = generate_bitmask_candidates_for_selected_groups(
+                    model=model,
+                    params=params,
+                    selected_groups=selected_groups,
+                    forbidden_swaps=forbidden_swaps_set,
+                )
+            else:
+                candidates, stage_a_candidates = generate_candidates_for_selected_groups(
+                    model=model,
+                    params=params,
+                    selected_groups=selected_groups,
+                    forbidden_transitions=forbidden_transitions_set,
+                )
             if not candidates:
                 print(f"[Flip {flip_idx+1}] 无候选，提前停止。")
                 break
@@ -795,6 +1213,7 @@ def main() -> None:
                 criterion=criterion,
                 baseline_loss=baseline_loss,
                 top_k=args.top_k_verify,
+                is_int8=(args.quantize == "int8"),
             )
             if best is None:
                 print(f"[Flip {flip_idx+1}] Top-{args.top_k_verify} 无正增益候选，提前停止。")
@@ -802,8 +1221,12 @@ def main() -> None:
 
             success = apply_pattern_change(model, param_map, best)
             if not success:
-                print(f"[Flip {flip_idx+1}] 应用候选失败，提前停止。")
+                print(f"[Iter {flip_idx+1}] 应用候选失败，提前停止。")
                 break
+            # Sync INT8 state if quantized
+            if args.quantize == "int8":
+                _pname = best.param_name if best.param_name.endswith(".weight") else best.param_name + ".weight"
+                _sync_int8_after_pattern_change(model, _pname)
 
             group_key = (best.param_name, best.group_idx)
             if group_key not in exclude_groups_set:
@@ -813,20 +1236,37 @@ def main() -> None:
                 exclude_groups_queue.append(group_key)
                 exclude_groups_set.add(group_key)
 
-            forward_key = (best.param_name, best.group_idx, best.old_code, best.new_code)
-            reverse_key = (best.param_name, best.group_idx, best.new_code, best.old_code)
-            for t_key in (forward_key, reverse_key):
-                if t_key in forbidden_transitions_set:
-                    continue
-                if len(forbidden_transitions_queue) == forbidden_transitions_queue.maxlen:
-                    popped_t = forbidden_transitions_queue.popleft()
-                    forbidden_transitions_set.discard(popped_t)
-                forbidden_transitions_queue.append(t_key)
-                forbidden_transitions_set.add(t_key)
+            if is_bitmask:
+                # Forbid this swap and its reverse
+                swap_code = best.flipped_bit  # swap_code stored in flipped_bit field
+                forbidden_swaps_set.add((best.param_name, best.group_idx, swap_code))
+                # Reverse: swap active_pos and inactive_pos
+                reverse_code = ((swap_code & 0xFF) << 8) | ((swap_code >> 8) & 0xFF)
+                forbidden_swaps_set.add((best.param_name, best.group_idx, reverse_code))
+            else:
+                forward_key = (best.param_name, best.group_idx, best.old_code, best.new_code)
+                reverse_key = (best.param_name, best.group_idx, best.new_code, best.old_code)
+                for t_key in (forward_key, reverse_key):
+                    if t_key in forbidden_transitions_set:
+                        continue
+                    if len(forbidden_transitions_queue) == forbidden_transitions_queue.maxlen:
+                        popped_t = forbidden_transitions_queue.popleft()
+                        forbidden_transitions_set.discard(popped_t)
+                    forbidden_transitions_queue.append(t_key)
+                    forbidden_transitions_set.add(t_key)
 
+            # Evaluate accuracy after this iteration
+            _iter_acc = evaluate_top1(model, test_loader, device)
+
+            _flip_elapsed = _time.time() - _flip_start
+            _flip_times.append(_flip_elapsed)
+
+            physical_flips_used = (flip_idx + 1) * cost_per_step
             attack_history.append(
                 {
-                    "flip": flip_idx + 1,
+                    "iter": flip_idx + 1,
+                    "physical_flips": physical_flips_used,
+                    "acc_after": round(_iter_acc, 2),
                     "param_name": best.param_name,
                     "group": best.group_idx,
                     "old_pattern": best.old_pattern,
@@ -835,14 +1275,23 @@ def main() -> None:
                     "stage_a_selected": stage_a["selected_groups"],
                     "stage_a_candidates": stage_a_candidates["candidates_valid"],
                     "stage_b_tested": stage_b["candidates_tested"],
+                    "flip_time_sec": round(_flip_elapsed, 4),
                 }
             )
 
-            if (flip_idx + 1) % 10 == 0 or (flip_idx + 1) == args.physical_budget:
-                print(f"[{now_ts()}] Flip {flip_idx+1}/{args.physical_budget} 已完成")
+            if (flip_idx + 1) % 5 == 0 or (flip_idx + 1) == max_iterations:
+                print(f"[{now_ts()}] Iter {flip_idx+1}/{max_iterations} (phy={physical_flips_used}) acc={_iter_acc:.2f}%")
 
+            # Early stopping
+            if args.early_stop_acc > 0 and _iter_acc < args.early_stop_acc:
+                print(f"[{now_ts()}] Early stop: acc={_iter_acc:.2f}% < {args.early_stop_acc}% at iter {flip_idx+1} (phy={physical_flips_used})")
+                break
+
+        _total_attack_time = _time.time() - _attack_start
+        _avg_flip_time = sum(_flip_times) / len(_flip_times) if _flip_times else 0.0
         final_acc = evaluate_top1(model, test_loader, device)
         print(f"[{now_ts()}] Seed={seed} 结束：Final Top-1={final_acc:.2f}%")
+        print(f"[{now_ts()}] 攻击耗时: total={_total_attack_time:.1f}s avg={_avg_flip_time:.2f}s/flip")
 
         all_results.append(
             {
@@ -851,19 +1300,34 @@ def main() -> None:
                 "initial_acc": init_acc,
                 "final_acc": final_acc,
                 "acc_drop": init_acc - final_acc,
-                "num_flips": len(attack_history),
+                "num_iterations": len(attack_history),
+                "physical_flips_used": len(attack_history) * cost_per_step,
+                "attack_mode": args.attack_mode,
+                "cost_per_step": cost_per_step,
+                "total_attack_time_sec": round(_total_attack_time, 2),
+                "avg_flip_time_sec": round(_avg_flip_time, 4),
                 "attack_history": attack_history,
                 "config": {
                     "dataset": args.dataset,
                     "dataset_root": str(dataset_root),
+                    "attack_mode": args.attack_mode,
                     "physical_budget": args.physical_budget,
+                    "eligible_groups": eligible_groups,
+                    "flip_ratio": flip_ratio,
                     "coarse_groups": coarse_groups,
+                    "requested_coarse_groups": args.coarse_groups,
+                    "requested_coarse_ratio": args.coarse_ratio,
+                    "effective_coarse_ratio": effective_coarse_ratio,
                     "calib_count": calib_count,
+                    "calib_samples": calib_samples,
+                    "calib_per_class": args.calib_per_class,
+                    "semantic_num_classes": dataset_semantic_num_classes(args.dataset),
                     "top_m_per_group": args.top_m_per_group,
                     "top_k_verify": args.top_k_verify,
                     "max_groups_per_layer": args.max_groups_per_layer,
                     "group_sampling": args.group_sampling,
                     "min_sampled_group_ratio": args.min_sampled_group_ratio,
+                    "exclude_head": args.exclude_head,
                 },
             }
         )
@@ -871,7 +1335,7 @@ def main() -> None:
     csv_path = os.path.join(args.output_dir, "results.csv")
     with open(csv_path, "w", newline="", encoding="utf-8") as f:
         w = csv.writer(f)
-        w.writerow(["seed", "arch", "initial_acc", "final_acc", "acc_drop", "num_flips"])
+        w.writerow(["seed", "arch", "initial_acc", "final_acc", "acc_drop", "num_iterations", "total_time_sec", "avg_flip_sec"])
         for r in all_results:
             w.writerow(
                 [
@@ -880,7 +1344,9 @@ def main() -> None:
                     f"{r['initial_acc']:.2f}",
                     f"{r['final_acc']:.2f}",
                     f"{r['acc_drop']:.2f}",
-                    r["num_flips"],
+                    r["num_iterations"],
+                    r.get("total_attack_time_sec", ""),
+                    r.get("avg_flip_time_sec", ""),
                 ]
             )
 

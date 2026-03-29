@@ -1,0 +1,109 @@
+[
+  {
+    "seed": 0,
+    "arch": "resnet18",
+    "initial_acc": 98.47133757961784,
+    "final_acc": 97.73248407643312,
+    "acc_drop": 0.7388535031847141,
+    "num_flips": 5,
+    "attack_history": [
+      {
+        "flip": 1,
+        "param_name": "layer2.0.downsample.0.weight",
+        "group": 1375,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.003041275776922703,
+        "stage_a_selected": 1000,
+        "stage_a_candidates": 2680,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 2,
+        "param_name": "layer2.0.downsample.0.weight",
+        "group": 150,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.005583056248724461,
+        "stage_a_selected": 1000,
+        "stage_a_candidates": 2708,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 3,
+        "param_name": "layer1.0.conv1.weight",
+        "group": 4039,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.005973117426037788,
+        "stage_a_selected": 1000,
+        "stage_a_candidates": 2656,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 4,
+        "param_name": "layer1.0.conv1.weight",
+        "group": 4087,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.011750642210245132,
+        "stage_a_selected": 1000,
+        "stage_a_candidates": 2660,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 5,
+        "param_name": "layer2.0.downsample.0.weight",
+        "group": 1368,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "proxy_score": 0.005838762037456036,
+        "stage_a_selected": 1000,
+        "stage_a_candidates": 2672,
+        "stage_b_tested": 64
+      }
+    ],
+    "config": {
+      "dataset": "imagenette",
+      "dataset_root": "data/imagenette_full",
+      "physical_budget": 5,
+      "coarse_groups": 1000,
+      "calib_count": 256,
+      "top_m_per_group": 3,
+      "top_k_verify": 64,
+      "max_groups_per_layer": 0,
+      "group_sampling": "top_grad",
+      "min_sampled_group_ratio": 0.05
+    }
+  }
+]

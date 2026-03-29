@@ -1,0 +1,883 @@
+[
+  {
+    "seed": 0,
+    "arch": "deit_tiny",
+    "initial_acc": 93.88535031847134,
+    "final_acc": 82.80254777070064,
+    "acc_drop": 11.082802547770697,
+    "num_flips": 50,
+    "attack_history": [
+      {
+        "flip": 1,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 16381,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.011074364185333252,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3584,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 2,
+        "param_name": "encoder.layers.encoder_layer_6.mlp.0.weight",
+        "group": 15670,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.007683039642870426,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3606,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 3,
+        "param_name": "encoder.layers.encoder_layer_9.mlp.0.weight",
+        "group": 14326,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.007933326065540314,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3600,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 4,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 36149,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.004865171387791634,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3604,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 5,
+        "param_name": "encoder.layers.encoder_layer_11.self_attention.in_proj_weight",
+        "group": 19973,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.008922378532588482,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3574,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 6,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 6542,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.013878756202757359,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3606,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 7,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 36153,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.00905374251306057,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3614,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 8,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35734,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.006775825284421444,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3606,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 9,
+        "param_name": "encoder.layers.encoder_layer_9.mlp.0.weight",
+        "group": 14345,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.008557820692658424,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3610,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 10,
+        "param_name": "encoder.layers.encoder_layer_6.mlp.0.weight",
+        "group": 14806,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.004283042158931494,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3610,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 11,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 36742,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.009076979011297226,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3598,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 12,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 31990,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0063948361203074455,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3598,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 13,
+        "param_name": "encoder.layers.encoder_layer_4.mlp.0.weight",
+        "group": 22889,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "proxy_score": 0.006403536535799503,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3594,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 14,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35743,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.005880576558411121,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3590,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 15,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 21806,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.007067014463245869,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3586,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 16,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35741,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.006636983714997768,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3596,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 17,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35759,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.005937088746577501,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3592,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 18,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.3.weight",
+        "group": 25164,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.006656030658632517,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3592,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 19,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35732,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.005601952783763409,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3604,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 20,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35717,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.006843758746981621,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3580,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 21,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35733,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.006971384864300489,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3592,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 22,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35753,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.007840382866561413,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3551,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 23,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 9478,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.0057141901925206184,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3561,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 24,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 9484,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0076547954231500626,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3569,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 25,
+        "param_name": "encoder.layers.encoder_layer_5.mlp.0.weight",
+        "group": 14764,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.006002041511237621,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3546,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 26,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35744,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.008445462211966515,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3541,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 27,
+        "param_name": "encoder.layers.encoder_layer_11.self_attention.in_proj_weight",
+        "group": 18629,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.008924505673348904,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3541,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 28,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35725,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.009066084399819374,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3529,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 29,
+        "param_name": "encoder.layers.encoder_layer_4.self_attention.in_proj_weight",
+        "group": 19301,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.010002586990594864,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3531,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 30,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35739,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.007312319241464138,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3534,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 31,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35734,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.009092721156775951,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3538,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 32,
+        "param_name": "encoder.layers.encoder_layer_9.mlp.0.weight",
+        "group": 14336,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.012403350323438644,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3538,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 33,
+        "param_name": "encoder.layers.encoder_layer_9.mlp.0.weight",
+        "group": 13324,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.016985055059194565,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3536,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 34,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35746,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.011922549456357956,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3513,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 35,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 7685,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.008733103051781654,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3505,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 36,
+        "param_name": "encoder.layers.encoder_layer_6.mlp.0.weight",
+        "group": 1988,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.01062657218426466,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3495,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 37,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35738,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "proxy_score": 0.01593615487217903,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3513,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 38,
+        "param_name": "encoder.layers.encoder_layer_9.mlp.0.weight",
+        "group": 14334,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.015815431252121925,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3488,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 39,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 6917,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.014116574078798294,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3495,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 40,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 31996,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.013845562934875488,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3500,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 41,
+        "param_name": "encoder.layers.encoder_layer_5.self_attention.out_proj.weight",
+        "group": 6063,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.017233850434422493,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3524,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 42,
+        "param_name": "encoder.layers.encoder_layer_7.self_attention.in_proj_weight",
+        "group": 19606,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.018240217119455338,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3518,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 43,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35750,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.016661284491419792,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3515,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 44,
+        "param_name": "encoder.layers.encoder_layer_5.self_attention.in_proj_weight",
+        "group": 18821,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.01961516961455345,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3499,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 45,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35729,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.01871512271463871,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3498,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 46,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 32015,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.016619347035884857,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3501,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 47,
+        "param_name": "encoder.layers.encoder_layer_7.self_attention.in_proj_weight",
+        "group": 22133,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.018841343000531197,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3507,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 48,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35745,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.019237635657191277,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3504,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 49,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 35725,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.024745559319853783,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3495,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 50,
+        "param_name": "encoder.layers.encoder_layer_9.mlp.0.weight",
+        "group": 14310,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.019679488614201546,
+        "stage_a_selected": 1327,
+        "stage_a_candidates": 3512,
+        "stage_b_tested": 64
+      }
+    ],
+    "config": {
+      "dataset": "imagenette",
+      "dataset_root": "data/imagenette_full",
+      "physical_budget": 50,
+      "eligible_groups": 1327104,
+      "flip_ratio": 3.767602237654321e-05,
+      "coarse_groups": 1327,
+      "requested_coarse_groups": 0,
+      "requested_coarse_ratio": 0.001,
+      "effective_coarse_ratio": 0.0009999216338734567,
+      "calib_count": 80,
+      "calib_samples": 80,
+      "calib_per_class": 8,
+      "semantic_num_classes": 10,
+      "top_m_per_group": 3,
+      "top_k_verify": 64,
+      "max_groups_per_layer": 0,
+      "group_sampling": "top_grad",
+      "min_sampled_group_ratio": 0.05,
+      "exclude_head": true
+    }
+  }
+]

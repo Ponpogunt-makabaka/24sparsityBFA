@@ -1,0 +1,109 @@
+[
+  {
+    "seed": 0,
+    "arch": "deit_tiny",
+    "initial_acc": 82.32,
+    "final_acc": 81.48,
+    "acc_drop": 0.8399999999999892,
+    "num_flips": 5,
+    "attack_history": [
+      {
+        "flip": 1,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 24542,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.00777455884963274,
+        "stage_a_selected": 3000,
+        "stage_a_candidates": 7868,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 2,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 6542,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.0189663115888834,
+        "stage_a_selected": 3000,
+        "stage_a_candidates": 7918,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 3,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 24541,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.011726850643754005,
+        "stage_a_selected": 3000,
+        "stage_a_candidates": 7924,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 4,
+        "param_name": "encoder.layers.encoder_layer_3.mlp.0.weight",
+        "group": 13892,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.006359875667840242,
+        "stage_a_selected": 3000,
+        "stage_a_candidates": 7894,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 5,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 3374,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "proxy_score": 0.010860643349587917,
+        "stage_a_selected": 3000,
+        "stage_a_candidates": 7922,
+        "stage_b_tested": 64
+      }
+    ],
+    "config": {
+      "dataset": "cifar100",
+      "dataset_root": "data/cifar100",
+      "physical_budget": 5,
+      "coarse_groups": 3000,
+      "calib_count": 256,
+      "top_m_per_group": 3,
+      "top_k_verify": 64,
+      "max_groups_per_layer": 0,
+      "group_sampling": "top_grad",
+      "min_sampled_group_ratio": 0.05
+    }
+  }
+]

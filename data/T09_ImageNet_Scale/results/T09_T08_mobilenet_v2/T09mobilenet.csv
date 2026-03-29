@@ -1,2 +1,0 @@
-seed,arch,initial_acc,final_acc,acc_drop,num_flips
-0,mobilenet_v2,92.87,10.42,82.45,50

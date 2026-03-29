@@ -1,0 +1,2 @@
+seed,arch,initial_acc,final_acc,acc_drop,num_iterations,total_time_sec,avg_flip_sec
+0,vgg16_bn,74.04,45.34,28.70,50,1763.94,35.2788

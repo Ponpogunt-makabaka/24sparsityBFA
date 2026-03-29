@@ -1,0 +1,18 @@
+{
+  "output_checkpoint": "data/T09_ImageNet_Scale/weights/deit_tiny_dense_ft_cifar100_20ep.pth",
+  "metrics": {
+    "arch": "deit_tiny",
+    "dense_val_top1": 1.0,
+    "sparse_init_val_top1": 0.0,
+    "final_val_top1": 82.84,
+    "final_val_loss": 0.8269762288093567,
+    "final_max_abs_masked": 0.0,
+    "elapsed_sec": 1891.950352191925,
+    "epochs": 20,
+    "batch_size": 64,
+    "lr": 0.0003,
+    "weight_decay": 0.05,
+    "warmup_epochs": 2,
+    "best_val_top1": 82.84
+  }
+}

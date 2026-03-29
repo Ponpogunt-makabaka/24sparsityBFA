@@ -1,0 +1,1039 @@
+[
+  {
+    "seed": 0,
+    "arch": "deit_tiny",
+    "initial_acc": 54.23,
+    "final_acc": 0.63,
+    "acc_drop": 53.599999999999994,
+    "num_iterations": 50,
+    "physical_flips_used": 50,
+    "attack_mode": "index",
+    "cost_per_step": 1,
+    "total_attack_time_sec": 4133.25,
+    "avg_flip_time_sec": 82.6649,
+    "attack_history": [
+      {
+        "iter": 1,
+        "physical_flips": 1,
+        "acc_after": 52.93,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 23868,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.01299371849745512,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3574,
+        "stage_b_tested": 64,
+        "flip_time_sec": 84.1086
+      },
+      {
+        "iter": 2,
+        "physical_flips": 2,
+        "acc_after": 32.53,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 2448,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.13227272033691406,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3560,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.5966
+      },
+      {
+        "iter": 3,
+        "physical_flips": 3,
+        "acc_after": 24.18,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 23004,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.4715450406074524,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3644,
+        "stage_b_tested": 64,
+        "flip_time_sec": 84.0319
+      },
+      {
+        "iter": 4,
+        "physical_flips": 4,
+        "acc_after": 19.3,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 23340,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.29689016938209534,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3660,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.8509
+      },
+      {
+        "iter": 5,
+        "physical_flips": 5,
+        "acc_after": 16.37,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 2455,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.1443224549293518,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3638,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.4163
+      },
+      {
+        "iter": 6,
+        "physical_flips": 6,
+        "acc_after": 13.29,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 23532,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.2210782915353775,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3658,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.5377
+      },
+      {
+        "iter": 7,
+        "physical_flips": 7,
+        "acc_after": 11.34,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 9072,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.2507721483707428,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3654,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.0738
+      },
+      {
+        "iter": 8,
+        "physical_flips": 8,
+        "acc_after": 10.12,
+        "param_name": "encoder.layers.encoder_layer_7.self_attention.in_proj_weight",
+        "group": 24053,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.10175562649965286,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3658,
+        "stage_b_tested": 64,
+        "flip_time_sec": 79.9098
+      },
+      {
+        "iter": 9,
+        "physical_flips": 9,
+        "acc_after": 9.35,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 21996,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.10086781531572342,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3642,
+        "stage_b_tested": 64,
+        "flip_time_sec": 80.608
+      },
+      {
+        "iter": 10,
+        "physical_flips": 10,
+        "acc_after": 6.41,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 35093,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.3604981303215027,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3640,
+        "stage_b_tested": 64,
+        "flip_time_sec": 79.4377
+      },
+      {
+        "iter": 11,
+        "physical_flips": 11,
+        "acc_after": 5.83,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 20460,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.05459892377257347,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3606,
+        "stage_b_tested": 64,
+        "flip_time_sec": 80.5729
+      },
+      {
+        "iter": 12,
+        "physical_flips": 12,
+        "acc_after": 5.09,
+        "param_name": "encoder.layers.encoder_layer_8.self_attention.in_proj_weight",
+        "group": 22325,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.08864306658506393,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3596,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.002
+      },
+      {
+        "iter": 13,
+        "physical_flips": 13,
+        "acc_after": 4.78,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 22127,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.06680776178836823,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3592,
+        "stage_b_tested": 64,
+        "flip_time_sec": 80.9896
+      },
+      {
+        "iter": 14,
+        "physical_flips": 14,
+        "acc_after": 4.36,
+        "param_name": "encoder.layers.encoder_layer_8.self_attention.in_proj_weight",
+        "group": 21941,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.0688483938574791,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3568,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.2575
+      },
+      {
+        "iter": 15,
+        "physical_flips": 15,
+        "acc_after": 3.86,
+        "param_name": "encoder.layers.encoder_layer_8.self_attention.in_proj_weight",
+        "group": 26357,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.07880987226963043,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3554,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.2682
+      },
+      {
+        "iter": 16,
+        "physical_flips": 16,
+        "acc_after": 3.84,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 19980,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.0704471617937088,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3530,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.4813
+      },
+      {
+        "iter": 17,
+        "physical_flips": 17,
+        "acc_after": 3.52,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 22860,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.07230786234140396,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3592,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.1547
+      },
+      {
+        "iter": 18,
+        "physical_flips": 18,
+        "acc_after": 3.07,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 2451,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.09541869163513184,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3594,
+        "stage_b_tested": 64,
+        "flip_time_sec": 80.7874
+      },
+      {
+        "iter": 19,
+        "physical_flips": 19,
+        "acc_after": 2.82,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 2454,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.09551355242729187,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3578,
+        "stage_b_tested": 64,
+        "flip_time_sec": 80.9138
+      },
+      {
+        "iter": 20,
+        "physical_flips": 20,
+        "acc_after": 2.58,
+        "param_name": "encoder.layers.encoder_layer_4.self_attention.in_proj_weight",
+        "group": 24341,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.05652643367648125,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3580,
+        "stage_b_tested": 64,
+        "flip_time_sec": 81.3837
+      },
+      {
+        "iter": 21,
+        "physical_flips": 21,
+        "acc_after": 2.36,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 2457,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.05645133554935455,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3556,
+        "stage_b_tested": 64,
+        "flip_time_sec": 84.9886
+      },
+      {
+        "iter": 22,
+        "physical_flips": 22,
+        "acc_after": 2.17,
+        "param_name": "encoder.layers.encoder_layer_8.self_attention.in_proj_weight",
+        "group": 24245,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.062328074127435684,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3564,
+        "stage_b_tested": 64,
+        "flip_time_sec": 85.4399
+      },
+      {
+        "iter": 23,
+        "physical_flips": 23,
+        "acc_after": 2.08,
+        "param_name": "encoder.layers.encoder_layer_1.self_attention.in_proj_weight",
+        "group": 27420,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.04188644513487816,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3544,
+        "stage_b_tested": 64,
+        "flip_time_sec": 84.4689
+      },
+      {
+        "iter": 24,
+        "physical_flips": 24,
+        "acc_after": 1.99,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 21036,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.040688060224056244,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3537,
+        "stage_b_tested": 64,
+        "flip_time_sec": 85.7315
+      },
+      {
+        "iter": 25,
+        "physical_flips": 25,
+        "acc_after": 1.83,
+        "param_name": "encoder.layers.encoder_layer_3.self_attention.in_proj_weight",
+        "group": 24876,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "proxy_score": 0.03626783937215805,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3554,
+        "stage_b_tested": 64,
+        "flip_time_sec": 86.871
+      },
+      {
+        "iter": 26,
+        "physical_flips": 26,
+        "acc_after": 1.76,
+        "param_name": "encoder.layers.encoder_layer_6.self_attention.in_proj_weight",
+        "group": 24210,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.04515624791383743,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3561,
+        "stage_b_tested": 64,
+        "flip_time_sec": 86.0842
+      },
+      {
+        "iter": 27,
+        "physical_flips": 27,
+        "acc_after": 1.78,
+        "param_name": "encoder.layers.encoder_layer_8.self_attention.in_proj_weight",
+        "group": 24965,
+        "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.046019889414310455,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3568,
+        "stage_b_tested": 64,
+        "flip_time_sec": 83.2149
+      },
+      {
+        "iter": 28,
+        "physical_flips": 28,
+        "acc_after": 1.55,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 19836,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.034611739218235016,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3588,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.5287
+      },
+      {
+        "iter": 29,
+        "physical_flips": 29,
+        "acc_after": 1.5,
+        "param_name": "encoder.layers.encoder_layer_6.mlp.3.weight",
+        "group": 26677,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.050442956387996674,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3577,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.772
+      },
+      {
+        "iter": 30,
+        "physical_flips": 30,
+        "acc_after": 1.43,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 19932,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.04502183198928833,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3568,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.9771
+      },
+      {
+        "iter": 31,
+        "physical_flips": 31,
+        "acc_after": 1.4,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 22764,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.04413142055273056,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3566,
+        "stage_b_tested": 64,
+        "flip_time_sec": 83.1212
+      },
+      {
+        "iter": 32,
+        "physical_flips": 32,
+        "acc_after": 1.32,
+        "param_name": "encoder.layers.encoder_layer_3.self_attention.in_proj_weight",
+        "group": 26988,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          2
+        ],
+        "proxy_score": 0.04155358672142029,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3571,
+        "stage_b_tested": 64,
+        "flip_time_sec": 83.0085
+      },
+      {
+        "iter": 33,
+        "physical_flips": 33,
+        "acc_after": 1.3,
+        "param_name": "encoder.layers.encoder_layer_3.self_attention.in_proj_weight",
+        "group": 26940,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.04172554984688759,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3549,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.1885
+      },
+      {
+        "iter": 34,
+        "physical_flips": 34,
+        "acc_after": 1.24,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 21852,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.03932970017194748,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3539,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.0025
+      },
+      {
+        "iter": 35,
+        "physical_flips": 35,
+        "acc_after": 1.27,
+        "param_name": "encoder.layers.encoder_layer_7.self_attention.in_proj_weight",
+        "group": 20501,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.039196327328681946,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3560,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.154
+      },
+      {
+        "iter": 36,
+        "physical_flips": 36,
+        "acc_after": 1.29,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 17957,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.04076274484395981,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3546,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.5706
+      },
+      {
+        "iter": 37,
+        "physical_flips": 37,
+        "acc_after": 1.23,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 22638,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.022162755951285362,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3548,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.7544
+      },
+      {
+        "iter": 38,
+        "physical_flips": 38,
+        "acc_after": 1.12,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 22628,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.026902787387371063,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3554,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.7505
+      },
+      {
+        "iter": 39,
+        "physical_flips": 39,
+        "acc_after": 1.08,
+        "param_name": "encoder.layers.encoder_layer_7.self_attention.in_proj_weight",
+        "group": 21029,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.03699876368045807,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3562,
+        "stage_b_tested": 64,
+        "flip_time_sec": 83.1889
+      },
+      {
+        "iter": 40,
+        "physical_flips": 40,
+        "acc_after": 1.0,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 22649,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.024143163114786148,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3556,
+        "stage_b_tested": 64,
+        "flip_time_sec": 83.1873
+      },
+      {
+        "iter": 41,
+        "physical_flips": 41,
+        "acc_after": 0.9,
+        "param_name": "encoder.layers.encoder_layer_7.self_attention.in_proj_weight",
+        "group": 22421,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.030891919508576393,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3550,
+        "stage_b_tested": 64,
+        "flip_time_sec": 83.5603
+      },
+      {
+        "iter": 42,
+        "physical_flips": 42,
+        "acc_after": 0.84,
+        "param_name": "encoder.layers.encoder_layer_5.self_attention.out_proj.weight",
+        "group": 5288,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.02789328806102276,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3538,
+        "stage_b_tested": 64,
+        "flip_time_sec": 84.0554
+      },
+      {
+        "iter": 43,
+        "physical_flips": 43,
+        "acc_after": 0.87,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 35093,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.03934788331389427,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3550,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.3525
+      },
+      {
+        "iter": 44,
+        "physical_flips": 44,
+        "acc_after": 0.79,
+        "param_name": "encoder.layers.encoder_layer_3.self_attention.in_proj_weight",
+        "group": 25308,
+        "old_pattern": [
+          1,
+          2
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.030149947851896286,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3548,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.3008
+      },
+      {
+        "iter": 45,
+        "physical_flips": 45,
+        "acc_after": 0.76,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 28772,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.025972329080104828,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3550,
+        "stage_b_tested": 64,
+        "flip_time_sec": 83.0586
+      },
+      {
+        "iter": 46,
+        "physical_flips": 46,
+        "acc_after": 0.75,
+        "param_name": "encoder.layers.encoder_layer_11.mlp.3.weight",
+        "group": 28543,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.027626974508166313,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3557,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.8271
+      },
+      {
+        "iter": 47,
+        "physical_flips": 47,
+        "acc_after": 0.73,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 28783,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.022738995030522346,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3537,
+        "stage_b_tested": 64,
+        "flip_time_sec": 82.863
+      },
+      {
+        "iter": 48,
+        "physical_flips": 48,
+        "acc_after": 0.68,
+        "param_name": "encoder.layers.encoder_layer_8.self_attention.in_proj_weight",
+        "group": 24005,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.04071070998907089,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3545,
+        "stage_b_tested": 64,
+        "flip_time_sec": 83.4125
+      },
+      {
+        "iter": 49,
+        "physical_flips": 49,
+        "acc_after": 0.66,
+        "param_name": "encoder.layers.encoder_layer_7.self_attention.in_proj_weight",
+        "group": 24005,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.029712701216340065,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3519,
+        "stage_b_tested": 64,
+        "flip_time_sec": 83.1588
+      },
+      {
+        "iter": 50,
+        "physical_flips": 50,
+        "acc_after": 0.63,
+        "param_name": "encoder.layers.encoder_layer_7.self_attention.in_proj_weight",
+        "group": 26165,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.02905312553048134,
+        "stage_a_selected": 1337,
+        "stage_a_candidates": 3517,
+        "stage_b_tested": 64,
+        "flip_time_sec": 83.2707
+      }
+    ],
+    "config": {
+      "dataset": "tiny_imagenet",
+      "dataset_root": "data/tiny-imagenet-200",
+      "attack_mode": "index",
+      "physical_budget": 50,
+      "eligible_groups": 1336704,
+      "flip_ratio": 3.740543905008139e-05,
+      "coarse_groups": 1337,
+      "requested_coarse_groups": 0,
+      "requested_coarse_ratio": 0.001,
+      "effective_coarse_ratio": 0.0010002214401991765,
+      "calib_count": 1600,
+      "calib_samples": 1600,
+      "calib_per_class": 8,
+      "semantic_num_classes": 200,
+      "top_m_per_group": 3,
+      "top_k_verify": 64,
+      "max_groups_per_layer": 0,
+      "group_sampling": "top_grad",
+      "min_sampled_group_ratio": 0.05,
+      "exclude_head": false
+    }
+  }
+]

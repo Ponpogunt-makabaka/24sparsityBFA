@@ -1,0 +1,109 @@
+[
+  {
+    "seed": 0,
+    "arch": "deit_tiny",
+    "initial_acc": 93.88535031847134,
+    "final_acc": 91.05732484076434,
+    "acc_drop": 2.8280254777070013,
+    "num_flips": 5,
+    "attack_history": [
+      {
+        "flip": 1,
+        "param_name": "heads.head.weight",
+        "group": 23178,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.005797175224870443,
+        "stage_a_selected": 3000,
+        "stage_a_candidates": 8032,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 2,
+        "param_name": "heads.head.weight",
+        "group": 23174,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.02117248997092247,
+        "stage_a_selected": 3000,
+        "stage_a_candidates": 8060,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 3,
+        "param_name": "heads.head.weight",
+        "group": 23158,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.029531432315707207,
+        "stage_a_selected": 3000,
+        "stage_a_candidates": 8040,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 4,
+        "param_name": "heads.head.weight",
+        "group": 23148,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.03441108763217926,
+        "stage_a_selected": 3000,
+        "stage_a_candidates": 7976,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 5,
+        "param_name": "heads.head.weight",
+        "group": 23164,
+        "old_pattern": [
+          0,
+          3
+        ],
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.031871892511844635,
+        "stage_a_selected": 3000,
+        "stage_a_candidates": 8004,
+        "stage_b_tested": 64
+      }
+    ],
+    "config": {
+      "dataset": "imagenette",
+      "dataset_root": "data/imagenette_full",
+      "physical_budget": 5,
+      "coarse_groups": 3000,
+      "calib_count": 256,
+      "top_m_per_group": 3,
+      "top_k_verify": 64,
+      "max_groups_per_layer": 0,
+      "group_sampling": "top_grad",
+      "min_sampled_group_ratio": 0.05
+    }
+  }
+]

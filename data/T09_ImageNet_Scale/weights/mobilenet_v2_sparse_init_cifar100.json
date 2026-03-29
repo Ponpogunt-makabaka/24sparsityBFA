@@ -1,0 +1,18 @@
+{
+  "output_checkpoint": "data/T09_ImageNet_Scale/weights/mobilenet_v2_sparse_init_cifar100.pth",
+  "metrics": {
+    "arch": "mobilenet_v2",
+    "dense_val_top1": 74.3,
+    "sparse_init_val_top1": 17.78,
+    "final_val_top1": 17.78,
+    "final_val_loss": 4.083126013565064,
+    "final_max_abs_masked": 0.0,
+    "elapsed_sec": 44.306970834732056,
+    "epochs": 0,
+    "batch_size": 256,
+    "lr": 0.0,
+    "weight_decay": 0.0,
+    "warmup_epochs": 0,
+    "best_val_top1": 17.78
+  }
+}

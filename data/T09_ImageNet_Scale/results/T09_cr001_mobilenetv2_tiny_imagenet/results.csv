@@ -1,0 +1,2 @@
+seed,arch,initial_acc,final_acc,acc_drop,num_flips,total_time_sec,avg_flip_sec
+0,mobilenet_v2,54.51,0.50,54.01,50,80.11,1.6022

@@ -29,6 +29,21 @@ from torch.utils.data import DataLoader
 from torchvision.models import mobilenet_v2, resnet18
 from torchvision.models.vision_transformer import VisionTransformer
 
+import sys as _sys
+_repo_root = Path(__file__).resolve().parents[2]
+if str(_repo_root) not in _sys.path:
+    _sys.path.insert(0, str(_repo_root))
+from models.resnet20 import resnet20 as _resnet20_fn
+
+
+def _load_chenyaofo_model(hub_name: str) -> nn.Module:
+    """Load a CIFAR model from chenyaofo/pytorch-cifar-models via torch.hub."""
+    import torch.hub
+    return torch.hub.load(
+        'chenyaofo/pytorch-cifar-models', hub_name,
+        pretrained=False, trust_repo=True,
+    )
+
 
 IMAGENETTE_WNID_TO_IMAGENET_INDEX = {
     "n01440764": 0,    # tench
@@ -131,15 +146,16 @@ def create_imagenette_loaders(
     return train_loader, val_loader
 
 
-def create_cifar100_loaders(
+def create_cifar10_loaders(
     dataset_root: Path,
     batch_size: int,
     num_workers: int,
     download: bool = True,
 ) -> Tuple[DataLoader, DataLoader]:
+    """Load CIFAR-10 (10 classes, 32x32 images)."""
     dataset_root.mkdir(parents=True, exist_ok=True)
-    mean = (0.5071, 0.4867, 0.4408)
-    std = (0.2675, 0.2565, 0.2761)
+    mean = (0.4914, 0.4822, 0.4465)
+    std = (0.2471, 0.2435, 0.2616)
 
     train_transform = transforms.Compose([
         transforms.RandomCrop(32, padding=4),
@@ -151,6 +167,118 @@ def create_cifar100_loaders(
         transforms.ToTensor(),
         transforms.Normalize(mean, std),
     ])
+
+    train_set = datasets.CIFAR10(root=str(dataset_root), train=True, download=download, transform=train_transform)
+    val_set = datasets.CIFAR10(root=str(dataset_root), train=False, download=download, transform=val_transform)
+
+    train_loader = DataLoader(train_set, batch_size=batch_size, shuffle=True,
+                              num_workers=num_workers, pin_memory=torch.cuda.is_available())
+    val_loader = DataLoader(val_set, batch_size=batch_size, shuffle=False,
+                            num_workers=num_workers, pin_memory=torch.cuda.is_available())
+    return train_loader, val_loader
+
+
+def create_tiny_imagenet_loaders(
+    dataset_root: Path,
+    batch_size: int,
+    num_workers: int,
+    image_size: int = 64,
+) -> Tuple[DataLoader, DataLoader]:
+    """Load Tiny ImageNet-200 (200 classes, 64x64 images, optionally resized)."""
+    train_dir = dataset_root / "train"
+    val_dir = dataset_root / "val" / "images"
+    if not train_dir.is_dir():
+        raise FileNotFoundError(f"Tiny ImageNet train dir not found: {train_dir}")
+    if not val_dir.is_dir():
+        raise FileNotFoundError(f"Tiny ImageNet val dir not found: {val_dir}")
+
+    if image_size > 64:
+        # Route A for DeiT: resize Tiny ImageNet to 224x224
+        train_transform = transforms.Compose([
+            transforms.Resize(image_size),
+            transforms.RandomCrop(image_size, padding=image_size // 8),
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225]),
+        ])
+        val_transform = transforms.Compose([
+            transforms.Resize(image_size),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225]),
+        ])
+    else:
+        train_transform = transforms.Compose([
+            transforms.RandomResizedCrop(64),
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225]),
+        ])
+        val_transform = transforms.Compose([
+            transforms.CenterCrop(64),
+            transforms.ToTensor(),
+            transforms.Normalize(mean=[0.485, 0.456, 0.406],
+                                 std=[0.229, 0.224, 0.225]),
+        ])
+
+    train_set = datasets.ImageFolder(str(train_dir), transform=train_transform)
+    val_set = datasets.ImageFolder(str(val_dir), transform=val_transform)
+
+    train_loader = DataLoader(
+        train_set,
+        batch_size=batch_size,
+        shuffle=True,
+        num_workers=num_workers,
+        pin_memory=torch.cuda.is_available(),
+    )
+    val_loader = DataLoader(
+        val_set,
+        batch_size=batch_size,
+        shuffle=False,
+        num_workers=num_workers,
+        pin_memory=torch.cuda.is_available(),
+    )
+    return train_loader, val_loader
+
+
+def create_cifar100_loaders(
+    dataset_root: Path,
+    batch_size: int,
+    num_workers: int,
+    download: bool = True,
+    image_size: int = 32,
+) -> Tuple[DataLoader, DataLoader]:
+    dataset_root.mkdir(parents=True, exist_ok=True)
+    mean = (0.5071, 0.4867, 0.4408)
+    std = (0.2675, 0.2565, 0.2761)
+
+    if image_size > 32:
+        # Route A for DeiT: resize CIFAR-100 to 224x224
+        train_transform = transforms.Compose([
+            transforms.Resize(image_size),
+            transforms.RandomCrop(image_size, padding=image_size // 8),
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(),
+            transforms.Normalize(mean, std),
+        ])
+        val_transform = transforms.Compose([
+            transforms.Resize(image_size),
+            transforms.ToTensor(),
+            transforms.Normalize(mean, std),
+        ])
+    else:
+        train_transform = transforms.Compose([
+            transforms.RandomCrop(32, padding=4),
+            transforms.RandomHorizontalFlip(),
+            transforms.ToTensor(),
+            transforms.Normalize(mean, std),
+        ])
+        val_transform = transforms.Compose([
+            transforms.ToTensor(),
+            transforms.Normalize(mean, std),
+        ])
 
     train_set = datasets.CIFAR100(
         root=str(dataset_root),
@@ -324,7 +452,8 @@ def create_model_and_load(
     if arch == "mobilenet_v2":
         model = mobilenet_v2(weights=None, num_classes=num_classes)
         if dataset == "cifar100":
-            # Match CIFAR-100 MobileNetV2 stride pattern used by public checkpoints.
+            # Modify stride for very small images (CIFAR-100 32x32 only).
+            # Tiny ImageNet (64x64) is large enough for standard stride=2.
             model.features[0][0].stride = (1, 1)
             model.features[2].conv[1][0].stride = (1, 1)
         checkpoint = torch.load(dense_weights, map_location="cpu")
@@ -335,9 +464,13 @@ def create_model_and_load(
         return model
 
     if arch == "deit_tiny":
-        patch_size = 4 if dataset == "cifar100" else 16
+        # Route A (CIFAR-100): Use patch_size=16 + image_size=224 (resize input)
+        # This allows loading all ImageNet pretrained weights (conv_proj, pos_embed)
+        # Only head shape differs → replaced below.
+        patch_size = 16
+        model_image_size = 224  # always use 224 for DeiT to match pretrained weights
         model = VisionTransformer(
-            image_size=image_size,
+            image_size=model_image_size,
             patch_size=patch_size,
             num_layers=12,
             num_heads=3,
@@ -357,21 +490,61 @@ def create_model_and_load(
                 state_dict["encoder.pos_embedding"],
                 target_tokens=target_tokens,
             )
+        # For CIFAR-100: head shape [1000,192] → [100,192] — skip via compatible load
         skipped, missing, unexpected = _load_compatible_state_dict(model, state_dict)
         print(f"[Load] deit_tiny skipped={skipped} missing={missing} unexpected={unexpected}")
+        if dataset == "cifar100":
+            print(f"[Load] DeiT CIFAR-100 Route A: model uses 224x224 input + patch16, "
+                  f"CIFAR-100 images will be resized at data loading time.")
+        model.to(device)
+        return model
+
+    if arch == "resnet20":
+        model = _resnet20_fn(sparsity_type=None)
+        if dense_weights.exists():
+            checkpoint = torch.load(dense_weights, map_location="cpu")
+            state_dict = _strip_module_prefix(_extract_state_dict(checkpoint))
+            skipped, missing, unexpected = _load_compatible_state_dict(model, state_dict)
+            print(f"[Load] resnet20 skipped={skipped} missing={missing} unexpected={unexpected}")
+        else:
+            print("[Load] resnet20: no dense weights, using random init")
+        model.to(device)
+        return model
+
+    if arch in ("vgg11_bn", "vgg16_bn", "resnet32"):
+        hub_map = {
+            "vgg11_bn": "cifar100_vgg11_bn",
+            "vgg16_bn": "cifar100_vgg16_bn",
+            "resnet32": "cifar100_resnet32",
+        }
+        model = _load_chenyaofo_model(hub_map[arch])
+        if dense_weights.exists():
+            checkpoint = torch.load(dense_weights, map_location="cpu")
+            state_dict = _strip_module_prefix(_extract_state_dict(checkpoint))
+            skipped, missing, unexpected = _load_compatible_state_dict(model, state_dict)
+            print(f"[Load] {arch} skipped={skipped} missing={missing} unexpected={unexpected}")
+        else:
+            print(f"[Load] {arch}: no dense weights, using random init")
         model.to(device)
         return model
 
     raise ValueError(f"Unsupported arch: {arch}")
 
 
-def compute_2_4_mask_conv(weight: torch.Tensor) -> torch.Tensor:
+def compute_2_4_mask_conv(weight: torch.Tensor) -> torch.Tensor | None:
     """
-    Conv grouping must match T08 flatten_groups semantics exactly.
+    Compute 2:4 mask for Conv2d using NHWC GEMM-aligned semantics.
+
+    K dimension = in_ch_per_group * kH * kW (NHWC: in varies fastest).
+    Groups of 4 along K must not cross output-channel (row) boundaries,
+    so K must be divisible by 4.
     """
+    out_ch, in_ch, kH, kW = weight.shape
+    K = in_ch * kH * kW
+    if K % 4 != 0:
+        return None  # skip — groups would cross row boundaries
+
     w_perm = weight.detach().permute(0, 2, 3, 1).contiguous()
-    if w_perm.numel() % 4 != 0:
-        raise ValueError(f"Conv weight numel not divisible by 4: {tuple(weight.shape)}")
     flat_abs = w_perm.abs().view(-1, 4)
     prune_idx = torch.argsort(flat_abs, dim=1)[:, :2]
     keep_flat = torch.ones_like(flat_abs, dtype=torch.bool)
@@ -381,9 +554,18 @@ def compute_2_4_mask_conv(weight: torch.Tensor) -> torch.Tensor:
     return keep_orig
 
 
-def compute_2_4_mask_linear(weight: torch.Tensor) -> torch.Tensor:
-    if weight.numel() % 4 != 0:
-        raise ValueError(f"Linear-like weight numel not divisible by 4: {tuple(weight.shape)}")
+def compute_2_4_mask_linear(weight: torch.Tensor) -> torch.Tensor | None:
+    """
+    Compute 2:4 mask for Linear weight [out, in].
+
+    K = in_features, groups of 4 along K per row.
+    """
+    if weight.dim() != 2:
+        return None
+    out_features, in_features = weight.shape
+    if in_features % 4 != 0:
+        return None  # skip — K not divisible by 4
+
     flat_abs = weight.detach().abs().view(-1, 4)
     prune_idx = torch.argsort(flat_abs, dim=1)[:, :2]
     keep_flat = torch.ones_like(flat_abs, dtype=torch.bool)
@@ -391,16 +573,125 @@ def compute_2_4_mask_linear(weight: torch.Tensor) -> torch.Tensor:
     return keep_flat.view_as(weight)
 
 
-def build_fixed_masks(model: nn.Module) -> Dict[str, torch.Tensor]:
+def _is_depthwise_conv(module: nn.Conv2d) -> bool:
+    return module.groups == module.in_channels and module.in_channels == module.out_channels
+
+
+def _get_conv_module(model: nn.Module, param_name: str) -> nn.Conv2d | None:
+    """Get the Conv2d module for a given parameter name."""
+    mod_name = param_name.replace(".weight", "")
+    try:
+        mod = model.get_submodule(mod_name)
+        if isinstance(mod, nn.Conv2d):
+            return mod
+    except (AttributeError, ValueError):
+        pass
+    return None
+
+
+def _should_sparsify(name: str, param: torch.Tensor, model: nn.Module, arch: str) -> bool:
     """
-    Build fixed masks for all 4D (Conv-like) and 2D (Linear/QKV-like) parameters.
+    Determine if a parameter should receive 2:4 sparsity.
+
+    Per-architecture rules:
+      ResNet-18:
+        - Skip: conv1 (in_ch=3), fc (classification head)
+        - Sparsify: all layer conv (3x3, 1x1) where K%4==0, downsample conv
+      MobileNetV2:
+        - Skip: ALL depthwise conv, features.0.0 (in_ch=3)
+        - Sparsify: pointwise 1x1 conv (groups=1), classifier Linear
+      DeiT-Tiny:
+        - Skip: conv_proj (patch embedding), heads.head (classification head)
+        - Sparsify: MLP Linear, attention QKV, out_proj
+    """
+    if param.dim() == 4:
+        conv_mod = _get_conv_module(model, name)
+        if conv_mod is not None:
+            # Skip depthwise conv
+            if _is_depthwise_conv(conv_mod):
+                return False
+            # Skip grouped conv (not standard groups=1)
+            if conv_mod.groups > 1:
+                return False
+
+        # Check K divisibility
+        out_ch, in_ch, kH, kW = param.shape
+        K = in_ch * kH * kW
+        if K % 4 != 0:
+            return False
+
+        if arch == "resnet18":
+            if name == "conv1.weight":
+                return False
+            return True
+        elif arch == "mobilenet_v2":
+            if in_ch == 3:
+                return False
+            if kH == 1 and kW == 1:
+                return True
+            return False
+        elif arch == "resnet20":
+            if name == "conv1.weight":
+                return False
+            return True
+        elif arch == "resnet32":
+            # Same as ResNet-20: skip first conv (in_ch=3)
+            if in_ch == 3:
+                return False
+            return True
+        elif arch in ("vgg11_bn", "vgg16_bn"):
+            # Skip first conv (in_ch=3), sparsify all other convs
+            if in_ch == 3:
+                return False
+            return True
+        elif arch == "deit_tiny":
+            if "conv_proj" in name:
+                return False
+            return True
+        return True
+
+    elif param.dim() == 2:
+        out_f, in_f = param.shape
+        if in_f % 4 != 0:
+            return False
+        # Include classification head (fc, classifier, heads.head) —
+        # they are legitimate 2:4 layers and important for BFA attack surface.
+        return True
+
+    return False
+
+
+def build_fixed_masks(
+    model: nn.Module, arch: str = "resnet18"
+) -> Dict[str, torch.Tensor]:
+    """
+    Build fixed 2:4 masks with architecture-aware layer selection.
+
+    Only masks eligible layers; skips depthwise conv, first conv (in_ch=3),
+    classification heads, patch embeddings, and layers where K%4!=0.
     """
     mask_map: Dict[str, torch.Tensor] = {}
+    skipped = []
     for name, param in model.named_parameters():
+        if not _should_sparsify(name, param, model, arch):
+            if param.dim() >= 2:
+                skipped.append((name, list(param.shape), "not eligible"))
+            continue
+
+        mask = None
         if param.dim() == 4:
-            mask_map[name] = compute_2_4_mask_conv(param.data)
+            mask = compute_2_4_mask_conv(param.data)
         elif param.dim() == 2:
-            mask_map[name] = compute_2_4_mask_linear(param.data)
+            mask = compute_2_4_mask_linear(param.data)
+
+        if mask is not None:
+            mask_map[name] = mask
+        else:
+            skipped.append((name, list(param.shape), "K%4!=0"))
+
+    print(f"[Mask] Applied 2:4 to {len(mask_map)} layers, skipped {len(skipped)} layers:")
+    for sname, sshape, sreason in skipped:
+        print(f"  SKIP: {sname} {sshape} ({sreason})")
     return mask_map
 
 
@@ -453,6 +744,86 @@ def verify_mask_enforcement(model: nn.Module, mask_map: Dict[str, torch.Tensor])
         layer_max = float(masked_vals.abs().max().item())
         max_abs_masked = max(max_abs_masked, layer_max)
     return max_abs_masked
+
+
+def save_checkpoint_and_metrics(
+    output_path: Path,
+    arch: str,
+    dataset: str,
+    mode: str,
+    model: nn.Module,
+    use_sparsity: bool,
+    num_classes: int,
+    image_size: int,
+    dense_val: EvalResult,
+    sparse_init_val: EvalResult,
+    final_val: EvalResult,
+    final_masked_max: float,
+    epochs: int,
+    batch_size: int,
+    lr: float,
+    weight_decay: float,
+    warmup_epochs: int,
+    best_top1: float,
+    history: list,
+    elapsed: float,
+) -> None:
+    ckpt = {
+        "arch": arch,
+        "mode": mode,
+        "model_state_dict": model.state_dict(),
+        "sparsity_type": "2:4" if use_sparsity else "dense",
+        "mask_grouping": {
+            "conv2d": "NHWC K-dim: permute(0,2,3,1).view(-1,4), K=in*kH*kW, K%4==0 required",
+            "linear": "K-dim: view(-1,4), K=in_features, K%4==0 required",
+            "layer_selection": f"arch-aware: skip depthwise/first_conv/head for {arch}",
+        },
+        "dataset": dataset,
+        "num_classes": num_classes,
+        "image_size": image_size,
+        "dense_val_top1": dense_val.top1,
+        "sparse_init_val_top1": sparse_init_val.top1,
+        "final_val_top1": final_val.top1,
+        "final_val_loss": final_val.loss,
+        "final_max_abs_masked": final_masked_max,
+        "epochs": epochs,
+        "batch_size": batch_size,
+        "lr": lr,
+        "weight_decay": weight_decay,
+        "warmup_epochs": warmup_epochs,
+        "best_val_top1": best_top1,
+        "history": history,
+    }
+    torch.save(ckpt, output_path)
+
+    metrics_path = output_path.with_suffix(".json")
+    metrics_path.write_text(
+        json.dumps(
+            {
+                "output_checkpoint": str(output_path),
+                "metrics": {
+                    "arch": arch,
+                    "dense_val_top1": dense_val.top1,
+                    "sparse_init_val_top1": sparse_init_val.top1,
+                    "final_val_top1": final_val.top1,
+                    "final_val_loss": final_val.loss,
+                    "final_max_abs_masked": final_masked_max,
+                    "elapsed_sec": elapsed,
+                    "epochs": epochs,
+                    "batch_size": batch_size,
+                    "lr": lr,
+                    "weight_decay": weight_decay,
+                    "warmup_epochs": warmup_epochs,
+                    "best_val_top1": best_top1,
+                },
+            },
+            indent=2,
+        ),
+        encoding="utf-8",
+    )
+
+    print(f"[Done] Saved sparse checkpoint: {output_path}")
+    print(f"[Done] Saved metrics json: {metrics_path}")
 
 
 def evaluate(model: nn.Module, loader: DataLoader, device: str) -> EvalResult:
@@ -521,13 +892,29 @@ def train_one_epoch(
 
 def default_dense_weights_for_arch(arch: str, dataset: str) -> Path:
     base = Path("data/T09_ImageNet_Scale/weights")
+    if dataset == "cifar10":
+        if arch == "resnet20":
+            return Path("Sample_BFA/1_sparse_finetune.pth")
+        raise ValueError(f"No default dense weights for {arch} on CIFAR-10")
     if dataset == "cifar100":
         if arch == "resnet18":
             return base / "resnet18_cifar100_hf.bin"
         if arch == "mobilenet_v2":
             return base / "mobilenet_v2_cifar100_chenyaofo.pth"
+        if arch == "vgg11_bn":
+            return base / "vgg11_bn_cifar100_chenyaofo.pth"
+        if arch == "vgg16_bn":
+            return base / "vgg16_bn_cifar100_chenyaofo.pth"
+        if arch == "resnet32":
+            return base / "resnet32_cifar100_chenyaofo.pth"
         if arch == "deit_tiny":
             return base / "deit_tiny_patch16_224-a1311bcf.pth"
+    if dataset == "tiny_imagenet":
+        # Use ImageNet pretrained weights; head will be reinitialized via compatible load.
+        if arch == "mobilenet_v2":
+            return base / "mobilenet_v2-b0353104.pth"
+        if arch == "resnet18":
+            return base / "resnet18-f37072fd.pth"
     if arch == "resnet18":
         return base / "resnet18-f37072fd.pth"
     if arch == "mobilenet_v2":
@@ -539,21 +926,15 @@ def default_dense_weights_for_arch(arch: str, dataset: str) -> Path:
 
 def default_output_for_arch(arch: str, dataset: str) -> Path:
     base = Path("data/T09_ImageNet_Scale/weights")
-    suffix = "imagenette" if dataset == "imagenette" else "cifar100"
-    if arch == "resnet18":
-        return base / f"resnet18_2_4_sparse_{suffix}.pth"
-    if arch == "mobilenet_v2":
-        return base / f"mobilenet_v2_2_4_sparse_{suffix}.pth"
-    if arch == "deit_tiny":
-        return base / f"deit_tiny_2_4_sparse_{suffix}.pth"
-    raise ValueError(f"Unsupported arch: {arch}")
+    suffix_map = {"imagenette": "imagenette", "cifar10": "cifar10", "cifar100": "cifar100", "tiny_imagenet": "tiny_imagenet"}
+    suffix = suffix_map.get(dataset, dataset)
+    return base / f"{arch}_2_4_sparse_{suffix}.pth"
 
 
 def default_batch_size_for_arch(arch: str, dataset: str) -> int:
-    if dataset == "imagenette" and arch == "deit_tiny":
-        return 16
-    if dataset == "cifar100" and arch == "deit_tiny":
-        return 128
+    if arch == "deit_tiny":
+        # DeiT always uses 224x224 input → smaller batch for GPU memory
+        return 64
     if dataset == "cifar100":
         return 256
     return 64
@@ -562,39 +943,62 @@ def default_batch_size_for_arch(arch: str, dataset: str) -> int:
 def dataset_num_classes(dataset: str) -> int:
     if dataset == "imagenette":
         return 1000
+    if dataset == "cifar10":
+        return 10
     if dataset == "cifar100":
         return 100
+    if dataset == "tiny_imagenet":
+        return 200
     raise ValueError(f"Unsupported dataset: {dataset}")
 
 
-def dataset_image_size(dataset: str) -> int:
+def dataset_image_size(dataset: str, arch: str = "") -> int:
     if dataset == "imagenette":
         return 224
-    if dataset == "cifar100":
+    if dataset == "cifar10":
         return 32
+    if dataset == "cifar100":
+        if arch == "deit_tiny":
+            return 224
+        return 32
+    if dataset == "tiny_imagenet":
+        if arch == "deit_tiny":
+            return 224  # Route A: resize to 224 for pretrained patch_size=16
+        return 64
     raise ValueError(f"Unsupported dataset: {dataset}")
 
 
 def default_epochs_for_run(dataset: str, arch: str) -> int:
+    if dataset == "cifar10":
+        return 50
     if dataset == "cifar100":
         if arch == "deit_tiny":
-            # ViT fine-tuning on CIFAR-100 usually needs substantially longer schedules.
             return 100
         return 40
+    if dataset == "tiny_imagenet":
+        if arch == "deit_tiny":
+            return 30
+        return 20
     return 3
 
 
 def default_eval_every(dataset: str) -> int:
     if dataset == "cifar100":
         return 5
+    if dataset == "tiny_imagenet":
+        return 2
     return 1
 
 
 def default_lr_for_run(dataset: str, arch: str) -> float:
+    if dataset == "cifar10":
+        return 5e-2
     if dataset == "cifar100":
         if arch == "deit_tiny":
             return 3e-4
         return 5e-2
+    if dataset == "tiny_imagenet":
+        return 1e-2
     return 1e-3
 
 
@@ -665,8 +1069,8 @@ def build_scheduler(
 
 def main() -> None:
     parser = argparse.ArgumentParser(description="Step3: strict 2:4 sparsify + fine-tune")
-    parser.add_argument("--arch", type=str, choices=["resnet18", "mobilenet_v2", "deit_tiny"], required=True)
-    parser.add_argument("--dataset", type=str, choices=["imagenette", "cifar100"], default="imagenette")
+    parser.add_argument("--arch", type=str, choices=["resnet18", "resnet20", "resnet32", "mobilenet_v2", "vgg11_bn", "vgg16_bn", "deit_tiny"], required=True)
+    parser.add_argument("--dataset", type=str, choices=["imagenette", "cifar10", "cifar100", "tiny_imagenet"], default="imagenette")
     parser.add_argument(
         "--dataset-root",
         type=str,
@@ -684,12 +1088,18 @@ def main() -> None:
     parser.add_argument("--eval-every", type=int, default=0, help="0 means dataset default")
     parser.add_argument("--warmup-epochs", type=int, default=-1, help="-1 means dataset/arch default")
     parser.add_argument("--seed", type=int, default=42)
+    parser.add_argument(
+        "--mode", type=str, default="sparse-ft",
+        choices=["dense-eval", "dense-ft", "sparse-init", "sparse-ft"],
+        help="Pipeline mode: dense-eval (eval only), dense-ft (finetune without sparsity), "
+             "sparse-init (apply mask + eval), sparse-ft (apply mask + finetune).",
+    )
     args = parser.parse_args()
 
     set_seed(args.seed)
     device = "cuda" if torch.cuda.is_available() else "cpu"
     num_classes = dataset_num_classes(args.dataset)
-    image_size = dataset_image_size(args.dataset)
+    image_size = dataset_image_size(args.dataset, args.arch)
     epochs = args.epochs if args.epochs > 0 else default_epochs_for_run(args.dataset, args.arch)
     eval_every = args.eval_every if args.eval_every > 0 else default_eval_every(args.dataset)
     lr = args.lr if args.lr > 0 else default_lr_for_run(args.dataset, args.arch)
@@ -710,7 +1120,14 @@ def main() -> None:
     output_path = Path(args.output) if args.output else default_output_for_arch(args.arch, args.dataset)
     batch_size = args.batch_size if args.batch_size > 0 else default_batch_size_for_arch(args.arch, args.dataset)
     if args.dataset_root is None:
-        dataset_root = Path("data/imagenette_full" if args.dataset == "imagenette" else "data/cifar100")
+        if args.dataset == "imagenette":
+            dataset_root = Path("data/imagenette_full")
+        elif args.dataset == "tiny_imagenet":
+            dataset_root = Path("data/tiny-imagenet-200")
+        elif args.dataset == "cifar10":
+            dataset_root = Path("data/cifar10")
+        else:
+            dataset_root = Path("data/cifar100")
     else:
         dataset_root = Path(args.dataset_root)
 
@@ -731,12 +1148,26 @@ def main() -> None:
             batch_size=batch_size,
             num_workers=args.num_workers,
         )
+    elif args.dataset == "cifar10":
+        train_loader, val_loader = create_cifar10_loaders(
+            dataset_root=dataset_root,
+            batch_size=batch_size,
+            num_workers=args.num_workers,
+        )
+    elif args.dataset == "tiny_imagenet":
+        train_loader, val_loader = create_tiny_imagenet_loaders(
+            dataset_root=dataset_root,
+            batch_size=batch_size,
+            num_workers=args.num_workers,
+            image_size=image_size,
+        )
     else:
         train_loader, val_loader = create_cifar100_loaders(
             dataset_root=dataset_root,
             batch_size=batch_size,
             num_workers=args.num_workers,
             download=True,
+            image_size=image_size,
         )
     print(f"[Data] train_batches={len(train_loader)} val_batches={len(val_loader)}")
 
@@ -748,17 +1179,66 @@ def main() -> None:
         num_classes=num_classes,
         image_size=image_size,
     )
+    # For DeiT with CIFAR-100 Route A (224x224 input), wrap model with resize
+    if args.arch == "deit_tiny" and args.dataset == "cifar100":
+        # Data is already resized to 224 in the loader, no wrapper needed
+        pass
+
     dense_val = evaluate(model, val_loader, device)
     print(f"[Dense] val_top1={dense_val.top1:.2f}% val_loss={dense_val.loss:.4f}")
 
-    t0 = time.time()
-    mask_map = build_fixed_masks(model)
-    verify_masks(mask_map)
-    apply_masks(model, mask_map)
-    sparse_init_val = evaluate(model, val_loader, device)
-    print(f"[SparseInit] val_top1={sparse_init_val.top1:.2f}% val_loss={sparse_init_val.loss:.4f}")
-    print(f"[Mask] masked_param_tensors={len(mask_map)}")
+    # ---- Mode dispatch ----
+    mode = args.mode
+    if mode == "dense-eval":
+        print(f"[Mode=dense-eval] Done. Dense val_top1={dense_val.top1:.2f}%")
+        return
 
+    t0 = time.time()
+
+    # For dense-ft mode: no sparsity mask, just finetune the dense model
+    use_sparsity = mode in ("sparse-init", "sparse-ft")
+    mask_map: Dict[str, torch.Tensor] = {}
+    sparse_init_val = EvalResult(loss=0.0, top1=0.0)
+
+    if use_sparsity:
+        mask_map = build_fixed_masks(model, arch=args.arch)
+        verify_masks(mask_map)
+        apply_masks(model, mask_map)
+        sparse_init_val = evaluate(model, val_loader, device)
+        print(f"[SparseInit] val_top1={sparse_init_val.top1:.2f}% val_loss={sparse_init_val.loss:.4f}")
+        print(f"[Mask] masked_param_tensors={len(mask_map)}")
+    else:
+        print(f"[Mode=dense-ft] No sparsity mask applied. Finetuning dense model.")
+
+    if mode == "sparse-init":
+        final_masked_max = verify_mask_enforcement(model, mask_map) if mask_map else 0.0
+        elapsed = time.time() - t0
+        save_checkpoint_and_metrics(
+            output_path=output_path,
+            arch=args.arch,
+            dataset=args.dataset,
+            mode=mode,
+            model=model,
+            use_sparsity=use_sparsity,
+            num_classes=num_classes,
+            image_size=image_size,
+            dense_val=dense_val,
+            sparse_init_val=sparse_init_val,
+            final_val=sparse_init_val,
+            final_masked_max=final_masked_max,
+            epochs=0,
+            batch_size=batch_size,
+            lr=0.0,
+            weight_decay=0.0,
+            warmup_epochs=0,
+            best_top1=sparse_init_val.top1,
+            history=[],
+            elapsed=elapsed,
+        )
+        print(f"[Mode=sparse-init] Done. SparseInit val_top1={sparse_init_val.top1:.2f}%")
+        return
+
+    # modes: dense-ft or sparse-ft → both do training
     optimizer = build_optimizer(
         model=model,
         dataset=args.dataset,
@@ -783,7 +1263,7 @@ def main() -> None:
             model=model,
             train_loader=train_loader,
             optimizer=optimizer,
-            mask_map=mask_map,
+            mask_map=mask_map,  # empty dict for dense-ft → no mask enforcement
             criterion=train_criterion,
             device=device,
             grad_clip=grad_clip,
@@ -792,7 +1272,7 @@ def main() -> None:
         val_res = evaluate(model, val_loader, device) if do_eval else None
         scheduler.step()
         lr_now = optimizer.param_groups[0]["lr"]
-        masked_max = verify_mask_enforcement(model, mask_map)
+        masked_max = verify_mask_enforcement(model, mask_map) if mask_map else 0.0
         if val_res is not None and val_res.top1 >= best_top1:
             best_top1 = val_res.top1
             best_state_dict = {k: v.detach().cpu().clone() for k, v in model.state_dict().items()}
@@ -825,66 +1305,34 @@ def main() -> None:
         )
 
     model.load_state_dict(best_state_dict, strict=True)
-    apply_masks(model, mask_map)
+    if mask_map:
+        apply_masks(model, mask_map)
     final_val = evaluate(model, val_loader, device)
-    final_masked_max = verify_mask_enforcement(model, mask_map)
+    final_masked_max = verify_mask_enforcement(model, mask_map) if mask_map else 0.0
     elapsed = time.time() - t0
 
-    ckpt = {
-        "arch": args.arch,
-        "model_state_dict": model.state_dict(),
-        "sparsity_type": "2:4",
-        "mask_grouping": {
-            "conv2d": "w.permute(0,2,3,1).contiguous().view(-1,4)",
-            "linear": "w.view(-1,4)",
-            "mha_qkv": "in_proj_weight.view(-1,4) via 2D parameter handling",
-        },
-        "dataset": args.dataset,
-        "num_classes": num_classes,
-        "image_size": image_size,
-        "dense_val_top1": dense_val.top1,
-        "sparse_init_val_top1": sparse_init_val.top1,
-        "final_val_top1": final_val.top1,
-        "final_val_loss": final_val.loss,
-        "final_max_abs_masked": final_masked_max,
-        "epochs": epochs,
-        "batch_size": batch_size,
-        "lr": lr,
-        "weight_decay": weight_decay,
-        "warmup_epochs": warmup_epochs,
-        "best_val_top1": best_top1,
-        "history": history,
-    }
-    torch.save(ckpt, output_path)
-
-    metrics_path = output_path.with_suffix(".json")
-    metrics_path.write_text(
-        json.dumps(
-            {
-                "output_checkpoint": str(output_path),
-                "metrics": {
-                    "arch": args.arch,
-                    "dense_val_top1": dense_val.top1,
-                    "sparse_init_val_top1": sparse_init_val.top1,
-                    "final_val_top1": final_val.top1,
-                    "final_val_loss": final_val.loss,
-                    "final_max_abs_masked": final_masked_max,
-                    "elapsed_sec": elapsed,
-                    "epochs": epochs,
-                    "batch_size": batch_size,
-                    "lr": lr,
-                    "weight_decay": weight_decay,
-                    "warmup_epochs": warmup_epochs,
-                    "best_val_top1": best_top1,
-                },
-            },
-            indent=2,
-        ),
-        encoding="utf-8",
+    save_checkpoint_and_metrics(
+        output_path=output_path,
+        arch=args.arch,
+        dataset=args.dataset,
+        mode=mode,
+        model=model,
+        use_sparsity=use_sparsity,
+        num_classes=num_classes,
+        image_size=image_size,
+        dense_val=dense_val,
+        sparse_init_val=sparse_init_val,
+        final_val=final_val,
+        final_masked_max=final_masked_max,
+        epochs=epochs,
+        batch_size=batch_size,
+        lr=lr,
+        weight_decay=weight_decay,
+        warmup_epochs=warmup_epochs,
+        best_top1=best_top1,
+        history=history,
+        elapsed=elapsed,
     )
-
-    print(f"[Done] Saved sparse checkpoint: {output_path}")
-    print(f"[Done] Saved metrics json: {metrics_path}")
     print(
         f"[Final] arch={args.arch} val_top1={final_val.top1:.2f}% val_loss={final_val.loss:.4f} "
         f"max_abs_masked={final_masked_max:.3e} elapsed_sec={elapsed:.1f}"

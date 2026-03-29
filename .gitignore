@@ -34,3 +34,14 @@ data/cifar-10-python.tar.gz
 
 # Sample BFA local data cache
 sample_bfa/data/
+
+# Large datasets (download separately)
+data/tiny-imagenet-200/
+data/tiny-imagenet-200.zip
+data/T09_ImageNet_Scale/hf_cache/
+data/imagenette_full
+
+# Model weights (too large for git)
+*.pth
+*.bin
+*.pt

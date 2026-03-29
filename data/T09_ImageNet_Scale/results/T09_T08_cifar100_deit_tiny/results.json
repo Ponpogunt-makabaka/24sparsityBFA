@@ -2,31 +2,31 @@
   {
     "seed": 0,
     "arch": "deit_tiny",
-    "initial_acc": 23.18,
-    "final_acc": 20.1,
-    "acc_drop": 3.0799999999999983,
+    "initial_acc": 82.32,
+    "final_acc": 79.54,
+    "acc_drop": 2.779999999999987,
     "num_flips": 50,
     "attack_history": [
       {
         "flip": 1,
-        "param_name": "conv_proj.weight",
-        "group": 1026,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 2758,
         "old_pattern": [
-          2,
-          3
-        ],
-        "new_pattern": [
           1,
           2
         ],
-        "proxy_score": 0.0006697700591757894,
-        "stage_a_kept": 5834,
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.0022041669581085443,
+        "stage_a_kept": 3107685,
         "stage_b_tested": 64
       },
       {
         "flip": 2,
-        "param_name": "heads.head.weight",
-        "group": 1125,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.3.weight",
+        "group": 11026,
         "old_pattern": [
           2,
           3
@@ -35,174 +35,174 @@
           1,
           2
         ],
-        "proxy_score": 0.003812826005741954,
-        "stage_a_kept": 5804,
+        "proxy_score": 0.0023844956886023283,
+        "stage_a_kept": 3107682,
         "stage_b_tested": 64
       },
       {
         "flip": 3,
-        "param_name": "conv_proj.weight",
-        "group": 654,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 1152,
         "old_pattern": [
-          1,
+          0,
           3
         ],
         "new_pattern": [
           0,
-          3
+          2
         ],
-        "proxy_score": 0.00058123585768044,
-        "stage_a_kept": 5787,
+        "proxy_score": 0.004640631377696991,
+        "stage_a_kept": 3107680,
         "stage_b_tested": 64
       },
       {
         "flip": 4,
-        "param_name": "heads.head.weight",
-        "group": 1101,
+        "param_name": "encoder.layers.encoder_layer_9.mlp.0.weight",
+        "group": 22486,
         "old_pattern": [
-          2,
-          3
+          0,
+          1
         ],
         "new_pattern": [
           1,
           2
         ],
-        "proxy_score": 0.0021307512652128935,
-        "stage_a_kept": 5765,
+        "proxy_score": 0.001915924483910203,
+        "stage_a_kept": 3107677,
         "stage_b_tested": 64
       },
       {
         "flip": 5,
-        "param_name": "conv_proj.weight",
-        "group": 2272,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 16772,
         "old_pattern": [
-          2,
-          3
+          0,
+          2
         ],
         "new_pattern": [
           1,
           2
         ],
-        "proxy_score": 0.0014975059311836958,
-        "stage_a_kept": 5845,
+        "proxy_score": 0.002279992215335369,
+        "stage_a_kept": 3107675,
         "stage_b_tested": 64
       },
       {
         "flip": 6,
-        "param_name": "conv_proj.weight",
-        "group": 2167,
+        "param_name": "heads.head.weight",
+        "group": 4435,
         "old_pattern": [
-          0,
-          2
-        ],
-        "new_pattern": [
-          0,
+          2,
           3
         ],
-        "proxy_score": 0.002763153053820133,
-        "stage_a_kept": 5810,
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0014843865064904094,
+        "stage_a_kept": 3107673,
         "stage_b_tested": 64
       },
       {
         "flip": 7,
-        "param_name": "conv_proj.weight",
-        "group": 421,
+        "param_name": "heads.head.weight",
+        "group": 712,
         "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
           1,
           2
         ],
-        "new_pattern": [
-          0,
-          1
-        ],
-        "proxy_score": 0.0008637304417788982,
-        "stage_a_kept": 5812,
+        "proxy_score": 0.0015049645444378257,
+        "stage_a_kept": 3107671,
         "stage_b_tested": 64
       },
       {
         "flip": 8,
-        "param_name": "conv_proj.weight",
-        "group": 923,
+        "param_name": "encoder.layers.encoder_layer_1.self_attention.in_proj_weight",
+        "group": 24254,
         "old_pattern": [
-          0,
-          1
+          1,
+          3
         ],
         "new_pattern": [
           0,
           3
         ],
-        "proxy_score": 0.0016259039985015988,
-        "stage_a_kept": 5803,
+        "proxy_score": 0.001770349103026092,
+        "stage_a_kept": 3107669,
         "stage_b_tested": 64
       },
       {
         "flip": 9,
-        "param_name": "conv_proj.weight",
-        "group": 1266,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 6541,
         "old_pattern": [
           0,
-          3
+          2
         ],
         "new_pattern": [
           0,
-          1
+          3
         ],
-        "proxy_score": 0.00043089373502880335,
-        "stage_a_kept": 5852,
+        "proxy_score": 0.004242216236889362,
+        "stage_a_kept": 3107667,
         "stage_b_tested": 64
       },
       {
         "flip": 10,
-        "param_name": "heads.head.weight",
-        "group": 13,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 16765,
         "old_pattern": [
-          2,
-          3
-        ],
-        "new_pattern": [
           1,
           2
         ],
-        "proxy_score": 0.0017398488707840443,
-        "stage_a_kept": 5829,
+        "new_pattern": [
+          2,
+          3
+        ],
+        "proxy_score": 0.0020838105119764805,
+        "stage_a_kept": 3107665,
         "stage_b_tested": 64
       },
       {
         "flip": 11,
-        "param_name": "conv_proj.weight",
-        "group": 1134,
+        "param_name": "encoder.layers.encoder_layer_7.self_attention.in_proj_weight",
+        "group": 4901,
         "old_pattern": [
-          2,
+          0,
           3
         ],
         "new_pattern": [
           1,
-          2
+          3
         ],
-        "proxy_score": 0.0007248597103171051,
-        "stage_a_kept": 5813,
+        "proxy_score": 0.004407113417983055,
+        "stage_a_kept": 3107662,
         "stage_b_tested": 64
       },
       {
         "flip": 12,
-        "param_name": "conv_proj.weight",
-        "group": 12,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 33950,
         "old_pattern": [
-          0,
+          1,
           3
         ],
         "new_pattern": [
-          2,
+          0,
           3
         ],
-        "proxy_score": 0.0008080398547463119,
-        "stage_a_kept": 5829,
+        "proxy_score": 0.001706576906144619,
+        "stage_a_kept": 3107659,
         "stage_b_tested": 64
       },
       {
         "flip": 13,
-        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
-        "group": 21507,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.in_proj_weight",
+        "group": 20942,
         "old_pattern": [
           1,
           2
@@ -211,558 +211,542 @@
           0,
           1
         ],
-        "proxy_score": 0.0005003933911211789,
-        "stage_a_kept": 5849,
+        "proxy_score": 0.0025115222670137882,
+        "stage_a_kept": 3107657,
         "stage_b_tested": 64
       },
       {
         "flip": 14,
-        "param_name": "heads.head.weight",
-        "group": 2286,
+        "param_name": "encoder.layers.encoder_layer_1.mlp.0.weight",
+        "group": 28910,
         "old_pattern": [
-          2,
-          3
+          0,
+          1
         ],
         "new_pattern": [
-          1,
-          2
+          0,
+          3
         ],
-        "proxy_score": 0.004327737260609865,
-        "stage_a_kept": 5821,
+        "proxy_score": 0.002071715658530593,
+        "stage_a_kept": 3107654,
         "stage_b_tested": 64
       },
       {
         "flip": 15,
-        "param_name": "conv_proj.weight",
-        "group": 1580,
+        "param_name": "heads.head.weight",
+        "group": 3476,
         "old_pattern": [
-          1,
+          2,
           3
         ],
         "new_pattern": [
-          0,
-          3
+          1,
+          2
         ],
-        "proxy_score": 0.002436730545014143,
-        "stage_a_kept": 5800,
+        "proxy_score": 0.002999461954459548,
+        "stage_a_kept": 3107652,
         "stage_b_tested": 64
       },
       {
         "flip": 16,
-        "param_name": "conv_proj.weight",
-        "group": 651,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 17390,
         "old_pattern": [
-          0,
+          1,
           2
         ],
         "new_pattern": [
           0,
-          3
+          1
         ],
-        "proxy_score": 0.00069063575938344,
-        "stage_a_kept": 5810,
+        "proxy_score": 0.007658796384930611,
+        "stage_a_kept": 3107650,
         "stage_b_tested": 64
       },
       {
         "flip": 17,
-        "param_name": "conv_proj.weight",
-        "group": 285,
+        "param_name": "encoder.layers.encoder_layer_1.self_attention.out_proj.weight",
+        "group": 3871,
         "old_pattern": [
-          0,
-          3
-        ],
-        "new_pattern": [
           2,
           3
         ],
-        "proxy_score": 0.0008396675111725926,
-        "stage_a_kept": 5867,
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.002445788588374853,
+        "stage_a_kept": 3107647,
         "stage_b_tested": 64
       },
       {
         "flip": 18,
-        "param_name": "conv_proj.weight",
-        "group": 276,
+        "param_name": "encoder.layers.encoder_layer_1.mlp.0.weight",
+        "group": 22286,
         "old_pattern": [
-          0,
-          3
+          1,
+          2
         ],
         "new_pattern": [
           0,
-          2
+          1
         ],
-        "proxy_score": 0.0010769916698336601,
-        "stage_a_kept": 5830,
+        "proxy_score": 0.0029193100053817034,
+        "stage_a_kept": 3107645,
         "stage_b_tested": 64
       },
       {
         "flip": 19,
-        "param_name": "conv_proj.weight",
-        "group": 1037,
+        "param_name": "heads.head.weight",
+        "group": 3458,
         "old_pattern": [
-          0,
-          1
+          2,
+          3
         ],
         "new_pattern": [
-          1,
-          2
+          0,
+          3
         ],
-        "proxy_score": 0.00786653533577919,
-        "stage_a_kept": 5859,
+        "proxy_score": 0.0030760427471250296,
+        "stage_a_kept": 3107642,
         "stage_b_tested": 64
       },
       {
         "flip": 20,
-        "param_name": "conv_proj.weight",
-        "group": 1372,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 30788,
         "old_pattern": [
-          2,
-          3
+          0,
+          1
         ],
         "new_pattern": [
           1,
           2
         ],
-        "proxy_score": 0.001714590354822576,
-        "stage_a_kept": 5820,
+        "proxy_score": 0.0016783886821940541,
+        "stage_a_kept": 3107640,
         "stage_b_tested": 64
       },
       {
         "flip": 21,
-        "param_name": "conv_proj.weight",
-        "group": 1020,
+        "param_name": "heads.head.weight",
+        "group": 226,
         "old_pattern": [
-          1,
+          2,
           3
         ],
         "new_pattern": [
           1,
           2
         ],
-        "proxy_score": 0.002161754760891199,
-        "stage_a_kept": 5823,
+        "proxy_score": 0.005172911565750837,
+        "stage_a_kept": 3107638,
         "stage_b_tested": 64
       },
       {
         "flip": 22,
-        "param_name": "heads.head.weight",
-        "group": 3415,
+        "param_name": "encoder.layers.encoder_layer_1.mlp.0.weight",
+        "group": 35053,
         "old_pattern": [
-          2,
-          3
-        ],
-        "new_pattern": [
-          1,
+          0,
           2
         ],
-        "proxy_score": 0.0016155254561454058,
-        "stage_a_kept": 5839,
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.004964424762874842,
+        "stage_a_kept": 3107637,
         "stage_b_tested": 64
       },
       {
         "flip": 23,
-        "param_name": "conv_proj.weight",
-        "group": 914,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 20750,
         "old_pattern": [
-          0,
-          1
-        ],
-        "new_pattern": [
           1,
           2
         ],
-        "proxy_score": 0.0029981776606291533,
-        "stage_a_kept": 5824,
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.0307583287358284,
+        "stage_a_kept": 3107638,
         "stage_b_tested": 64
       },
       {
         "flip": 24,
-        "param_name": "conv_proj.weight",
-        "group": 1321,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 2748,
         "old_pattern": [
-          0,
-          2
+          2,
+          3
         ],
         "new_pattern": [
           0,
           3
         ],
-        "proxy_score": 0.0016283168224617839,
-        "stage_a_kept": 5809,
+        "proxy_score": 0.006672427523881197,
+        "stage_a_kept": 3107636,
         "stage_b_tested": 64
       },
       {
         "flip": 25,
-        "param_name": "conv_proj.weight",
-        "group": 855,
+        "param_name": "heads.head.weight",
+        "group": 681,
         "old_pattern": [
-          0,
-          2
+          2,
+          3
         ],
         "new_pattern": [
           1,
           2
         ],
-        "proxy_score": 0.002019540872424841,
-        "stage_a_kept": 5866,
+        "proxy_score": 0.0025479847099632025,
+        "stage_a_kept": 3107637,
         "stage_b_tested": 64
       },
       {
         "flip": 26,
-        "param_name": "conv_proj.weight",
-        "group": 255,
+        "param_name": "encoder.layers.encoder_layer_1.mlp.3.weight",
+        "group": 10950,
         "old_pattern": [
-          2,
+          1,
           3
         ],
         "new_pattern": [
-          1,
-          2
+          0,
+          3
         ],
-        "proxy_score": 0.0031456705182790756,
-        "stage_a_kept": 5820,
+        "proxy_score": 0.00297285383567214,
+        "stage_a_kept": 3107638,
         "stage_b_tested": 64
       },
       {
         "flip": 27,
-        "param_name": "conv_proj.weight",
-        "group": 1707,
+        "param_name": "heads.head.weight",
+        "group": 3380,
         "old_pattern": [
-          1,
-          2
-        ],
-        "new_pattern": [
           2,
           3
         ],
-        "proxy_score": 0.0024137338623404503,
-        "stage_a_kept": 5812,
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0026752289850264788,
+        "stage_a_kept": 3107639,
         "stage_b_tested": 64
       },
       {
         "flip": 28,
-        "param_name": "conv_proj.weight",
-        "group": 1544,
+        "param_name": "encoder.layers.encoder_layer_3.mlp.0.weight",
+        "group": 11582,
         "old_pattern": [
-          2,
+          1,
           3
         ],
         "new_pattern": [
-          1,
-          2
+          0,
+          3
         ],
-        "proxy_score": 0.001942802220582962,
-        "stage_a_kept": 5798,
+        "proxy_score": 0.009354468435049057,
+        "stage_a_kept": 3107640,
         "stage_b_tested": 64
       },
       {
         "flip": 29,
-        "param_name": "conv_proj.weight",
-        "group": 712,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 21949,
         "old_pattern": [
           1,
           2
         ],
         "new_pattern": [
-          2,
+          1,
           3
         ],
-        "proxy_score": 0.00402664253488183,
-        "stage_a_kept": 5865,
+        "proxy_score": 0.01031587366014719,
+        "stage_a_kept": 3107641,
         "stage_b_tested": 64
       },
       {
         "flip": 30,
-        "param_name": "conv_proj.weight",
-        "group": 532,
+        "param_name": "encoder.layers.encoder_layer_1.self_attention.out_proj.weight",
+        "group": 2754,
         "old_pattern": [
           1,
           2
         ],
         "new_pattern": [
-          0,
-          1
+          2,
+          3
         ],
-        "proxy_score": 0.0014931620098650455,
-        "stage_a_kept": 5826,
+        "proxy_score": 0.007330057676881552,
+        "stage_a_kept": 3107641,
         "stage_b_tested": 64
       },
       {
         "flip": 31,
-        "param_name": "conv_proj.weight",
-        "group": 767,
+        "param_name": "heads.head.weight",
+        "group": 692,
         "old_pattern": [
-          0,
+          2,
           3
         ],
         "new_pattern": [
           1,
-          3
+          2
         ],
-        "proxy_score": 0.0034451098181307316,
-        "stage_a_kept": 5838,
+        "proxy_score": 0.012094780802726746,
+        "stage_a_kept": 3107640,
         "stage_b_tested": 64
       },
       {
         "flip": 32,
-        "param_name": "conv_proj.weight",
-        "group": 2149,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 3863,
         "old_pattern": [
-          0,
-          2
-        ],
-        "new_pattern": [
-          0,
+          2,
           3
         ],
-        "proxy_score": 0.002786849159747362,
-        "stage_a_kept": 5805,
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.00286438362672925,
+        "stage_a_kept": 3107639,
         "stage_b_tested": 64
       },
       {
         "flip": 33,
-        "param_name": "conv_proj.weight",
-        "group": 529,
+        "param_name": "encoder.layers.encoder_layer_6.mlp.0.weight",
+        "group": 15188,
         "old_pattern": [
-          2,
+          0,
           3
         ],
         "new_pattern": [
           1,
-          2
+          3
         ],
-        "proxy_score": 0.003926876932382584,
-        "stage_a_kept": 5838,
+        "proxy_score": 0.022299647331237793,
+        "stage_a_kept": 3107640,
         "stage_b_tested": 64
       },
       {
         "flip": 34,
-        "param_name": "conv_proj.weight",
-        "group": 427,
+        "param_name": "encoder.layers.encoder_layer_8.mlp.0.weight",
+        "group": 4102,
         "old_pattern": [
-          0,
-          2
-        ],
-        "new_pattern": [
-          0,
+          2,
           3
         ],
-        "proxy_score": 0.004843490198254585,
-        "stage_a_kept": 5799,
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.004510998260229826,
+        "stage_a_kept": 3107639,
         "stage_b_tested": 64
       },
       {
         "flip": 35,
-        "param_name": "conv_proj.weight",
-        "group": 1730,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.in_proj_weight",
+        "group": 18759,
         "old_pattern": [
-          1,
-          2
-        ],
-        "new_pattern": [
           0,
           1
         ],
-        "proxy_score": 0.0010517134796828032,
-        "stage_a_kept": 5859,
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0045119416899979115,
+        "stage_a_kept": 3107640,
         "stage_b_tested": 64
       },
       {
         "flip": 36,
-        "param_name": "conv_proj.weight",
-        "group": 1565,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 4532,
         "old_pattern": [
-          1,
-          2
+          0,
+          3
         ],
         "new_pattern": [
           0,
           1
         ],
-        "proxy_score": 0.0033817333169281483,
-        "stage_a_kept": 5796,
+        "proxy_score": 0.005444956012070179,
+        "stage_a_kept": 3107641,
         "stage_b_tested": 64
       },
       {
         "flip": 37,
-        "param_name": "conv_proj.weight",
-        "group": 1028,
+        "param_name": "heads.head.weight",
+        "group": 1881,
         "old_pattern": [
-          0,
-          1
+          2,
+          3
         ],
         "new_pattern": [
           1,
           2
         ],
-        "proxy_score": 0.003743044100701809,
-        "stage_a_kept": 5831,
+        "proxy_score": 0.0025796585250645876,
+        "stage_a_kept": 3107640,
         "stage_b_tested": 64
       },
       {
         "flip": 38,
-        "param_name": "conv_proj.weight",
-        "group": 1377,
+        "param_name": "encoder.layers.encoder_layer_1.mlp.3.weight",
+        "group": 10961,
         "old_pattern": [
-          1,
-          2
-        ],
-        "new_pattern": [
-          2,
+          0,
           3
         ],
-        "proxy_score": 0.0036094870883971453,
-        "stage_a_kept": 5828,
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.003190358867868781,
+        "stage_a_kept": 3107641,
         "stage_b_tested": 64
       },
       {
         "flip": 39,
-        "param_name": "conv_proj.weight",
-        "group": 1811,
+        "param_name": "encoder.layers.encoder_layer_1.mlp.3.weight",
+        "group": 22289,
         "old_pattern": [
-          1,
-          3
-        ],
-        "new_pattern": [
           0,
           3
         ],
-        "proxy_score": 0.0023061796091496944,
-        "stage_a_kept": 5848,
+        "new_pattern": [
+          1,
+          3
+        ],
+        "proxy_score": 0.007999875582754612,
+        "stage_a_kept": 3107640,
         "stage_b_tested": 64
       },
       {
         "flip": 40,
-        "param_name": "conv_proj.weight",
-        "group": 2152,
+        "param_name": "encoder.layers.encoder_layer_5.mlp.0.weight",
+        "group": 9374,
         "old_pattern": [
-          1,
-          3
-        ],
-        "new_pattern": [
           1,
           2
         ],
-        "proxy_score": 0.0023644440807402134,
-        "stage_a_kept": 5803,
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.004977620672434568,
+        "stage_a_kept": 3107640,
         "stage_b_tested": 64
       },
       {
         "flip": 41,
-        "param_name": "conv_proj.weight",
-        "group": 2153,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 3852,
         "old_pattern": [
-          0,
-          3
+          1,
+          2
         ],
         "new_pattern": [
-          1,
+          2,
           3
         ],
-        "proxy_score": 0.004872250370681286,
-        "stage_a_kept": 5807,
+        "proxy_score": 0.0034266721922904253,
+        "stage_a_kept": 3107640,
         "stage_b_tested": 64
       },
       {
         "flip": 42,
-        "param_name": "conv_proj.weight",
-        "group": 510,
+        "param_name": "encoder.layers.encoder_layer_2.self_attention.out_proj.weight",
+        "group": 2782,
         "old_pattern": [
-          1,
-          2
-        ],
-        "new_pattern": [
           2,
           3
         ],
-        "proxy_score": 0.0074914973229169846,
-        "stage_a_kept": 5851,
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.0024508198257535696,
+        "stage_a_kept": 3107640,
         "stage_b_tested": 64
       },
       {
         "flip": 43,
-        "param_name": "conv_proj.weight",
-        "group": 2279,
+        "param_name": "encoder.layers.encoder_layer_7.mlp.0.weight",
+        "group": 29765,
         "old_pattern": [
+          2,
+          3
+        ],
+        "new_pattern": [
           1,
           2
         ],
-        "new_pattern": [
-          0,
-          1
-        ],
-        "proxy_score": 0.002617559628561139,
-        "stage_a_kept": 5828,
+        "proxy_score": 0.007271330337971449,
+        "stage_a_kept": 3107641,
         "stage_b_tested": 64
       },
       {
         "flip": 44,
-        "param_name": "conv_proj.weight",
-        "group": 1558,
+        "param_name": "encoder.layers.encoder_layer_1.mlp.0.weight",
+        "group": 24158,
         "old_pattern": [
-          2,
-          3
-        ],
-        "new_pattern": [
           1,
           2
         ],
-        "proxy_score": 0.009608199819922447,
-        "stage_a_kept": 5827,
+        "new_pattern": [
+          0,
+          1
+        ],
+        "proxy_score": 0.0130615234375,
+        "stage_a_kept": 3107641,
         "stage_b_tested": 64
       },
       {
         "flip": 45,
-        "param_name": "conv_proj.weight",
-        "group": 1711,
+        "param_name": "encoder.layers.encoder_layer_6.self_attention.in_proj_weight",
+        "group": 22196,
         "old_pattern": [
-          1,
-          2
-        ],
-        "new_pattern": [
           2,
           3
         ],
-        "proxy_score": 0.004823020659387112,
-        "stage_a_kept": 5782,
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.00770033523440361,
+        "stage_a_kept": 3107641,
         "stage_b_tested": 64
       },
       {
         "flip": 46,
-        "param_name": "conv_proj.weight",
-        "group": 857,
+        "param_name": "encoder.layers.encoder_layer_0.self_attention.out_proj.weight",
+        "group": 2745,
         "old_pattern": [
-          0,
+          2,
           3
         ],
         "new_pattern": [
-          0,
-          1
+          1,
+          2
         ],
-        "proxy_score": 0.006220826413482428,
-        "stage_a_kept": 5773,
+        "proxy_score": 0.0194118469953537,
+        "stage_a_kept": 3107642,
         "stage_b_tested": 64
       },
       {
         "flip": 47,
-        "param_name": "conv_proj.weight",
-        "group": 818,
-        "old_pattern": [
-          2,
-          3
-        ],
-        "new_pattern": [
-          1,
-          2
-        ],
-        "proxy_score": 0.0025331033393740654,
-        "stage_a_kept": 5780,
-        "stage_b_tested": 64
-      },
-      {
-        "flip": 48,
-        "param_name": "conv_proj.weight",
-        "group": 299,
+        "param_name": "encoder.layers.encoder_layer_10.mlp.0.weight",
+        "group": 406,
         "old_pattern": [
           1,
           2
@@ -771,50 +755,68 @@
           0,
           1
         ],
-        "proxy_score": 0.008555067703127861,
-        "stage_a_kept": 5788,
+        "proxy_score": 0.016614433377981186,
+        "stage_a_kept": 3107643,
+        "stage_b_tested": 64
+      },
+      {
+        "flip": 48,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.3.weight",
+        "group": 10998,
+        "old_pattern": [
+          0,
+          2
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 0.007245794869959354,
+        "stage_a_kept": 3107643,
         "stage_b_tested": 64
       },
       {
         "flip": 49,
-        "param_name": "conv_proj.weight",
-        "group": 689,
+        "param_name": "encoder.layers.encoder_layer_0.mlp.0.weight",
+        "group": 36260,
         "old_pattern": [
-          2,
-          3
+          0,
+          2
         ],
         "new_pattern": [
-          0,
-          3
+          1,
+          2
         ],
-        "proxy_score": 0.0012049023061990738,
-        "stage_a_kept": 5844,
+        "proxy_score": 0.004400158300995827,
+        "stage_a_kept": 3107644,
         "stage_b_tested": 64
       },
       {
         "flip": 50,
-        "param_name": "conv_proj.weight",
-        "group": 714,
+        "param_name": "encoder.layers.encoder_layer_1.mlp.0.weight",
+        "group": 26942,
         "old_pattern": [
           1,
-          3
+          2
         ],
         "new_pattern": [
-          0,
+          2,
           3
         ],
-        "proxy_score": 0.0034931031987071037,
-        "stage_a_kept": 5809,
+        "proxy_score": 0.0032375440932810307,
+        "stage_a_kept": 3107643,
         "stage_b_tested": 64
       }
     ],
     "config": {
       "dataset": "cifar100",
-      "dataset_root": "data/cifar100",
+      "dataset_root": "/home/lab-2010/24sparsityBFA-main/data/cifar100",
       "physical_budget": 50,
       "top_m_per_group": 3,
       "top_k_verify": 64,
-      "max_groups_per_layer": 50
+      "max_groups_per_layer": 0,
+      "group_sampling": "top_grad",
+      "min_sampled_group_ratio": 0.05
     }
   }
 ]

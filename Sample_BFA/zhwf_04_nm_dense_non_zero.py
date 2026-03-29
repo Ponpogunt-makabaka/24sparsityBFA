@@ -60,7 +60,7 @@ def load_and_quantize_ckpt(ckpt_path="1_sparse_finetune.pth", data_root="~/data/
 		transforms.ToTensor(),
 		transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2470, 0.2435, 0.2616)),
 	])
-	loader = DataLoader(datasets.CIFAR10(root=data_root, train=False, download=False, transform=transform), batch_size=batch_size, shuffle=False, num_workers=4, pin_memory=True)
+	loader = DataLoader(datasets.CIFAR10(root=data_root, train=False, download=False, transform=transform), batch_size=batch_size, shuffle=False, num_workers=0, pin_memory=True)
 
 	model = resnet20_nm()
 	if not os.path.isfile(ckpt_path):
@@ -132,7 +132,7 @@ if __name__ == "__main__":
 		transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2470, 0.2435, 0.2616)),
 	])
 	trainset = datasets.CIFAR10(root=os.path.expanduser("~/data/cifar10"), train=True, download=False, transform=train_transform)
-	attack_loader = DataLoader(trainset, batch_size=attack_batch_size, shuffle=True, num_workers=4, pin_memory=True)
+	attack_loader = DataLoader(trainset, batch_size=attack_batch_size, shuffle=True, num_workers=0, pin_memory=True)
 
 	model_attack = resnet20_nm()
 	ckpt_path = os.path.join(os.path.dirname(__file__), "1_sparse_finetune.pth") if not os.path.isfile("1_sparse_finetune.pth") else "1_sparse_finetune.pth"
@@ -187,7 +187,7 @@ if __name__ == "__main__":
 		transforms.ToTensor(),
 		transforms.Normalize((0.4914, 0.4822, 0.4465), (0.2470, 0.2435, 0.2616)),
 	])
-	test_loader = DataLoader(datasets.CIFAR10(root=os.path.expanduser("~/data/cifar10"), train=False, download=False, transform=test_transform), batch_size=128, shuffle=False, num_workers=4, pin_memory=True)
+	test_loader = DataLoader(datasets.CIFAR10(root=os.path.expanduser("~/data/cifar10"), train=False, download=False, transform=test_transform), batch_size=128, shuffle=False, num_workers=0, pin_memory=True)
 
 	def evaluate_top1(model, loader, device):
 		model = model.to(device).eval()

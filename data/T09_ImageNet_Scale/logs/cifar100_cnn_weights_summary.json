@@ -1,0 +1,48 @@
+{
+  "resnet18": {
+    "source": {
+      "type": "huggingface_hub",
+      "repo_id": "edadaltocg/resnet18_cifar100",
+      "filename": "pytorch_model.bin"
+    },
+    "output_path": "/home/lab-2010/24sparsityBFA-main/data/T09_ImageNet_Scale/weights/resnet18_cifar100_hf.bin",
+    "sha256": "f0b764aa8fd33ccef5232e8d1de9eaa481256e4e2bc129f980fdadf7e53d9758",
+    "size_bytes": 44958965,
+    "num_tensors": 122,
+    "required_shapes": {
+      "conv1.weight": [
+        64,
+        3,
+        3,
+        3
+      ],
+      "fc.weight": [
+        100,
+        512
+      ]
+    }
+  },
+  "mobilenet_v2": {
+    "source": {
+      "type": "torch_hub",
+      "repo": "chenyaofo/pytorch-cifar-models",
+      "entry": "cifar100_mobilenetv2_x1_0"
+    },
+    "output_path": "/home/lab-2010/24sparsityBFA-main/data/T09_ImageNet_Scale/weights/mobilenet_v2_cifar100_chenyaofo.pth",
+    "sha256": "e2e4b0109f7885a30d85b671e0eae480f5a8db39a78ea566d868902912ef4da4",
+    "size_bytes": 9655947,
+    "num_tensors": 314,
+    "required_shapes": {
+      "features.0.0.weight": [
+        32,
+        3,
+        3,
+        3
+      ],
+      "classifier.1.weight": [
+        100,
+        1280
+      ]
+    }
+  }
+}

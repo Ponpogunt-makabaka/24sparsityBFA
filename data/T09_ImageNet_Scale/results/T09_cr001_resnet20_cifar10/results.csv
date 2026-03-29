@@ -1,0 +1,2 @@
+seed,arch,initial_acc,final_acc,acc_drop,num_flips,total_time_sec,avg_flip_sec
+0,resnet20,92.17,29.28,62.89,50,22.21,0.4441

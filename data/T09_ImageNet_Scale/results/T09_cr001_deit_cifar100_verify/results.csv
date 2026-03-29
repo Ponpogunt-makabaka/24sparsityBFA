@@ -1,0 +1,2 @@
+seed,arch,initial_acc,final_acc,acc_drop,num_flips,total_time_sec,avg_flip_sec
+0,deit_tiny,82.32,80.24,2.08,50,523.33,10.4666

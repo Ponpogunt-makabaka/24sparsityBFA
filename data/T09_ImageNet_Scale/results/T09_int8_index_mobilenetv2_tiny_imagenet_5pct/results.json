@@ -1,0 +1,99 @@
+[
+  {
+    "seed": 0,
+    "arch": "mobilenet_v2",
+    "initial_acc": 54.2,
+    "final_acc": 4.73,
+    "acc_drop": 49.47,
+    "num_iterations": 3,
+    "physical_flips_used": 3,
+    "attack_mode": "index",
+    "cost_per_step": 1,
+    "total_attack_time_sec": 41.76,
+    "avg_flip_time_sec": 13.9183,
+    "attack_history": [
+      {
+        "iter": 1,
+        "physical_flips": 1,
+        "acc_after": 37.55,
+        "param_name": "features.1.conv.1.weight",
+        "group": 22,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          1,
+          2
+        ],
+        "proxy_score": 0.11315011978149414,
+        "stage_a_selected": 595,
+        "stage_a_candidates": 1576,
+        "stage_b_tested": 64,
+        "flip_time_sec": 13.9441
+      },
+      {
+        "iter": 2,
+        "physical_flips": 2,
+        "acc_after": 14.85,
+        "param_name": "features.1.conv.1.weight",
+        "group": 16,
+        "old_pattern": [
+          1,
+          3
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 1.6411126852035522,
+        "stage_a_selected": 595,
+        "stage_a_candidates": 1586,
+        "stage_b_tested": 64,
+        "flip_time_sec": 13.9538
+      },
+      {
+        "iter": 3,
+        "physical_flips": 3,
+        "acc_after": 4.73,
+        "param_name": "features.2.conv.2.weight",
+        "group": 309,
+        "old_pattern": [
+          0,
+          1
+        ],
+        "new_pattern": [
+          0,
+          3
+        ],
+        "proxy_score": 1.505257487297058,
+        "stage_a_selected": 595,
+        "stage_a_candidates": 1612,
+        "stage_b_tested": 64,
+        "flip_time_sec": 13.857
+      }
+    ],
+    "config": {
+      "dataset": "tiny_imagenet",
+      "dataset_root": "data/tiny-imagenet-200",
+      "attack_mode": "index",
+      "physical_budget": 50,
+      "eligible_groups": 595168,
+      "flip_ratio": 8.400989300500027e-05,
+      "coarse_groups": 595,
+      "requested_coarse_groups": 0,
+      "requested_coarse_ratio": 0.001,
+      "effective_coarse_ratio": 0.0009997177267595033,
+      "calib_count": 1600,
+      "calib_samples": 1600,
+      "calib_per_class": 8,
+      "semantic_num_classes": 200,
+      "top_m_per_group": 3,
+      "top_k_verify": 64,
+      "max_groups_per_layer": 0,
+      "group_sampling": "top_grad",
+      "min_sampled_group_ratio": 0.05,
+      "exclude_head": false
+    }
+  }
+]
